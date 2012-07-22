@@ -1,0 +1,96 @@
+/*
+ *  Webform-Toolkit
+ *  Generate an interactive HTML FORM from JSON
+ *
+ *  Copyright 2012, Marc S. Brooks (http://mbrooks.info)
+ *  Licensed under the MIT license:
+ *  http://www.opensource.org/licenses/mit-license.php
+ *
+ *  Dependencies:
+ *    jquery.js
+ */
+
+form.webform div {
+	margin: 5px;
+}
+
+form.webform div.webkit_submit {
+	padding: 10px 0px 10px 0px;
+}
+
+form.webform div.radios span {
+	vertical-align: -2px;
+}
+
+form.webform fieldset {
+	border: none;
+	margin: 5px 10px 0px 10px;
+	padding: 0px;
+}
+
+form.webform input[type=text],
+form.webform input[type=password],
+form.webform input[type=file],
+form.webform input.error_off {
+	border: 1px solid #DDDDDD;
+	border-bottom: 1px solid #BBBBBB;
+	border-left: 1px solid #AAAAAA;
+	font-size: 13px;
+	height: 20px;
+	width: 200px;
+}
+
+form.webform input[type=radio] {
+	margin: 10px;
+}
+
+form.webform input.error_on {
+	border: 1px solid #FF0000;
+	color: #FF0000;
+}
+
+form.webform input[type=file] {
+	border: 1px solid transparent;
+	margin-bottom: 1px;
+	margin-top: 1px;
+	font-size: 11px;
+}
+
+form.webform input[type=button],
+form.webform input[type=submit] {
+	display: block;
+	margin: 0px auto 0px auto;
+	padding: 2px;
+	position: relative;
+}
+
+form.webform label {
+	float: left;
+	position: relative;
+	top: 5px;
+	width: 150px;
+}
+
+form.webform p {
+	background-color: #F7F7F7;
+	border: 1px solid #CCCCCC;
+	border-top: 1px solid #EEEEEE;
+	font-size: 12px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+form.webform p.error {
+	text-align: center;
+}
+
+form.webform select {
+	margin-left: 0px;
+	vertical-align: -3px;
+}
+
+form.webform textarea {
+	border: 1px solid #DDDDDD;
+	font-size: 13px;
+	resize: none;
+}
