@@ -144,7 +144,7 @@
 
 					// attach field events
 					elm.bind('mousedown mousemove mouseout change', function() {
-						validateField( $(this) )
+						validateField( $(this) );
 					});
 
 					// attach key events
@@ -162,7 +162,7 @@
 
 		// create the submit button
 		var div = $('<DIV></DIV>')
-			.attr('id','webform_submit');
+			.addClass('webform_submit');
 
 		var button = $('<INPUT></INPUT>');
 
@@ -273,5 +273,100 @@
 	/*
 	 * Validate the form element value
 	 */
-	function validateField(elm) {}
+	function validateField(elm) {
+		var value = elm.val();
+		if (!value) { return }
+
+		var regex = new RegExp(elm.regex);
+		var match;
+
+		// REGEX by field type
+		switch( elm.attr('name') ) {
+			case 'INPUT' :
+				match = regex.test(value);
+			break;
+
+			case 'SELECT' :
+				match = regex.test(value);
+			break;
+
+			case 'TEXTAREA' :
+				match = regex.test(value);
+			break;
+		}
+
+		var error = elm.data('error');
+		var set   = elm.parent();
+
+		// toggle the error message visibility
+		if (match === false && error === false) {
+			var p = $('<P>' + elm.mesg + '</P>')
+				.addClass('error');
+
+			set.append(p);
+
+			elm.addClass('error_on')
+				.data('error', true);
+		}
+		else
+		if (match === true && error === true) {
+			set.filter(':last').remove();
+
+			elm.addClass('error_off')
+				.data('error', false);
+		}
+
+		// toggle the submit button visibility
+		setButtonState( set.parent() );
+
+		return true;
+	}
+
+	/*
+	 * Enable/Disable submit button
+	 */
+	function setButtonState(form) {
+		var elm = form.find('input:submit') || form.find('input:button');
+		if (!elm) { return };
+
+		if ( checkErrors(form) ) {
+			elm.attr('disabled', true);
+		}
+		else {
+			elm.attr('disabled', false);
+		}
+	}
+
+	/*
+	 * Check each form element for errors
+	 */
+	function checkErrors(form) {
+		form.each(function() {
+			var elm = this;
+
+			// supported elements
+			if (elm.nodeName != 'INPUT' && elm.nodeName != 'SELECT' && elm.nodeName != 'TEXTAREA') {
+				return;
+			}
+
+			if (elm.nodeName == 'INPUT' &&
+				(elm.type != 'text' && elm.type != 'password' && elm.type != 'radio') ) {
+				return;
+			}
+
+			var data = $(this).data();
+
+			// does errors exist?
+			if ( (data('required') && !elm.value) || data('error') ) {
+				return false;
+			}
+		});
+
+		return false;
+	}
+
+	/*
+	 * POST the form name/value pairs to the server
+	 */
+	function submitForm() {}
 })(jQuery);
