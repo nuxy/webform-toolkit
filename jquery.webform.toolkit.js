@@ -52,6 +52,7 @@
 		// set POST action URI/URL
 		if (config.action) {
 			form.attr('method','POST')
+				.attr('action', config.action)
 				.attr('enctype','multipart/form-data');
 		}
 
@@ -68,7 +69,6 @@
 					.attr('type','hidden')
 					.attr('name',  name[0])
 					.attr('value', name[1]);
-
 				set.append(hidden);
 			}
 		}
@@ -82,8 +82,7 @@
 
 				// .. label, if exists
 				if (data.label) {
-					var label = $('<LABEL>' + data.label + '</LABEL>');
-					div.append(label);
+					div.append( $('<LABEL>' + data.label + '</LABEL>') );
 				}
 
 				var elm = new Object;
@@ -121,9 +120,9 @@
 
 				// filter with REGEX
 				if (data.filter) {
-					elm.regex  = data.filter;
-					elm.mesg   = data.error;
-					elm.error  = false;
+					elm.regex = data.filter;
+					elm.mesg  = data.error;
+					elm.error = false;
 
 					// attach field events
 					elm.bind('mousedown mousemove mouseout change', function() {
@@ -153,17 +152,23 @@
 				value : 'Submit'
 			});
 
-		// use callback to process the form values
-		if (callback) {
-			form.submit(function(event) {
-				event.preventDefault();
-				callback(form);
-			});
-		}
-		// use standard POST method
-		else {
-			button.attr('type','button');
-		}
+		// bind form submit event
+		form.submit(function(event) {
+			event.preventDefault();
+
+			var $this = $(this);
+			checkErrors($this);
+
+			// POST using AJAX call, return callback with form object
+			if (callback) {
+				$.post(config.url, $this.serialize(), callback($this) );
+			}
+
+			// POST form values
+			else {
+				this.submit();
+			}
+		});
 
 		div.append(button);
 		set.append(div);
@@ -313,8 +318,7 @@
 	 * Enable/Disable submit button
 	 */
 	function setButtonState(form) {
-		var elm = form.find('input:submit') || form.find('input:button');
-
+		var elm = form.find('input:submit');
 		if (!elm) { return };
 
 		if ( checkErrors(form) ) {
@@ -349,12 +353,5 @@
 		});
 
 		return false;
-	}
-
-	/*
-	 * POST the form name/value pairs to the server
-	 */
-	function submitForm() {
-		alert('submit');
 	}
 })(jQuery);
