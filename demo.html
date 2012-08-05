@@ -22,9 +22,6 @@
 			id     : 'example',
 			action : 'http://mbrooks.info',
 			fields : [{"label":"User Name","type":"text","name":"username","size":"15","filter":"^\\w","error":"Supported characters: A-Z, 0-9, _ and spaces","required":"1"},{"label":"Password","type":"password","name":"password","size":"15","filter":"^(?!password)(.{8,15})$","error":"The password entered is not valid","required":"1"},{"label":"Age","type":"select","name":"age","size":"","filter":"10|11|12|13|14|15","error":"","required":"0"},{"label":"Gender","type":"radio","name":"gender","size":"","filter":"Male|Female","error":"","required":"0"},{"label":"Message","type":"textarea","name":"message","size":"","filter":"^\\w","error":"Supported characters: A-Z, 0-9, _ and spaces","required":"1"}]
-		},
-		function() {
-			alert('hello world');
 		});
 	});
 	</script>
