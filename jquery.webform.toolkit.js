@@ -12,27 +12,10 @@
 
 (function($) {
 	var methods = {
-		init : function(options, config, callback) {
-
-			// default options
-			var settings = {};
-
-			if (arguments.length > 1) {
-				$.extend(settings, options);
-			}
-			else {
-				config = options;
-			}
-
+		init : function(config, callback) {
 			return this.each(function() {
 				var $this = $(this),
 					data  = $this.data();
-
-				if ( $.isEmptyObject(data) ) {
-					$this.data({
-						options : settings
-					});
-				}
 
 				$this.append( createForm(config, callback) );
 			});
@@ -105,7 +88,7 @@
 
 				var elm = new Object;
 
-				// .. field element
+				// supported elements
 				switch (data.type) {
 					case 'text' :
 						elm = createInputElm(data);
@@ -164,19 +147,22 @@
 		var div = $('<DIV></DIV>')
 			.addClass('webform_submit');
 
-		var button = $('<INPUT></INPUT>');
+		var button = $('<INPUT></INPUT>')
+			.attr({
+				type  : 'submit',
+				value : 'Submit'
+			});
 
 		// use callback to process the form values
 		if (callback) {
-			button.attr('type','button');
-
-			button.click(function() {
+			form.submit(function(event) {
+				event.preventDefault();
 				callback(form);
 			});
 		}
 		// use standard POST method
 		else {
-			button.attr('type','submit');
+			button.attr('type','button');
 		}
 
 		div.append(button);
@@ -280,7 +266,7 @@
 		var regex = new RegExp(elm.regex);
 		var match;
 
-		// REGEX by field type
+		// .. REGEX by type
 		switch( elm.attr('name') ) {
 			case 'INPUT' :
 				match = regex.test(value);
@@ -297,6 +283,7 @@
 
 		var error = elm.data('error');
 		var set   = elm.parent();
+		var form  = set.parent();
 
 		// toggle the error message visibility
 		if (match === false && error === false) {
@@ -317,7 +304,7 @@
 		}
 
 		// toggle the submit button visibility
-		setButtonState( set.parent() );
+		setButtonState(form);
 
 		return true;
 	}
@@ -327,6 +314,7 @@
 	 */
 	function setButtonState(form) {
 		var elm = form.find('input:submit') || form.find('input:button');
+
 		if (!elm) { return };
 
 		if ( checkErrors(form) ) {
@@ -354,11 +342,9 @@
 				return;
 			}
 
-			var data = $(this).data();
-
 			// does errors exist?
-			if ( (data('required') && !elm.value) || data('error') ) {
-				return false;
+			if ( (elm.required && !elm.value) || $(this).data('error') ) {
+				return;
 			}
 		});
 
@@ -368,5 +354,7 @@
 	/*
 	 * POST the form name/value pairs to the server
 	 */
-	function submitForm() {}
+	function submitForm() {
+		alert('submit');
+	}
 })(jQuery);
