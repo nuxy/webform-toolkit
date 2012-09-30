@@ -85,7 +85,7 @@
 					div.append( $('<LABEL>' + data.label + '</LABEL>') );
 				}
 
-				var elm = new Object;
+				var elm = jQuery.obj;
 
 				// supported elements
 				switch (data.type) {
@@ -120,19 +120,21 @@
 
 				// filter with REGEX
 				if (data.filter) {
-					elm.regex = data.filter;
-					elm.mesg  = data.error;
-					elm.error = false;
+					elm.data({
+						regex : data.filter,
+						mesg  : data.error,
+						error : false
+					});
 
 					// attach field events
-					elm.bind('mousedown mousemove mouseout change', function() {
-						validateField( $(this) );
+					elm.bind('keyup keydown mousedown mousemove mouseout change', function() {
+						validateField(this);
 					});
 
 					// attach key events
 					elm.keypress(function(event) {
 						if (event.keyCode == 0) {
-							validateField( $(this) );
+							validateField(this);
 						}
 					});
 				}
@@ -157,16 +159,18 @@
 			event.preventDefault();
 
 			var $this = $(this);
-			checkErrors($this);
 
-			// POST using AJAX call, return callback with form object
-			if (callback) {
-				$.post(config.url, $this.serialize(), callback($this) );
-			}
+			if ( checkErrors($this) ) {
 
-			// POST form values
-			else {
-				this.submit();
+				// POST using AJAX call, return callback with form object
+				if (callback) {
+					$.post(config.url, $this.serialize(), callback($this) );
+				}
+
+				// POST form values
+				else {
+					$this.get(0).submit();
+				}
 			}
 		});
 
@@ -265,51 +269,53 @@
 	 * Validate the form element value
 	 */
 	function validateField(elm) {
-		var value = elm.val();
+		var $this = $(elm);
+
+		var value = elm.value;
 		if (!value) { return }
 
-		var regex = new RegExp(elm.regex);
+		var regex = $this.data('regex');
+		var error = $this.data('error');
+
+		var search = new RegExp(regex, 'g');
 		var match;
 
 		// .. REGEX by type
-		switch( elm.attr('name') ) {
+		switch(elm.nodeName) {
 			case 'INPUT' :
-				match = regex.test(value);
+				match = search.test(value);
 			break;
 
 			case 'SELECT' :
-				match = regex.test(value);
+				match = search.test(value);
 			break;
 
 			case 'TEXTAREA' :
-				match = regex.test(value);
+				match = search.test(value);
 			break;
 		}
 
-		var error = elm.data('error');
-		var set   = elm.parent();
-		var form  = set.parent();
+		var field = $this.parent();
 
 		// toggle the error message visibility
 		if (match === false && error === false) {
-			var p = $('<P>' + elm.mesg + '</P>')
+			var p = $('<P>' + $this.data('mesg') + '</P>')
 				.addClass('error');
+			field.append(p);
 
-			set.append(p);
-
-			elm.addClass('error_on')
+			$this.addClass('error_on')
 				.data('error', true);
 		}
 		else
 		if (match === true && error === true) {
-			set.filter(':last').remove();
+			field.children('p').remove();
 
-			elm.addClass('error_off')
+			$this.removeClass('error_on')
 				.data('error', false);
 		}
 
 		// toggle the submit button visibility
-		setButtonState(form);
+		setButtonState( field.parent() );
 
 		return true;
 	}
@@ -318,14 +324,15 @@
 	 * Enable/Disable submit button
 	 */
 	function setButtonState(form) {
-		var elm = form.find('input:submit');
-		if (!elm) { return };
+		var button = form.find('input:submit');
+
+		if (!button) { return };
 
 		if ( checkErrors(form) ) {
-			elm.attr('disabled', true);
+			button.attr('disabled', true);
 		}
 		else {
-			elm.attr('disabled', false);
+			button.attr('disabled', false);
 		}
 	}
 
@@ -334,24 +341,22 @@
 	 */
 	function checkErrors(form) {
 		form.each(function() {
-			var elm = this;
+			var $this = this;
 
 			// supported elements
-			if (elm.nodeName != 'INPUT' && elm.nodeName != 'SELECT' && elm.nodeName != 'TEXTAREA') {
-				return;
+			if (! /(INPUT|SELECT|TEXTAREA)/.exec($this.nodeName) ) {
+				return true;
 			}
 
-			if (elm.nodeName == 'INPUT' &&
-				(elm.type != 'text' && elm.type != 'password' && elm.type != 'radio') ) {
-				return;
+			if ($this.nodeName == 'INPUT' &&
+				! /(text|password|radio)/.exec($this.type) ) {
+				return true;
 			}
 
-			// does errors exist?
-			if ( (elm.required && !elm.value) || $(this).data('error') ) {
-				return;
+			// do errors exist?
+			if ( ($this.required && !$this.value) || $(this).data('error') ) {
+				return true;
 			}
 		});
-
-		return false;
 	}
 })(jQuery);
