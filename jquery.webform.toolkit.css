@@ -80,7 +80,7 @@ form.webform p {
 	padding: 5px;
 }
 
-form.webform p.error {
+form.webform p.error_mesg {
 	text-align: center;
 }
 

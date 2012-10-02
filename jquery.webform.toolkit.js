@@ -300,7 +300,7 @@
 		// toggle the error message visibility
 		if (match === false && error === false) {
 			var p = $('<P>' + $this.data('mesg') + '</P>')
-				.addClass('error');
+				.addClass('error_mesg');
 			field.append(p);
 
 			$this.addClass('error_on')
@@ -325,7 +325,6 @@
 	 */
 	function setButtonState(form) {
 		var button = form.find('input:submit');
-
 		if (!button) { return };
 
 		if ( checkErrors(form) ) {
