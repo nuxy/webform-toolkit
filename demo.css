@@ -1,5 +1,37 @@
 /* customize */
 
-#container {
-	width: 385px;
+#form {
+	font-family: Arial;
+	margin: 7% auto 0px auto;
+	width: 400px;
+}
+
+#form label {
+	margin-bottom: 10px 0px 2px 0px;
+}
+
+#form input[type=text],
+#form input[type=password],
+#form textarea {
+	padding: 4px;
+	width: 200px;
+}
+
+#form input[type=radio] {
+	margin: 8px 4px 8px 4px;
+}
+
+#form input[type=submit] {
+	display: block;
+	margin: 10px auto 0px auto;
+	width: 80px;
+}
+
+#form select {
+	margin: 5px;
+}
+
+#form p.error {
+	margin: 5px 0px 20px 0px;
+	width: 350px;
 }
