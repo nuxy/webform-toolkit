@@ -2,7 +2,7 @@
  *  Webform-Toolkit
  *  Generate an interactive HTML FORM from JSON
  *
- *  Copyright 2012, Marc S. Brooks (http://mbrooks.info)
+ *  Copyright 2012-2013, Marc S. Brooks (http://mbrooks.info)
  *  Licensed under the MIT license:
  *  http://www.opensource.org/licenses/mit-license.php
  *
@@ -12,25 +12,14 @@
 
 (function($) {
 	var methods = {
-		init : function(config, callback) {
-			return this.each(function() {
-				var $this = $(this),
-					data  = $this.data();
-
-				$this.append( createForm(config, callback) );
-			});
-		},
-
-		destroy : function() {
-			return this.each(function() {
-				$(this).removeData();
-			});
+		"init" : function(config, callback) {
+			$(this).append(createForm(config, callback));
 		}
 	};
 
 	$.fn.WebformToolkit = function(method) {
 		if (methods[method]) {
-			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1) );
+			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
 		}
 		else
 		if (typeof method === 'object' || ! method) {
@@ -51,9 +40,11 @@
 
 		// set POST action URI/URL
 		if (config.action) {
-			form.attr('method','POST')
-				.attr('action', config.action)
-				.attr('enctype','multipart/form-data');
+			form.attr({
+				method  : 'POST',
+				enctype : 'multipart/form-data',
+				action  : config.action
+			});
 		}
 
 		var set = $('<FIELDSET></FIELDSET>');
@@ -66,9 +57,11 @@
 				var name = pairs[i].split('=');
 
 				var hidden = $('<INPUT></INPUT>')
-					.attr('type','hidden')
-					.attr('name',  name[0])
-					.attr('value', name[1]);
+					.attr({
+						type  : 'hidden',
+						name  : name[0],
+						value : name[1]
+					});
 				set.append(hidden);
 			}
 		}
@@ -89,27 +82,27 @@
 
 				// supported elements
 				switch (data.type) {
-					case 'text' :
+					case 'text':
 						elm = createInputElm(data);
 					break;
 
-					case 'password' :
+					case 'password':
 						elm = createInputElm(data);
 					break;
 
-					case 'textarea' :
+					case 'textarea':
 						elm = createTextAreaElm(data);
 					break;
 
-					case 'select' :
+					case 'select':
 						elm = createMenuElm(data);
 					break;
 
-					case 'radio' :
+					case 'radio':
 						elm = createRadioElm(data);
 					break;
 
-					default :
+					default:
 						$.error('Invalid or missing field type');
 					break;
 				}
@@ -127,15 +120,13 @@
 					});
 
 					// attach field events
-					elm.bind('keyup keydown mousedown mousemove mouseout change', function() {
+					elm.on('keyup keydown mousedown mousemove mouseout change', function() {
 						validateField(this);
 					});
 
 					// attach key events
 					elm.keypress(function(event) {
-						if (event.keyCode == 0) {
-							validateField(this);
-						}
+						if (event.keyCode != 0) return;
 					});
 				}
 
@@ -160,11 +151,11 @@
 
 			var $this = $(this);
 
-			if ( checkErrors($this) ) {
+			if (checkErrors($this)) {
 
 				// POST using AJAX call, return callback with form object
-				if (callback) {
-					$.post(config.url, $this.serialize(), callback($this) );
+				if (typeof callback === 'function') {
+					$.post(config.url, $this.serialize(), callback($this));
 				}
 
 				// POST form values
@@ -244,9 +235,11 @@
 			var value = opts[i];
 
 			var input = $('<INPUT></INPUT>')
-				.attr('type', 'radio')
-				.attr('name', config.name)
-				.attr('value', value);
+				.attr({
+					type  : 'radio',
+					name  : config.name,
+					value : value
+				});
 
 			var span = $('<SPAN>' + value + '</SPAN>');
 
@@ -272,13 +265,13 @@
 		var $this = $(elm);
 
 		var value = elm.value;
-		if (!value) { return }
+		if (!value) return;
 
-		var regex = $this.data('regex');
-		var error = $this.data('error');
+		var regex = $this.data('regex'),
+			error = $this.data('error');
 
-		var search = new RegExp(regex, 'g');
-		var match;
+		var search = new RegExp(regex, 'g'),
+			match  = null;
 
 		// .. REGEX by type
 		switch(elm.nodeName) {
@@ -315,7 +308,7 @@
 		}
 
 		// toggle the submit button visibility
-		setButtonState( field.parent() );
+		setButtonState(field.parent());
 
 		return true;
 	}
@@ -325,9 +318,9 @@
 	 */
 	function setButtonState(form) {
 		var button = form.find('input:submit');
-		if (!button) { return };
+		if (!button) return;
 
-		if ( checkErrors(form) ) {
+		if (checkErrors(form)) {
 			button.attr('disabled', true);
 		}
 		else {
@@ -343,17 +336,17 @@
 			var $this = this;
 
 			// supported elements
-			if (! /(INPUT|SELECT|TEXTAREA)/.exec($this.nodeName) ) {
+			if (!/(INPUT|SELECT|TEXTAREA)/.exec($this.nodeName)) {
 				return true;
 			}
 
 			if ($this.nodeName == 'INPUT' &&
-				! /(text|password|radio)/.exec($this.type) ) {
+				!/(text|password|radio)/.exec($this.type)) {
 				return true;
 			}
 
 			// do errors exist?
-			if ( ($this.required && !$this.value) || $(this).data('error') ) {
+			if (($this.required && !$this.value) || $(this).data('error')) {
 				return true;
 			}
 		});
