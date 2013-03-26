@@ -245,6 +245,10 @@
 					value : value
 				});
 
+			if (value == config.value) {
+				input.attr('checked', true);
+			}
+
 			var span = $('<SPAN>' + value + '</SPAN>');
 
 			div.append(input);
