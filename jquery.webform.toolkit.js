@@ -13,7 +13,9 @@
 (function($) {
 	var methods = {
 		"init" : function(config, callback) {
-			$(this).append(createForm(config, callback));
+			var form = createForm(config, callback);
+			$(this).append(form);
+			setButtonState(form);
 		}
 	};
 
@@ -62,6 +64,7 @@
 						name  : name[0],
 						value : name[1]
 					});
+
 				set.append(hidden);
 			}
 		}
@@ -122,6 +125,7 @@
 					// attach field events
 					elm.on('keyup keydown mousedown mousemove mouseout change', function() {
 						validateField(this);
+						setButtonState(form);
 					});
 
 					// attach key events
@@ -151,7 +155,7 @@
 
 			var $this = $(this);
 
-			if (checkErrors($this)) {
+			if (errorsExist($this)) {
 
 				// POST using AJAX call, return callback with form object
 				if (typeof callback === 'function') {
@@ -268,7 +272,8 @@
 		if (!value) return;
 
 		var regex = $this.data('regex'),
-			error = $this.data('error');
+			error = $this.data('error'),
+			mesg  = $this.data('mesg');
 
 		var search = new RegExp(regex, 'g'),
 			match  = null;
@@ -292,8 +297,9 @@
 
 		// toggle the error message visibility
 		if (match === false && error === false) {
-			var p = $('<P>' + $this.data('mesg') + '</P>')
+			var p = $('<P>' + mesg + '</P>')
 				.addClass('error_mesg');
+
 			field.append(p);
 
 			$this.addClass('error_on')
@@ -307,9 +313,6 @@
 				.data('error', false);
 		}
 
-		// toggle the submit button visibility
-		setButtonState(field.parent());
-
 		return true;
 	}
 
@@ -320,7 +323,7 @@
 		var button = form.find('input:submit');
 		if (!button) return;
 
-		if (checkErrors(form)) {
+		if (errorsExist(form)) {
 			button.attr('disabled', true);
 		}
 		else {
@@ -329,26 +332,28 @@
 	}
 
 	/*
-	 * Check each form element for errors
+	 * Return true if form errors exist
 	 */
-	function checkErrors(form) {
-		form.each(function() {
-			var $this = this;
+	function errorsExist(form) {
+		var fields = form[0].elements;
+
+		for (var i = 0; i < fields.length; i++) {
+			var elm = fields[i];
 
 			// supported elements
-			if (!/(INPUT|SELECT|TEXTAREA)/.exec($this.nodeName)) {
-				return true;
+			if (!/INPUT|SELECT|TEXTAREA/.test(elm.nodeName)) {
+				continue;
 			}
 
-			if ($this.nodeName == 'INPUT' &&
-				!/(text|password|radio)/.exec($this.type)) {
-				return true;
+			if (elm.nodeName == 'INPUT' &&
+				!/text|password|radio/.test(elm.type)) {
+				continue;
 			}
 
 			// do errors exist?
-			if (($this.required && !$this.value) || $(this).data('error')) {
+			if ((elm.required && !elm.value) || $(elm).data('error')) {
 				return true;
 			}
-		});
+		}
 	}
 })(jQuery);
