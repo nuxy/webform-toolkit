@@ -30,23 +30,19 @@ form.webform fieldset {
 
 form.webform input[type=text],
 form.webform input[type=password],
-form.webform input[type=file],
-form.webform input.error_off {
+form.webform input[type=file] {
 	border: 1px solid #DDDDDD;
 	border-bottom: 1px solid #BBBBBB;
 	border-left: 1px solid #AAAAAA;
+	box-shadow: none;
 	font-size: 13px;
 	height: 20px;
+	outline: none;
 	width: 200px;
 }
 
 form.webform input[type=radio] {
 	margin: 10px;
-}
-
-form.webform input.error_on {
-	border: 1px solid #FF0000;
-	color: #FF0000;
 }
 
 form.webform input[type=file] {
@@ -85,12 +81,25 @@ form.webform p.error_mesg {
 }
 
 form.webform select {
+	box-shadow: none;
 	margin-left: 0px;
 	vertical-align: -3px;
 }
 
 form.webform textarea {
 	border: 1px solid #DDDDDD;
+	box-shadow: none;
 	font-size: 13px;
 	resize: none;
+}
+
+form.webform .error_on {
+	border: 1px solid #FF0000 !important;
+	color: #FF0000;
+}
+
+form.webform .error_off {
+	border: 1px solid #DDDDDD;
+	border-bottom: 1px solid #BBBBBB;
+	border-left: 1px solid #AAAAAA;
 }
