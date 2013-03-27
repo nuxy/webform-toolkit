@@ -1,6 +1,22 @@
 = Webform Toolkit
 
-This project is currently in development with no set time of release.
+Dynamically generate an HTML form with field validation and custom errors using a simple JSON
+
+http://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg
+
+== Features
+
+- Extensible HTML/CSS interface.
+- Compatible with Firefox 3.6+, Chrome, Safari 5+, Opera, and Internet Explorer 7+ web browsers.
+- Compatible with iOS and Android mobile web browsers.
+- Easy to set-up and customize.
+- Provides form input validation using REGEX ({regular expressions}[http://www.regular-expressions.info/reference.html])
+- Supports both synchronous and asynchronous form-data POST
+- Fast and lightweight (jQuery plug-in *only 3.3 kB)
+
+== Installation
+
+Download the latest {sources}[https://github.com/nuxy/Webform-Toolkit/tags] and refer to the {README}[http://labs.mbrooks.info/demos/Webform-Toolkit/README.html] for more information about this package.
 
 == Author
 

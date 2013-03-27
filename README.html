@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="http://mbrooks.info/readme.css">
+
+	<title>README</title>
+</head>
+<body>
+
+<h1>Webform Toolkit</h1>
+
+<p>Dynamically generate an HTML form with field validation and custom errors using a simple JSON</p>
+
+<h2>Features</h2>
+
+<ul>
+	<li>Extensible HTML/CSS interface.</li>
+	<li>Compatible with Firefox 3.6+, Chrome, Safari 5+, Opera, and Internet Explorer 7+ web browsers.</li>
+	<li>Compatible with iOS and Android mobile web browsers.</li>
+	<li>Easy to set-up and customize.</li>
+	<li>Provides form input validation using REGEX (<a href="http://www.regular-expressions.info/reference.html">regular expressions</a>)</li>
+	<li>Supports both synchronous and asynchronous form-data POST</li>
+	<li>Fast and lightweight (jQuery plug-in *only 3.3 kB)</li>
+</ul>
+
+<p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
+
+<a name="install"></a>
+
+<h2>Installation</h2>
+
+<ol>
+	<li>Download the latest <a href="https://github.com/nuxy/Webform-Toolkit/tags">sources</a> to your computer using a web browser.</li>
+	<li>Extract the contents of the <em>.zip</em> into a folder on your local computer.</li>
+	<li>Upload the folder with the <strong>following files</strong> to your web site.</li>
+</ol>
+
+<table border="1">
+	<tr>
+		<th>Filename</th>
+		<th>Role</th>
+	</tr>
+	<tr>
+		<td>jquery.webform.toolkit.min.js</td>
+		<td>The main script to be included from within your HTML document.</td>
+	</tr>
+	<tr>
+		<td>jquery.webform.toolkit.min.css</td>
+		<td>This style sheet that defines the "look & feel" of the HTML form.</td>
+	</tr>
+</table>
+
+<h2>Set-up</h2>
+
+<p>It's as simple as defining the target element <code>#container</code> using the <a href="http://api.jquery.com/category/selectors">jQuery selector</a> and passing form field properties as JSON.  An optional callback can also be defined for post-processing data on submit event.</p>
+
+<pre>$(selector).WebformTookit(<em>config</em>, <a href="#callback"><em>callback</em></a>);</pre>
+
+<h2>Source Code</h2>
+
+<p>Add the following Javascript between the <code>&lt;head&gt;&lt;/head&gt;</code> tags of your HTML document.</p>
+
+<a name="examples"></a>
+
+<pre>&lt;script src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
+&lt;script&gt;
+	google.load('jquery','1.7.1');
+&lt;/script&gt;
+
+&lt;link rel="stylesheet" type="text/css" href="/path/to/jquery.webform.toolkit.min.css"&gt;
+
+&lt;script src="/path/to/jquery.webform.toolkit.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(document).ready(function() {
+	$('#container')
+		.WebformToolkit({
+			id     : 'example',
+			action : 'http://www.domain.com/handler',
+			fields : [
+				{
+					"label"    : "User Name",
+					"type"     : "text",
+					"name"     : "username",
+					"value"    : "",
+					"size"     : "15",
+					"filter"   : "^\\w{0,15}$",
+					"error"    : "Supported characters: A-Z, 0-9, _ and spaces",
+					"required" : "1"
+				},
+				{
+					"label"    : "Password",
+					"type"     : "text",
+					"name"     : "password",
+					"value"    : "",
+					"size"     : "15",
+					"filter"   : "^\\w{0,15}$",
+					"error"    : "Supported characters: A-Z, 0-9, _ and spaces",
+					"required" : "1"
+				}
+			]
+		}, doSomething);
+&lt;/script&gt;</pre>
+
+<h2>Releases</h2>
+
+<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (3.3 kB) and developers version (unpacked  6.8 kB)</p>
+
+<p>You can always find the latest updates within this projects repository.</p>
+
+<h2>Code Repository</h2>
+
+<p>This projects repository is currently hosted on <a href="https://github.com">Github</a></p>
+
+<pre>https://github.com/nuxy/Webform-Toolkit</pre>
+
+<h2>Maintainer</h2>
+
+<p>For feedback, bug reports, or other comments, feel free to contact me at: <strong>devel</strong> <em>at</em> <strong>mbrooks</strong> <em>dot</em> <strong>info</strong></p>
+
+<h2>License and Warranty</h2>
+
+<p>This package is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.</p>
+
+<p>Webform Toolkit is provided under the terms of the <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
+
+<p>Webform Toolkit &#169;2012-2013 <a href="http://mbrooks.info">Marc S. Brooks</a></p>
+
+</body>
+</html>
