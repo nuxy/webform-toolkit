@@ -308,13 +308,19 @@
 
 			$this.addClass('error_on')
 				.data('error', true);
+
+			p.fadeIn('slow');
 		}
 		else
 		if (match === true && error === true) {
-			field.children('p').remove();
+			var p = field.children('p');
 
-			$this.removeClass('error_on')
-				.data('error', false);
+			p.fadeOut('slow', function() {
+				$this.removeClass('error_on')
+					.data('error', false);
+
+				p.remove();
+			});
 		}
 
 		return true;

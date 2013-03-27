@@ -78,6 +78,7 @@ form.webform p {
 }
 
 form.webform p.error_mesg {
+	display: none;
 	text-align: center;
 }
 
