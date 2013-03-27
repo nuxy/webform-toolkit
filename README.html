@@ -60,7 +60,7 @@
 
 <p>Add the following Javascript between the <code>&lt;head&gt;&lt;/head&gt;</code> tags of your HTML document.</p>
 
-<a name="examples"></a>
+<a name="example"></a>
 
 <pre>&lt;script src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
 &lt;script&gt;
@@ -84,7 +84,7 @@ $(document).ready(function() {
 					"value"    : "",
 					"size"     : "15",
 					"filter"   : "^\\w{0,15}$",
-					"error"    : "Supported characters: A-Z, 0-9, _ and spaces",
+					"error"    : "Supported characters: A-Z, 0-9 and underscore",
 					"required" : "1"
 				},
 				{
@@ -93,13 +93,64 @@ $(document).ready(function() {
 					"name"     : "password",
 					"value"    : "",
 					"size"     : "15",
-					"filter"   : "^\\w{0,15}$",
-					"error"    : "Supported characters: A-Z, 0-9, _ and spaces",
+					"filter"   : "^(?!password)(.{0,15})$",
+					"error"    : "The password entered is not valid",
 					"required" : "1"
 				}
 			]
 		}, doSomething);
 &lt;/script&gt;</pre>
+
+<h2>Field Definitions</h2>
+
+<table border="1">
+	<tr>
+		<th>Attribute</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>label</td>
+		<td>Field label value</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>Supported - file|password|radio|select|text|textarea</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>Form element name</td>
+	</tr>
+	<tr>
+		<td>value</td>
+		<td>Default value</td>
+	</tr>
+	<tr>
+		<td>size</td>
+		<td>Input type size</td>
+	</tr>
+	<tr>
+		<td>filter</td>
+		<td>Validate form input using REGEX</td>
+	</tr>
+	<tr>
+		<td>error</td>
+		<td>Custom error message</td>
+	</tr>
+	<tr>
+		<td>required</td>
+		<td>Required field</td>
+	</tr>
+</table>
+
+<a name="callback"></a>
+
+<h2>Callback Processing</h2>
+
+<p>When a callback function is defined a form object is returned.  The following function corresponds to the <a href="#example">example</a> provided above.</p>
+
+<pre>function doSomething(form) {
+	alert("callback(form='" + form.attr('id') + "')");
+}</pre>
 
 <h2>Releases</h2>
 
