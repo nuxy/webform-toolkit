@@ -155,7 +155,7 @@
 
 			var $this = $(this);
 
-			if (errorsExist($this)) {
+			if (!errorsExist($this)) {
 
 				// POST using AJAX call, return callback with form object
 				if (typeof callback === 'function') {
