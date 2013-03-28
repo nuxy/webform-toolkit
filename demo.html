@@ -73,6 +73,9 @@
 					"required" : "1"
 				}
 			]
+		},
+		function(form) {
+			alert("callback(form='" + form.attr('id') + "')");
 		});
 	});
 	</script>
