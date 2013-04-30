@@ -304,6 +304,15 @@
 			var p = $('<P>' + mesg + '</P>')
 				.addClass('error_mesg');
 
+			// .. arrow elements
+			var span1 = $('<SPAN></SPAN>'),
+				span2 = $('<SPAN></SPAN>');
+
+			span1.addClass('arrow_lft');
+			span2.addClass('arrow_rgt');
+
+			p.prepend(span1).append(span2);
+
 			field.append(p);
 
 			$this.addClass('error_on')
