@@ -12,7 +12,7 @@ http://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg
 - Easy to set-up and customize.
 - Provides form input validation using REGEX ({regular expressions}[http://www.regular-expressions.info/reference.html])
 - Supports both synchronous and asynchronous form-data POST
-- Fast and lightweight (jQuery plug-in *only 3.3 kB)
+- Fast and lightweight (jQuery plug-in *only 3.6 kB)
 
 == Installation
 
