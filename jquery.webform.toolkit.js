@@ -77,7 +77,7 @@
 				var div = $('<DIV></DIV>');
 
 				// .. label, if exists
-				if (data.label) {
+				if (data.label && data.type != 'checkbox') {
 					div.append( $('<LABEL>' + data.label + '</LABEL>') );
 				}
 
@@ -103,6 +103,10 @@
 
 					case 'radio':
 						elm = createRadioElm(data);
+					break;
+
+					case 'checkbox':
+						elm = createCheckBoxElm(data);
 					break;
 
 					default:
@@ -227,7 +231,7 @@
 	}
 
 	/*
-	 * Create radio button elements
+	 * Create RADIO button elements
 	 */
 	function createRadioElm(config) {
 		var div = $('<DIV></DIV>')
@@ -254,6 +258,30 @@
 			div.append(input);
 			div.append(span);
 		}
+
+		return div;
+	}
+
+	/*
+	 * Create CHECKBOX elements
+	 */
+	function createCheckBoxElm(config) {
+		var div = $('<DIV></DIV>')
+			.addClass('checkbox');
+
+		var label = $('<SPAN>' + config.label + '</SPAN>'),
+			input = $('<INPUT></INPUT>')
+			.attr({
+				type  : 'checkbox',
+				name  : config.name,
+				value : config.value
+			});
+
+		if (config.value) {
+			input.attr('checked', true);
+		}
+
+		div.append(input, label);
 
 		return div;
 	}

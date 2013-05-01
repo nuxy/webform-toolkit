@@ -15,7 +15,21 @@ form.webform div {
 }
 
 form.webform div.webform_submit {
+	clear: both;
 	padding: 10px 0px 10px 0px;
+}
+
+form.webform div.checkbox {
+	padding: 10px 0px 10px 0px;
+}
+
+form.webform div.checkbox input,
+form.webform div.checkbox span {
+	float: left;
+}
+
+form.webform div.checkbox span {
+	padding-left: 5px;
 }
 
 form.webform div.radios span {

@@ -6,6 +6,19 @@
 	width: 400px;
 }
 
+#container div.checkbox input,
+#container div.checkbox span {
+	float: left;
+}
+
+#container div.checkbox input {
+	margin-left: 40px;
+}
+
+#container div.checkbox span {
+	padding-left: 5px;
+}
+
 #container label {
 	margin-bottom: 10px 0px 2px 0px;
 }
