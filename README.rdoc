@@ -14,10 +14,6 @@ http://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg
 - Supports both synchronous and asynchronous form-data POST
 - Fast and lightweight (jQuery plug-in *only 3.3 kB)
 
-== To Do
-
-- Support checkbox type
-
 == Installation
 
 Download the latest {sources}[https://github.com/nuxy/Webform-Toolkit/tags] and refer to the {README}[http://labs.mbrooks.info/demos/Webform-Toolkit/README.html] for more information about this package.
