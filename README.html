@@ -19,7 +19,8 @@
 	<li>Compatible with iOS and Android mobile web browsers.</li>
 	<li>Easy to set-up and customize.</li>
 	<li>Provides form input validation using REGEX (<a href="http://www.regular-expressions.info/reference.html">regular expressions</a>)</li>
-	<li>Supports both synchronous and asynchronous form-data POST</li>
+	<li>Supports synchronous form-data POST</li>
+	<li>Supports FORM submit callback for custom AJAX handling</li>
 	<li>Fast and lightweight (jQuery plug-in *only 3.3 kB)</li>
 </ul>
 
@@ -98,7 +99,7 @@ $(document).ready(function() {
 					"required" : "1"
 				}
 			]
-		}, doSomething);
+		}, customHandler);
 &lt;/script&gt;</pre>
 
 <h2>Field Definitions</h2>
@@ -146,10 +147,17 @@ $(document).ready(function() {
 
 <h2>Callback Processing</h2>
 
-<p>When a callback function is defined a form object is returned.  The following function corresponds to the <a href="#example">example</a> provided above.</p>
+<p>When a callback function is defined a form object is returned.  This allows you to define a custom AJAX handler based on the requirements of your application.  The following function corresponds to the <a href="#example">example</a> provided above.</p>
 
-<pre>function doSomething(form) {
-	alert("callback(form='" + form.attr('id') + "')");
+<pre>function customHandler(form) {
+	$.ajax({
+		type : 'POST',
+		url  : form.attr('action'),
+		data : form.serialize()
+	})
+	.success(function(response) {
+		alert(response);
+	});
 }</pre>
 
 <h2>Releases</h2>
