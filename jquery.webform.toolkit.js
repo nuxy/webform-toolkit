@@ -161,9 +161,9 @@
 
 			if (!errorsExist($this)) {
 
-				// POST using AJAX call, return callback with form object
+				// return callback with form object response
 				if (typeof callback === 'function') {
-					$.post(config.url, $this.serialize(), callback($this));
+					callback($this);
 				}
 
 				// POST form values
