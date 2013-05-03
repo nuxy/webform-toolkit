@@ -126,10 +126,15 @@
 						error : false
 					});
 
-					// attach field events
-					elm.on('keyup keydown mousedown mousemove mouseout change', function() {
+					// attach form events
+					elm.on('mousedown mousemove mouseout change', function() {
 						validateField(this);
 						setButtonState(form);
+					});
+
+					form.on('mouseover mousemove', function() {
+						validateField(elm);
+						setButtonState(this);
 					});
 
 					// attach key events
