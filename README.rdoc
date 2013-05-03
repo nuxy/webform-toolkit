@@ -11,7 +11,8 @@ http://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg
 - Compatible with iOS and Android mobile web browsers.
 - Easy to set-up and customize.
 - Provides form input validation using REGEX ({regular expressions}[http://www.regular-expressions.info/reference.html])
-- Supports both synchronous and asynchronous form-data POST
+- Supports synchronous form-data POST
+- Supports FORM submit callback for custom AJAX handling
 - Fast and lightweight (jQuery plug-in *only 3.6 kB)
 
 == Installation
