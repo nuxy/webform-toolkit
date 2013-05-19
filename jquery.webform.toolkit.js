@@ -134,7 +134,7 @@
 
 					form.on('mouseover mousemove', function() {
 						validateField(elm);
-						setButtonState(this);
+						setButtonState( $(this) );
 					});
 
 					// attach key events
