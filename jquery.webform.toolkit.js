@@ -16,6 +16,7 @@
 			var form = createForm(config, callback);
 			$(this).append(form);
 			setButtonState(form);
+			return form;
 		}
 	};
 
