@@ -17,26 +17,36 @@
 				var $this = $(this),
 					data  = $this.data();
 
-				var form = createForm(config, callback);
-				$(this).append(form);
-				setButtonState(form);
+				var webform = createForm(config, callback);
+				$(this).append(webform);
 
 				if ( $.isEmptyObject(data) ) {
 					$this.data({
-						container : form
+						container : webform
 					});
 				}
 
-				return form;
+				setButtonState(webform);
+
+				return webform;
 			});
 		},
-		"create" : function(config) {
+		"create" : function(config, callback) {
 			return this.each(function() {
-				var $this = $(this),
-					data  = $this.data(),
-					form  = data.container;
+				var webform = $(this).data().container,
+					field   = null;
 
-				form.append( createField(form, config) );
+				field = createField(webform, config);
+
+				// return callback with form and field objects
+				if (typeof callback === 'function') {
+					callback(webform.find('fieldset'), field);
+				}
+
+				// append to existing form
+				else {
+					webform.find('div.webform_submit').before(field);
+				}
 			});
 		},
 		"destroy" : function() {
@@ -99,19 +109,7 @@
 		// create each field
 		if (config.fields) {
 			for (var j = 0; j < config.fields.length; j++) {
-				var data = config.fields[j];
-
-				var div = $('<DIV></DIV>');
-
-				// .. label, if exists
-				if (data.label && data.type != 'checkbox') {
-					div.append( $('<LABEL>' + data.label + '</LABEL>') );
-				}
-
-				elm = createField(form, data);
-
-				div.append(elm);
-				set.append(div);
+				set.append( createField(form, config.fields[j]) );
 			}
 		}
 
@@ -156,6 +154,13 @@
 	 * Create field elements
 	 */
 	function createField(form, config) {
+		var div = $('<DIV></DIV>');
+
+		// .. label, if exists
+		if (config.label && config.type != 'checkbox') {
+			div.append( $('<LABEL>' + config.label + '</LABEL>') );
+		}
+
 		var elm = jQuery.obj;
 
 		// supported elements
@@ -218,7 +223,9 @@
 			});
 		}
 
-		return elm;
+		div.append(elm);
+
+		return div;
 	}
 
 	/*
