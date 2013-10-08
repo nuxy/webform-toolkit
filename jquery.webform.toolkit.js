@@ -13,11 +13,33 @@
 (function($) {
 	var methods = {
 		"init" : function(config, callback) {
-			var form = createForm(config, callback);
-			$(this).append(form);
-			setButtonState(form);
-			return form;
+			return this.each(function() {
+				var $this = $(this),
+					data  = $this.data();
+
+				if ( $.isEmptyObject(data) ) {
+					$this.data(config);
+				}
+
+				var form = createForm(config, callback);
+				$(this).append(form);
+				setButtonState(form);
+				return form;
+			});
+		},
+		"create" : function(config, callback) {
+			return this.each(function() {
+				var $this = $(this),
+					data  = $this.data();
+
+			});
+		},
+		"destroy" : function() {
+			return this.each(function() {
+				$(this).removeData();
+			});
 		}
+		
 	};
 
 	$.fn.WebformToolkit = function(method) {
