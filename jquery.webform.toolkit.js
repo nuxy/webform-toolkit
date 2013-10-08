@@ -17,21 +17,26 @@
 				var $this = $(this),
 					data  = $this.data();
 
-				if ( $.isEmptyObject(data) ) {
-					$this.data(config);
-				}
-
 				var form = createForm(config, callback);
 				$(this).append(form);
 				setButtonState(form);
+
+				if ( $.isEmptyObject(data) ) {
+					$this.data({
+						container : form
+					});
+				}
+
 				return form;
 			});
 		},
-		"create" : function(config, callback) {
+		"create" : function(config) {
 			return this.each(function() {
 				var $this = $(this),
-					data  = $this.data();
+					data  = $this.data(),
+					form  = data.container;
 
+				form.append( createField(form, config) );
 			});
 		},
 		"destroy" : function() {
@@ -39,7 +44,6 @@
 				$(this).removeData();
 			});
 		}
-		
 	};
 
 	$.fn.WebformToolkit = function(method) {
@@ -104,67 +108,7 @@
 					div.append( $('<LABEL>' + data.label + '</LABEL>') );
 				}
 
-				var elm = jQuery.obj;
-
-				// supported elements
-				switch (data.type) {
-					case 'text':
-						elm = createInputElm(data);
-					break;
-
-					case 'password':
-						elm = createInputElm(data);
-					break;
-
-					case 'textarea':
-						elm = createTextAreaElm(data);
-					break;
-
-					case 'select':
-						elm = createMenuElm(data);
-					break;
-
-					case 'radio':
-						elm = createRadioElm(data);
-					break;
-
-					case 'checkbox':
-						elm = createCheckBoxElm(data);
-					break;
-
-					default:
-						$.error('Invalid or missing field type');
-					break;
-				}
-
-				if (data.required == 1) {
-					elm.attr('required', true);
-				}
-
-				// filter with REGEX
-				if (data.filter) {
-					elm.data({
-						regex : data.filter,
-						mesg  : data.error,
-						error : false
-					});
-
-					// attach form events
-					elm.on('mousedown mousemove mouseout change', function() {
-						validateField(this);
-						setButtonState(form);
-					});
-
-					form.on('mouseover mousemove', function() {
-						validateField(elm);
-						setButtonState( $(this) );
-					});
-
-					// attach key events
-					elm.keypress(function(event) {
-						if (event.keyCode != 0) return;
-					});
-				}
+				elm = createField(form, data);
 
 				div.append(elm);
 				set.append(div);
@@ -206,6 +150,75 @@
 		form.append(set);
 
 		return form;
+	}
+
+	/*
+	 * Create field elements
+	 */
+	function createField(form, config) {
+		var elm = jQuery.obj;
+
+		// supported elements
+		switch (config.type) {
+			case 'text':
+				elm = createInputElm(config);
+			break;
+
+			case 'password':
+				elm = createInputElm(config);
+			break;
+
+			case 'textarea':
+				elm = createTextAreaElm(config);
+			break;
+
+			case 'select':
+				elm = createMenuElm(config);
+			break;
+
+			case 'radio':
+				elm = createRadioElm(config);
+			break;
+
+			case 'checkbox':
+				elm = createCheckBoxElm(config);
+			break;
+
+			default:
+				$.error('Invalid or missing field type');
+			break;
+		}
+
+		if (config.required == 1) {
+			elm.attr('required', true);
+		}
+
+		// filter with REGEX
+		if (config.filter) {
+			elm.data({
+				regex : config.filter,
+				mesg  : config.error,
+				error : false
+			});
+
+			// attach form events
+			elm.on('mousedown mousemove mouseout change', function() {
+				validateField(this);
+				setButtonState(form);
+			});
+
+			form.on('mouseover mousemove', function() {
+				validateField(elm);
+				setButtonState( $(this) );
+			});
+
+			// attach key events
+			elm.keypress(function(event) {
+				if (event.keyCode != 0) return;
+			});
+		}
+
+		return elm;
 	}
 
 	/*
