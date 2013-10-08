@@ -11,7 +11,7 @@
  */
 
 form.webform div {
-	margin: 5px;
+	padding: 1px 0px 1px 0px;
 }
 
 form.webform div.webform_submit {
@@ -20,7 +20,7 @@ form.webform div.webform_submit {
 }
 
 form.webform div.checkbox {
-	padding: 10px 0px 10px 0px;
+	padding: 10px 0px 0px 0px;
 }
 
 form.webform div.checkbox input,
@@ -32,14 +32,24 @@ form.webform div.checkbox span {
 	padding-left: 5px;
 }
 
+form.webform div.radios {
+	position: relative;
+	margin-top: -3px;
+}
+
 form.webform div.radios span {
-	vertical-align: -2px;
+	vertical-align: -1px;
 }
 
 form.webform fieldset {
 	border: none;
 	margin: 5px 10px 0px 10px;
 	padding: 0px;
+}
+
+form.webform fieldset div {
+	float: left;
+	margin: 2px;
 }
 
 form.webform input[type=text],
@@ -78,7 +88,7 @@ form.webform input[type=submit] {
 form.webform label {
 	float: left;
 	position: relative;
-	top: 5px;
+	top: 9px;
 	width: 150px;
 }
 
