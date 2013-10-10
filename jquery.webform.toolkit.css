@@ -16,6 +16,7 @@ form.webform div {
 
 form.webform div.webform_submit {
 	clear: both;
+	float: none;
 	padding: 10px 0px 10px 0px;
 }
 
