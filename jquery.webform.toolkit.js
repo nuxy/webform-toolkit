@@ -173,6 +173,10 @@
 				elm = createInputElm(config);
 			break;
 
+			case 'hidden':
+				elm = createInputElm(config);
+			break;
+
 			case 'textarea':
 				elm = createTextAreaElm(config);
 			break;
@@ -199,7 +203,7 @@
 		}
 
 		// filter with REGEX
-		if (config.filter) {
+		if (config.filter && config.type != 'hidden') {
 			elm.data({
 				regex : config.filter,
 				mesg  : config.error,
@@ -234,7 +238,7 @@
 	function createInputElm(config) {
 		var input = $('<INPUT></INPUT>');
 
-		// .. text field attributes
+		// .. field attributes
 		if (config.type) {
 			input.attr('type', config.type);
 		}
@@ -243,12 +247,13 @@
 			input.attr('name', config.name);
 		}
 
-		if (config.type == 'text' && config.value) {
+		if (config.value) {
 			input.attr('value', config.value);
 		}
 
-		if (config.size) {
-			input.attr('maxlength', config.size);
+		// config.size to be removed in future release
+		if (config.maxlength || config.size) {
+			input.attr('maxlength', (config.maxlength) ? config.maxlength : config.size);
 		}
 
 		return input;
