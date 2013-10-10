@@ -20,8 +20,9 @@
 	<li>Easy to set-up and customize.</li>
 	<li>Provides form input validation using REGEX (<a href="http://www.regular-expressions.info/reference.html">regular expressions</a>)</li>
 	<li>Supports synchronous form-data POST</li>
-	<li>Supports FORM submit callback for custom AJAX handling</li>
-	<li>Fast and lightweight (jQuery plug-in *only 3.3 kB)</li>
+	<li>Supports FORM submit callback for custom AJAX handling.</li>
+	<li>Supports dynamic (<a href="#methods">on the fly</a>) field creation.</li>
+	<li>Fast and lightweight (jQuery plug-in *only 4 kB)</li>
 </ul>
 
 <p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
@@ -73,34 +74,36 @@
 &lt;script src="/path/to/jquery.webform.toolkit.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(document).ready(function() {
-	var form = $('#container')
+	var webform = $('#container')
 		.WebformToolkit({
 			id     : 'example',
 			action : 'http://www.domain.com/handler',
 			fields : [
 				{
-					"label"    : "User Name",
-					"type"     : "text",
-					"name"     : "username",
-					"value"    : "",
-					"size"     : "15",
-					"filter"   : "^\\w{0,15}$",
-					"error"    : "Supported characters: A-Z, 0-9 and underscore",
-					"required" : "1"
+					"label"     : "User Name",
+					"type"      : "text",
+					"name"      : "username",
+					"value"     : "",
+					"maxlength" : "15",
+					"filter"    : "^\\w{0,15}$",
+					"error"     : "Supported characters: A-Z, 0-9 and underscore",
+					"required"  : "1"
 				},
 				{
-					"label"    : "Password",
-					"type"     : "text",
-					"name"     : "password",
-					"value"    : "",
-					"size"     : "15",
-					"filter"   : "^(?!password)(.{0,15})$",
-					"error"    : "The password entered is not valid",
-					"required" : "1"
+					"label"     : "Password",
+					"type"      : "text",
+					"name"      : "password",
+					"value"     : "",
+					"maxlength" : "15",
+					"filter"    : "^(?!password)(.{0,15})$",
+					"error"     : "The password entered is not valid",
+					"required"  : "1"
 				}
 			]
 		}, customHandler);
 &lt;/script&gt;</pre>
+
+<a name="fields"></a>
 
 <h2>Field Definitions</h2>
 
@@ -108,40 +111,56 @@ $(document).ready(function() {
 	<tr>
 		<th>Attribute</th>
 		<th>Description</th>
+		<th>Required</th>
 	</tr>
 	<tr>
 		<td>label</td>
 		<td>Field label value</td>
+		<td>true</td>
 	</tr>
 	<tr>
 		<td>type</td>
-		<td>Supported - file|password|checkbox|radio|select|text|textarea</td>
+		<td>Supported types: text|hidden|password|checkbox|radio|select|textarea</td>
+		<td>true</td>
 	</tr>
 	<tr>
 		<td>name</td>
 		<td>Form element name</td>
+		<td>true</td>
 	</tr>
 	<tr>
 		<td>value</td>
 		<td>Default value</td>
+		<td>true</td>
+	</tr>
+	<tr class="deprecated">
+		<td><strike>size</strike></td>
+		<td><strike>Input type maximum length</strike> (see below)</td>
+		<td><strike>false</strike></td>
 	</tr>
 	<tr>
-		<td>size</td>
-		<td>Input type size</td>
+		<td>maxlength</td>
+		<td>Input type maximum length</td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>filter</td>
 		<td>Validate form input using REGEX</td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>error</td>
 		<td>Custom error message</td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>required</td>
 		<td>Required field</td>
+		<td>false</td>
 	</tr>
 </table>
+
+<p>The <em><a href="#fields">size</a></em> field definition is has been <strong>deprecated</strong> to be replaced with <em><a href="#fields">maxlength</a></em> going forward.  Please adapt your code when using this release. For backwards compatibility, I have left support in-tact, but do not expect it will be available in future releases.  You have been warned.</p>
 
 <a name="callback"></a>
 
@@ -160,9 +179,30 @@ $(document).ready(function() {
 	});
 }</pre>
 
+<a name="methods"></a>
+
+<h2>Adding Fields on the fly</h2>
+
+<p>I have added a method to dynamically create form fields that can be added to an existing webform. An optional callback has also been provided to for post-processing FORM and field elements. This makes it easy to show/hide fields using conditions and expressions.</p>
+
+<pre>webform.WebformToolkit('create', {
+	"label"    : "Age Group",
+	"type"     : "radio",
+	"name"     : "age",
+	"value"    : "1-6",
+	"size"     : "",
+	"filter"   : "1-6|7-11|12-18",
+	"error"    : "",
+	"required" : "0"
+},
+function(form, elm) {
+	form.append(elm);  // default: last in fieldset
+});
+</pre>
+
 <h2>Releases</h2>
 
-<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (3.6 kB) and developers version (unpacked  7.4 kB)</p>
+<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (4 kB) and developers version (unpacked  8.6 kB)</p>
 
 <p>You can always find the latest updates within this projects repository.</p>
 
