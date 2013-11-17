@@ -18,7 +18,7 @@
 					data  = $this.data();
 
 				var webform = createForm(config, callback);
-				$(this).append(webform);
+				$this.append(webform);
 
 				if ( $.isEmptyObject(data) ) {
 					$this.data({
