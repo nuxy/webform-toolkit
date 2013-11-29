@@ -73,8 +73,7 @@ form.webform input[type=radio] {
 
 form.webform input[type=file] {
 	border: 1px solid transparent;
-	margin-bottom: 1px;
-	margin-top: 1px;
+	margin: 5px 0px 5px 0px;
 	font-size: 11px;
 }
 

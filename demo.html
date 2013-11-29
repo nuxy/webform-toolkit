@@ -8,14 +8,14 @@
 
 	<!-- CSS include start -->
 
-	<link rel="stylesheet" type="text/css" href="jquery.webform.toolkit.min.css">
+	<link rel="stylesheet" type="text/css" href="jquery.webform.toolkit.css">
 
 	<!-- CSS include end -->
 
 
 	<!-- Javascript insert start -->
 
-	<script src="jquery.webform.toolkit.min.js"></script>
+	<script src="jquery.webform.toolkit.js"></script>
 	<script>
 	$(document).ready(function() {
 		var $this = $('#container').WebformToolkit({
@@ -41,6 +41,16 @@
 					"filter"    : "^(?!password)(.{0,15})$",
 					"error"     : "The password entered is not valid",
 					"required"  : "1"
+				},
+				{
+					"label"     : "Profile Image",
+					"type"      : "file",
+					"name"      : "upload",
+					"value"     : "",
+					"maxlength" : "",
+					"filter"    : "",
+					"error"     : "The upload failed due to unknown error",
+					"required"  : "0"
 				},
 				{
 					"label"     : "Age",

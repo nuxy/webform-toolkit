@@ -177,6 +177,10 @@
 				elm = createInputElm(config);
 			break;
 
+			case 'file':
+				elm = createFileElm(config);
+			break;
+
 			case 'textarea':
 				elm = createTextAreaElm(config);
 			break;
@@ -254,6 +258,21 @@
 		// config.size to be removed in future release
 		if (config.maxlength || config.size) {
 			input.attr('maxlength', (config.maxlength) ? config.maxlength : config.size);
+		}
+
+		return input;
+	}
+
+	/*
+	 * Create FILE element
+	 */
+	function createFileElm(config) {
+		var input = $('<INPUT></INPUT>')
+			.attr('type','file');
+
+		// .. field attributes
+		if (config.name) {
+			input.attr('name', config.name);
 		}
 
 		return input;
