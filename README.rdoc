@@ -18,7 +18,7 @@ http://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg
 
 == To Do
 
-- Add support for input file-type using both FORM POST and AJAX methods.
+- Add support for input file-type using AJAX POST method.
 
 == Installation
 
