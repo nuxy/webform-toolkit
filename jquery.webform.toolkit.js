@@ -1,8 +1,8 @@
-/*
+/**
  *  Webform-Toolkit
  *  Generate an interactive HTML FORM from JSON
  *
- *  Copyright 2012-2013, Marc S. Brooks (http://mbrooks.info)
+ *  Copyright 2012-2014, Marc S. Brooks (http://mbrooks.info)
  *  Licensed under the MIT license:
  *  http://www.opensource.org/licenses/mit-license.php
  *
@@ -69,8 +69,11 @@
 		}
 	};
 
-	/*
+	/**
 	 * Create FORM field elements
+	 * @param {Object} config
+	 * @param {Function} callback
+	 * @returns {Object}
 	 */
 	function createForm(config, callback) {
 		var form = $('<FORM></FORM>')
@@ -150,8 +153,11 @@
 		return form;
 	}
 
-	/*
+	/**
 	 * Create field elements
+	 * @param {Object} form
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createField(form, config) {
 		var div = $('<DIV></DIV>');
@@ -236,8 +242,10 @@
 		return div;
 	}
 
-	/*
+	/**
 	 * Create INPUT elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createInputElm(config) {
 		var input = $('<INPUT></INPUT>');
@@ -263,8 +271,10 @@
 		return input;
 	}
 
-	/*
+	/**
 	 * Create FILE element
+	 * @param {Object} config
+	 * returns {Object}
 	 */
 	function createFileElm(config) {
 		var input = $('<INPUT></INPUT>')
@@ -278,8 +288,10 @@
 		return input;
 	}
 
-	/*
+	/**
 	 * Create SELECT menu elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createMenuElm(config) {
 		var select = $('<SELECT></SELECT>');
@@ -302,8 +314,10 @@
 		return select;
 	}
 
-	/*
+	/**
 	 * Create RADIO button elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createRadioElm(config) {
 		var div = $('<DIV></DIV>')
@@ -334,8 +348,10 @@
 		return div;
 	}
 
-	/*
+	/**
 	 * Create CHECKBOX elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createCheckBoxElm(config) {
 		var div = $('<DIV></DIV>')
@@ -358,16 +374,20 @@
 		return div;
 	}
 
-	/*
+	/**
 	 * Create TEXTAREA elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createTextAreaElm(config) {
 		return $('<TEXTAREA></TEXTAREA>')
 			.attr('name', config.name);
 	}
 
-	/*
+	/**
 	 * Validate the form element value
+	 * @param {Object} elm
+	 * @returns {Boolean}
 	 */
 	function validateField(elm) {
 		var $this = $(elm);
@@ -435,8 +455,9 @@
 		return true;
 	}
 
-	/*
+	/**
 	 * Enable/Disable submit button
+	 * @param {Object} form
 	 */
 	function setButtonState(form) {
 		var button = form.find('input:submit');
@@ -450,8 +471,10 @@
 		}
 	}
 
-	/*
+	/**
 	 * Return true if form errors exist
+	 * @param {Object} form
+	 * @returns {Boolean}
 	 */
 	function errorsExist(form) {
 		var fields = form[0].elements;
