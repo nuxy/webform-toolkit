@@ -70,13 +70,13 @@
 	};
 
 	/**
-	 * Create FORM field elements
+	 * Create form field elements
 	 * @param {Object} config
 	 * @param {Function} callback
 	 * @returns {Object}
 	 */
 	function createForm(config, callback) {
-		var form = $('<FORM></FORM>')
+		var form = $('<form></form>')
 			.attr('id', config.id)
 			.addClass('webform');
 
@@ -89,7 +89,7 @@
 			});
 		}
 
-		var set = $('<FIELDSET></FIELDSET>');
+		var set = $('<fieldset></fieldset>');
 
 		// create hidden elements, if POST parameters exist
 		if (config.params) {
@@ -98,7 +98,7 @@
 			for (var i = 0; i < pairs.length; i++) {
 				var name = pairs[i].split('=');
 
-				var hidden = $('<INPUT></INPUT>')
+				var hidden = $('<input></input>')
 					.attr({
 						type  : 'hidden',
 						name  : name[0],
@@ -117,10 +117,10 @@
 		}
 
 		// create the submit button
-		var div = $('<DIV></DIV>')
+		var div = $('<div></div>')
 			.addClass('webform_submit');
 
-		var button = $('<INPUT></INPUT>')
+		var button = $('<input></input>')
 			.attr({
 				type  : 'submit',
 				value : 'Submit'
@@ -160,11 +160,11 @@
 	 * @returns {Object}
 	 */
 	function createField(form, config) {
-		var div = $('<DIV></DIV>');
+		var div = $('<div></div>');
 
 		// .. label, if exists
 		if (config.label && config.type != 'checkbox') {
-			div.append( $('<LABEL>' + config.label + '</LABEL>') );
+			div.append( $('<label>' + config.label + '</label>') );
 		}
 
 		var elm = jQuery.obj;
@@ -243,12 +243,12 @@
 	}
 
 	/**
-	 * Create INPUT elements
+	 * Create input elements
 	 * @param {Object} config
 	 * @returns {Object}
 	 */
 	function createInputElm(config) {
-		var input = $('<INPUT></INPUT>');
+		var input = $('<input></input>');
 
 		// .. field attributes
 		if (config.type) {
@@ -277,7 +277,7 @@
 	 * returns {Object}
 	 */
 	function createFileElm(config) {
-		var input = $('<INPUT></INPUT>')
+		var input = $('<input></input>')
 			.attr('type','file');
 
 		// .. field attributes
@@ -289,19 +289,19 @@
 	}
 
 	/**
-	 * Create SELECT menu elements
+	 * Create select menu elements
 	 * @param {Object} config
 	 * @returns {Object}
 	 */
 	function createMenuElm(config) {
-		var select = $('<SELECT></SELECT>');
+		var select = $('<select></select>');
 
 		var opts = config.filter.split('|');
 
 		for (var i = 0; i < opts.length; i++) {
 			var value = opts[i];
 
-			var option = $('<OPTION>' + value + '</OPTION>')
+			var option = $('<option>' + value + '</option>')
 				.attr('value', value);
 
 			if (value == config.value) {
@@ -320,7 +320,7 @@
 	 * @returns {Object}
 	 */
 	function createRadioElm(config) {
-		var div = $('<DIV></DIV>')
+		var div = $('<div></div>')
 			.addClass('radios');
 
 		var opts = config.filter.split('|');
@@ -328,7 +328,7 @@
 		for (var i = 0; i < opts.length; i++) {
 			var value = opts[i];
 
-			var input = $('<INPUT></INPUT>')
+			var input = $('<input></input>')
 				.attr({
 					type  : 'radio',
 					name  : config.name,
@@ -339,7 +339,7 @@
 				input.attr('checked', true);
 			}
 
-			var span = $('<SPAN>' + value + '</SPAN>');
+			var span = $('<span>' + value + '</span>');
 
 			div.append(input);
 			div.append(span);
@@ -354,11 +354,11 @@
 	 * @returns {Object}
 	 */
 	function createCheckBoxElm(config) {
-		var div = $('<DIV></DIV>')
+		var div = $('<div></div>')
 			.addClass('checkbox');
 
-		var label = $('<SPAN>' + config.label + '</SPAN>'),
-			input = $('<INPUT></INPUT>')
+		var label = $('<span>' + config.label + '</span>'),
+			input = $('<input></input>')
 			.attr({
 				type  : 'checkbox',
 				name  : config.name,
@@ -375,12 +375,12 @@
 	}
 
 	/**
-	 * Create TEXTAREA elements
+	 * Create textarea elements
 	 * @param {Object} config
 	 * @returns {Object}
 	 */
 	function createTextAreaElm(config) {
-		return $('<TEXTAREA></TEXTAREA>')
+		return $('<textarea></textarea>')
 			.attr('name', config.name);
 	}
 
@@ -404,15 +404,15 @@
 
 		// .. REGEX by type
 		switch(elm.nodeName) {
-			case 'INPUT' :
+			case 'input' :
 				match = search.test(value);
 			break;
 
-			case 'SELECT' :
+			case 'select' :
 				match = search.test(value);
 			break;
 
-			case 'TEXTAREA' :
+			case 'textarea' :
 				match = search.test(value);
 			break;
 		}
@@ -421,12 +421,12 @@
 
 		// toggle the error message visibility
 		if (match === false && error === false) {
-			var p = $('<P>' + mesg + '</P>')
+			var p = $('<p>' + mesg + '</p>')
 				.addClass('error_mesg');
 
 			// .. arrow elements
-			var span1 = $('<SPAN></SPAN>'),
-				span2 = $('<SPAN></SPAN>');
+			var span1 = $('<span></span>'),
+				span2 = $('<span></span>');
 
 			span1.addClass('arrow_lft');
 			span2.addClass('arrow_rgt');
@@ -483,11 +483,11 @@
 			var elm = fields[i];
 
 			// supported elements
-			if (!/INPUT|SELECT|TEXTAREA/.test(elm.nodeName)) {
+			if (!/input|select|textarea/.test(elm.nodeName)) {
 				continue;
 			}
 
-			if (elm.nodeName == 'INPUT' &&
+			if (elm.nodeName == 'input' &&
 				!/text|password|radio/.test(elm.type)) {
 				continue;
 			}
