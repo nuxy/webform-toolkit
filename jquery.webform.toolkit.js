@@ -294,6 +294,9 @@
 	 * @returns {Object}
 	 */
 	function createMenuElm(config) {
+		var div = $('<div></div>')
+			.addClass('menu');
+
 		var select = $('<select></select>');
 
 		var opts = config.filter.split('|');
@@ -311,7 +314,9 @@
 			select.append(option);
 		}
 
-		return select;
+		div.append(select);
+
+		return div;
 	}
 
 	/**

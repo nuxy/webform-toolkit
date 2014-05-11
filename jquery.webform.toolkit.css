@@ -39,7 +39,13 @@ form.webform div.radios {
 }
 
 form.webform div.radios span {
-	vertical-align: -1px;
+	vertical-align: 0px;
+}
+
+form.webform div.menu {
+	margin-left: 0px;
+	margin-top: -3px;
+	width: 200px;
 }
 
 form.webform fieldset {
