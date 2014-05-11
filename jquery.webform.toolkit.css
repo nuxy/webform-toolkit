@@ -74,6 +74,12 @@ form.webform textarea {
 	width: 200px;
 }
 
+form.webform input[type=text]:focus,
+form.webform input[type=password]:focus,
+form.webform textarea:focus {
+	border: 1px solid #3399CC;
+}
+
 form.webform input[type=radio] {
 	margin: 10px;
 }
