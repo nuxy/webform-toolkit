@@ -1,8 +1,8 @@
-/*
+/**
  *  Webform-Toolkit
  *  Generate an interactive HTML FORM from JSON
  *
- *  Copyright 2012-2013, Marc S. Brooks (http://mbrooks.info)
+ *  Copyright 2012-2014, Marc S. Brooks (http://mbrooks.info)
  *  Licensed under the MIT license:
  *  http://www.opensource.org/licenses/mit-license.php
  *
@@ -65,15 +65,18 @@
 			return methods.init.apply(this, arguments);
 		}
 		else {
-			$.error('Method ' +  method + ' does not exist on jQuery.WebformToolkit');
+			$.error('Method ' +  method + ' does not exist in jQuery.WebformToolkit');
 		}
 	};
 
-	/*
-	 * Create FORM field elements
+	/**
+	 * Create form field elements
+	 * @param {Object} config
+	 * @param {Function} callback
+	 * @returns {Object}
 	 */
 	function createForm(config, callback) {
-		var form = $('<FORM></FORM>')
+		var form = $('<form></form>')
 			.attr('id', config.id)
 			.addClass('webform');
 
@@ -86,7 +89,7 @@
 			});
 		}
 
-		var set = $('<FIELDSET></FIELDSET>');
+		var set = $('<fieldset></fieldset>');
 
 		// create hidden elements, if POST parameters exist
 		if (config.params) {
@@ -95,7 +98,7 @@
 			for (var i = 0; i < pairs.length; i++) {
 				var name = pairs[i].split('=');
 
-				var hidden = $('<INPUT></INPUT>')
+				var hidden = $('<input></input>')
 					.attr({
 						type  : 'hidden',
 						name  : name[0],
@@ -114,10 +117,10 @@
 		}
 
 		// create the submit button
-		var div = $('<DIV></DIV>')
+		var div = $('<div></div>')
 			.addClass('webform_submit');
 
-		var button = $('<INPUT></INPUT>')
+		var button = $('<input></input>')
 			.attr({
 				type  : 'submit',
 				value : 'Submit'
@@ -150,15 +153,18 @@
 		return form;
 	}
 
-	/*
+	/**
 	 * Create field elements
+	 * @param {Object} form
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createField(form, config) {
-		var div = $('<DIV></DIV>');
+		var div = $('<div></div>');
 
 		// .. label, if exists
 		if (config.label && config.type != 'checkbox') {
-			div.append( $('<LABEL>' + config.label + '</LABEL>') );
+			div.append( $('<label>' + config.label + '</label>') );
 		}
 
 		var elm = jQuery.obj;
@@ -233,14 +239,24 @@
 
 		div.append(elm);
 
+		// .. description, if exists
+		if (config.description) {
+			var p = $('<p>' + config.description + '</p>')
+				.addClass('field_desc');
+
+			div.append(p);
+		}
+
 		return div;
 	}
 
-	/*
-	 * Create INPUT elements
+	/**
+	 * Create input elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createInputElm(config) {
-		var input = $('<INPUT></INPUT>');
+		var input = $('<input></input>');
 
 		// .. field attributes
 		if (config.type) {
@@ -263,11 +279,13 @@
 		return input;
 	}
 
-	/*
+	/**
 	 * Create FILE element
+	 * @param {Object} config
+	 * returns {Object}
 	 */
 	function createFileElm(config) {
-		var input = $('<INPUT></INPUT>')
+		var input = $('<input></input>')
 			.attr('type','file');
 
 		// .. field attributes
@@ -278,18 +296,23 @@
 		return input;
 	}
 
-	/*
-	 * Create SELECT menu elements
+	/**
+	 * Create select menu elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createMenuElm(config) {
-		var select = $('<SELECT></SELECT>');
+		var div = $('<div></div>')
+			.addClass('menu');
+
+		var select = $('<select></select>');
 
 		var opts = config.filter.split('|');
 
 		for (var i = 0; i < opts.length; i++) {
 			var value = opts[i];
 
-			var option = $('<OPTION>' + value + '</OPTION>')
+			var option = $('<option>' + value + '</option>')
 				.attr('value', value);
 
 			if (value == config.value) {
@@ -299,14 +322,18 @@
 			select.append(option);
 		}
 
-		return select;
+		div.append(select);
+
+		return div;
 	}
 
-	/*
+	/**
 	 * Create RADIO button elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createRadioElm(config) {
-		var div = $('<DIV></DIV>')
+		var div = $('<div></div>')
 			.addClass('radios');
 
 		var opts = config.filter.split('|');
@@ -314,7 +341,7 @@
 		for (var i = 0; i < opts.length; i++) {
 			var value = opts[i];
 
-			var input = $('<INPUT></INPUT>')
+			var input = $('<input></input>')
 				.attr({
 					type  : 'radio',
 					name  : config.name,
@@ -325,7 +352,7 @@
 				input.attr('checked', true);
 			}
 
-			var span = $('<SPAN>' + value + '</SPAN>');
+			var span = $('<span>' + value + '</span>');
 
 			div.append(input);
 			div.append(span);
@@ -334,15 +361,17 @@
 		return div;
 	}
 
-	/*
+	/**
 	 * Create CHECKBOX elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createCheckBoxElm(config) {
-		var div = $('<DIV></DIV>')
+		var div = $('<div></div>')
 			.addClass('checkbox');
 
-		var label = $('<SPAN>' + config.label + '</SPAN>'),
-			input = $('<INPUT></INPUT>')
+		var label = $('<span>' + config.label + '</span>'),
+			input = $('<input></input>')
 			.attr({
 				type  : 'checkbox',
 				name  : config.name,
@@ -358,16 +387,20 @@
 		return div;
 	}
 
-	/*
-	 * Create TEXTAREA elements
+	/**
+	 * Create textarea elements
+	 * @param {Object} config
+	 * @returns {Object}
 	 */
 	function createTextAreaElm(config) {
-		return $('<TEXTAREA></TEXTAREA>')
+		return $('<textarea></textarea>')
 			.attr('name', config.name);
 	}
 
-	/*
+	/**
 	 * Validate the form element value
+	 * @param {Object} elm
+	 * @returns {Boolean}
 	 */
 	function validateField(elm) {
 		var $this = $(elm);
@@ -401,12 +434,12 @@
 
 		// toggle the error message visibility
 		if (match === false && error === false) {
-			var p = $('<P>' + mesg + '</P>')
+			var p = $('<p>' + mesg + '</p>')
 				.addClass('error_mesg');
 
 			// .. arrow elements
-			var span1 = $('<SPAN></SPAN>'),
-				span2 = $('<SPAN></SPAN>');
+			var span1 = $('<span></span>'),
+				span2 = $('<span></span>');
 
 			span1.addClass('arrow_lft');
 			span2.addClass('arrow_rgt');
@@ -435,8 +468,9 @@
 		return true;
 	}
 
-	/*
+	/**
 	 * Enable/Disable submit button
+	 * @param {Object} form
 	 */
 	function setButtonState(form) {
 		var button = form.find('input:submit');
@@ -450,8 +484,10 @@
 		}
 	}
 
-	/*
+	/**
 	 * Return true if form errors exist
+	 * @param {Object} form
+	 * @returns {Boolean}
 	 */
 	function errorsExist(form) {
 		var fields = form[0].elements;

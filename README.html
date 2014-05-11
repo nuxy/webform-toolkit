@@ -22,7 +22,7 @@
 	<li>Supports synchronous form-data POST</li>
 	<li>Supports FORM submit callback for custom AJAX handling.</li>
 	<li>Supports dynamic (<a href="#methods">on the fly</a>) field creation.</li>
-	<li>Fast and lightweight (jQuery plug-in *only 4 kB)</li>
+	<li>Fast and lightweight (jQuery plug-in *only 4.2 kB)</li>
 </ul>
 
 <p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
@@ -80,24 +80,26 @@ $(document).ready(function() {
 			action : 'http://www.domain.com/handler',
 			fields : [
 				{
-					"label"     : "User Name",
-					"type"      : "text",
-					"name"      : "username",
-					"value"     : "",
-					"maxlength" : "15",
-					"filter"    : "^\\w{0,15}$",
-					"error"     : "Supported characters: A-Z, 0-9 and underscore",
-					"required"  : "1"
+					"label"       : "User Name",
+					"type"        : "text",
+					"name"        : "username",
+					"value"       : "",
+					"maxlength"   : "15",
+					"filter"      : "^\\w{0,15}$",
+					"description" : "",
+					"error"       : "Supported characters: A-Z, 0-9 and underscore",
+					"required"    : "1"
 				},
 				{
-					"label"     : "Password",
-					"type"      : "text",
-					"name"      : "password",
-					"value"     : "",
-					"maxlength" : "15",
-					"filter"    : "^(?!password)(.{0,15})$",
-					"error"     : "The password entered is not valid",
-					"required"  : "1"
+					"label"       : "Password",
+					"type"        : "text",
+					"name"        : "password",
+					"value"       : "",
+					"maxlength"   : "15",
+					"filter"      : "^(?!password)(.{8,15})$",
+					"description" : "Must be a minimum of 8 characters",
+					"error"       : "The password entered is not valid",
+					"required"    : "1"
 				}
 			]
 		}, customHandler);
@@ -149,6 +151,11 @@ $(document).ready(function() {
 		<td>false</td>
 	</tr>
 	<tr>
+		<td>description</td>
+		<td>Custom field description</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>error</td>
 		<td>Custom error message</td>
 		<td>false</td>
@@ -190,14 +197,15 @@ $(document).ready(function() {
 <p>I have added a method to dynamically create form fields that can be added to an existing webform. An optional callback has also been provided to for post-processing FORM and field elements. This makes it easy to show/hide fields using conditions and expressions.</p>
 
 <pre>webform.WebformToolkit('create', {
-	"label"    : "Age Group",
-	"type"     : "radio",
-	"name"     : "age",
-	"value"    : "1-6",
-	"size"     : "",
-	"filter"   : "1-6|7-11|12-18",
-	"error"    : "",
-	"required" : "0"
+	"label"       : "Age Group",
+	"type"        : "radio",
+	"name"        : "age",
+	"value"       : "1-6",
+	"size"        : "",
+	"filter"      : "1-6|7-11|12-18",
+	"description" : "",
+	"error"       : "",
+	"required"    : "0"
 },
 function(form, elm) {
 	form.append(elm);  // default: last in fieldset
@@ -206,7 +214,7 @@ function(form, elm) {
 
 <h2>Releases</h2>
 
-<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (4.1 kB) and developers version (unpacked  8.9 kB)</p>
+<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (4.2 kB) and developers version (unpacked  9.7 kB)</p>
 
 <p>You can always find the latest updates within this projects repository.</p>
 
@@ -226,7 +234,7 @@ function(form, elm) {
 
 <p>Webform Toolkit is provided under the terms of the <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
 
-<p>Webform Toolkit &#169;2012-2013 <a href="http://mbrooks.info">Marc S. Brooks</a></p>
+<p>Webform Toolkit &#169;2012-2014 <a href="http://mbrooks.info">Marc S. Brooks</a></p>
 
 </body>
 </html>
