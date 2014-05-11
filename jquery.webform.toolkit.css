@@ -35,6 +35,7 @@ form.webform div.checkbox span {
 
 form.webform div.radios {
 	position: relative;
+	margin-left: -5px;
 	margin-top: -3px;
 }
 
@@ -43,8 +44,8 @@ form.webform div.radios span {
 }
 
 form.webform div.menu {
-	margin-left: 0px;
-	margin-top: -3px;
+	margin-left: -5px;
+	margin-top: -1px;
 	width: 200px;
 }
 
@@ -94,28 +95,34 @@ form.webform input[type=submit] {
 form.webform label {
 	float: left;
 	position: relative;
-	top: 9px;
+	top: 6px;
 	width: 150px;
 }
 
 form.webform p {
-	background-color: #F7F7F7;
-	border: 1px solid #CCCCCC;
+	padding: 5px;
+	text-align: center;
+}
+
+form.webform p.field_desc {
+	border-bottom: 1px solid #EEEEEE;
 	border-top: 1px solid #EEEEEE;
 	font-size: 12px;
-	margin-bottom: 20px;
-	padding: 5px;
+	margin-top: 5px;
 }
 
 form.webform p.error_mesg {
+	background-color: #F7F7F7;
+	border: 1px solid #CCCCCC;
+	border-top: 1px solid #EEEEEE;
 	display: none;
-	text-align: center;
+	font-size: 12px;
+	margin-bottom: 20px;
 }
 
 form.webform select {
 	box-shadow: none;
 	margin-left: 0px;
-	vertical-align: -3px;
 }
 
 form.webform textarea {

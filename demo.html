@@ -8,14 +8,14 @@
 
 	<!-- CSS include start -->
 
-	<link rel="stylesheet" type="text/css" href="jquery.webform.toolkit.css">
+	<link rel="stylesheet" type="text/css" href="jquery.webform.toolkit.min.css">
 
 	<!-- CSS include end -->
 
 
 	<!-- Javascript insert start -->
 
-	<script src="jquery.webform.toolkit.js"></script>
+	<script src="jquery.webform.toolkit.min.js"></script>
 	<script>
 	$(document).ready(function() {
 		var $this = $('#container').WebformToolkit({
@@ -23,74 +23,81 @@
 			action : 'http://www.domain.com/handler',
 			fields : [
 				{
-					"label"     : "User Name",
-					"type"      : "text",
-					"name"      : "username",
-					"value"     : "",
-					"maxlength" : "15",
-					"filter"    : "^\\w{0,15}$",
-					"error"     : "Supported characters: A-Z, 0-9 and underscore",
-					"required"  : "1"
+					"label"       : "User Name",
+					"type"        : "text",
+					"name"        : "username",
+					"value"       : "",
+					"maxlength"   : "15",
+					"filter"      : "^\\w{0,15}$",
+					"description" : "",
+					"error"       : "Supported characters: A-Z, 0-9 and underscore",
+					"required"    : "1"
 				},
 				{
-					"label"     : "Password",
-					"type"      : "password",
-					"name"      : "password",
-					"value"     : "",
-					"maxlength" : "15",
-					"filter"    : "^(?!password)(.{0,15})$",
-					"error"     : "The password entered is not valid",
-					"required"  : "1"
+					"label"       : "Password",
+					"type"        : "password",
+					"name"        : "password",
+					"value"       : "",
+					"maxlength"   : "15",
+					"filter"      : "^(?!password)(.{0,15})$",
+					"description" : "",
+					"error"       : "The password entered is not valid",
+					"required"    : "1"
 				},
 				{
-					"label"     : "Profile Image",
-					"type"      : "file",
-					"name"      : "upload",
-					"value"     : "",
-					"maxlength" : "",
-					"filter"    : "",
-					"error"     : "The upload failed due to unknown error",
-					"required"  : "0"
+					"label"       : "Profile Image",
+					"type"        : "file",
+					"name"        : "upload",
+					"value"       : "",
+					"maxlength"   : "",
+					"filter"      : "",
+					"description" : "You can upload a JPG, GIF or PNG (File size limit is 2 MB)",
+					"error"       : "The upload failed due to unknown error",
+					"required"    : "0"
 				},
 				{
-					"label"     : "Age",
-					"type"      : "select",
-					"name"      : "age",
-					"value"     : "",
-					"maxlength" : "",
-					"filter"    : "10|11|12|13|14|15",
-					"error"     : "",
-					"required"  : "0"
+					"label"       : "Age",
+					"type"        : "select",
+					"name"        : "age",
+					"value"       : "",
+					"maxlength"   : "",
+					"filter"      : "10|11|12|13|14|15",
+					"description" : "",
+					"error"       : "",
+					"required"    : "0"
 				},
 				{
-					"label"     : "Gender",
-					"type"      : "radio",
-					"name"      : "gender",
-					"value"     : "Male",
-					"maxlength" : "",
-					"filter"    : "Male|Female",
-					"error"     : "",
-					"required"  : "0"
+					"label"       : "Gender",
+					"type"        : "radio",
+					"name"        : "gender",
+					"value"       : "Male",
+					"maxlength"   : "",
+					"filter"      : "Male|Female",
+					"description" : "",
+					"error"       : "",
+					"required"    : "0"
 				},
 				{
-					"label"     : "Message",
-					"type"      : "textarea",
-					"name"      : "message",
-					"value"     : "",
-					"maxlength" : "",
-					"filter"    : "^\(\\w|\\s){0,55}$",
-					"error"     : "Supported characters: A-Z, 0-9, _ and spaces",
-					"required " : "1"
+					"label"       : "Message",
+					"type"        : "textarea",
+					"name"        : "message",
+					"value"       : "",
+					"maxlength"   : "",
+					"filter"      : "^\(\\w|\\s){0,55}$",
+					"description" : "",
+					"error"       : "Supported characters: A-Z, 0-9, _ and spaces",
+					"required"    : "1"
 				},
 				{
-					"label"     : "I want to check this box because it's a box",
-					"type"      : "checkbox",
-					"name"      : "confirm",
-					"maxlength" : "",
-					"value"     : "1",
-					"filter"    : "",
-					"error"     : "",
-					"required"  : "1"
+					"label"       : "I want to check this box because it's a box",
+					"type"        : "checkbox",
+					"name"        : "confirm",
+					"maxlength"   : "",
+					"value"       : "1",
+					"filter"      : "",
+					"description" : "",
+					"error"       : "",
+					"required"    : "1"
 				}
 			]
 		},
@@ -116,7 +123,7 @@
 <body>
 
 <p id="about">
-	This <strong>jQuery</strong> plugin is <a href="jquery.webform.toolkit.min.js" title="Only 5.7 kb">lightweight</a>, easy to <a href="README.html#install" title="Installation">install</a> / <a href="demo.css" title="Stylesheet">customize</a>, and works on all modern web browsers.
+	This <strong>jQuery</strong> plugin is <a href="jquery.webform.toolkit.min.js" title="Only 4.2 kb">lightweight</a>, easy to <a href="README.html#install" title="Installation">install</a> / <a href="demo.css" title="Stylesheet">customize</a>, and works on all modern web browsers.
 </p>
 
 
@@ -130,7 +137,7 @@
 <!-- footer start -->
 
 <div id="footer">
-	<span class="copy">&#169; 2012-2013 <a href="http://mbrooks.info">Marc S. Brooks</a></span>
+	<span class="copy">&#169; 2012-2014 <a href="http://mbrooks.info">Marc S. Brooks</a></span>
 </div>
 
 <!-- footer end -->

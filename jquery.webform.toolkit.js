@@ -65,7 +65,7 @@
 			return methods.init.apply(this, arguments);
 		}
 		else {
-			$.error('Method ' +  method + ' does not exist on jQuery.WebformToolkit');
+			$.error('Method ' +  method + ' does not exist in jQuery.WebformToolkit');
 		}
 	};
 
@@ -239,6 +239,14 @@
 
 		div.append(elm);
 
+		// .. description, if exists
+		if (config.description) {
+			var p = $('<p>' + config.description + '</p>')
+				.addClass('field_desc');
+
+			div.append(p);
+		}
+
 		return div;
 	}
 
@@ -409,15 +417,15 @@
 
 		// .. REGEX by type
 		switch(elm.nodeName) {
-			case 'input' :
+			case 'INPUT' :
 				match = search.test(value);
 			break;
 
-			case 'select' :
+			case 'SELECT' :
 				match = search.test(value);
 			break;
 
-			case 'textarea' :
+			case 'TEXTAREA' :
 				match = search.test(value);
 			break;
 		}
@@ -488,11 +496,11 @@
 			var elm = fields[i];
 
 			// supported elements
-			if (!/input|select|textarea/.test(elm.nodeName)) {
+			if (!/INPUT|SELECT|TEXTAREA/.test(elm.nodeName)) {
 				continue;
 			}
 
-			if (elm.nodeName == 'input' &&
+			if (elm.nodeName == 'INPUT' &&
 				!/text|password|radio/.test(elm.type)) {
 				continue;
 			}
