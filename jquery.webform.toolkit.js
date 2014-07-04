@@ -45,7 +45,7 @@
 
 				// append to existing form
 				else {
-					webform.find('div.webform_submit').before(field);
+					webform.find('div.form_submit').before(field);
 				}
 			});
 		},
@@ -118,7 +118,7 @@
 
 		// create the submit button
 		var div = $('<div></div>')
-			.addClass('webform_submit');
+			.addClass('form_submit');
 
 		var button = $('<input></input>')
 			.attr({
@@ -160,7 +160,8 @@
 	 * @returns {Object}
 	 */
 	function createField(form, config) {
-		var div = $('<div></div>');
+		var div = $('<div></div>')
+			.addClass('field_' + config.name);
 
 		// .. label, if exists
 		if (config.label && config.type != 'checkbox') {
