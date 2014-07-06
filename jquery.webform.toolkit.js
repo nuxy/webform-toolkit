@@ -209,10 +209,6 @@
 			break;
 		}
 
-		if (config.required == 1) {
-			elm.attr('required', true);
-		}
-
 		// filter with REGEX
 		if (config.filter && config.type != 'hidden') {
 			elm.data({
@@ -277,6 +273,10 @@
 			input.attr('maxlength', (config.maxlength) ? config.maxlength : config.size);
 		}
 
+		if (config.required == 1) {
+			input.prop('required', true);
+		}
+
 		return input;
 	}
 
@@ -306,7 +306,8 @@
 		var div = $('<div></div>')
 			.addClass('menu');
 
-		var select = $('<select></select>');
+		var select = $('<select></select>')
+			.attr('name', config.name);
 
 		var opts = config.filter.split('|');
 
@@ -317,10 +318,14 @@
 				.attr('value', value);
 
 			if (value == config.value) {
-				option.attr('selected', true);
+				option.prop('selected', true);
 			}
 
 			select.append(option);
+		}
+
+		if (config.required == 1) {
+			select.prop('required', true);
 		}
 
 		div.append(select);
@@ -350,7 +355,7 @@
 				});
 
 			if (value == config.value) {
-				input.attr('checked', true);
+				input.prop('checked', true);
 			}
 
 			var span = $('<span>' + value + '</span>');
@@ -380,7 +385,11 @@
 			});
 
 		if (config.value) {
-			input.attr('checked', true);
+			input.prop('checked', true);
+		}
+
+		if (config.required == 1) {
+			input.prop('required', true);
 		}
 
 		div.append(input, label);
@@ -394,8 +403,14 @@
 	 * @returns {Object}
 	 */
 	function createTextAreaElm(config) {
-		return $('<textarea></textarea>')
+		var textarea = $('<textarea></textarea>')
 			.attr('name', config.name);
+
+        if (config.required == 1) {
+            textarea.prop('required', true);
+        }
+
+		return textarea;
 	}
 
 	/**
@@ -478,10 +493,10 @@
 		if (!button) return;
 
 		if (errorsExist(form)) {
-			button.attr('disabled', true);
+			button.prop('disabled', true);
 		}
 		else {
-			button.attr('disabled', false);
+			button.prop('disabled', false);
 		}
 	}
 
