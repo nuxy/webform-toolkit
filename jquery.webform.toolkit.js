@@ -311,6 +311,12 @@
 
 		var opts = config.filter.split('|');
 
+		// .. first option (custom)
+		if (config.value) {
+			opts.unshift(config.value);
+		}
+
+		// .. select options
 		for (var i = 0; i < opts.length; i++) {
 			var value = opts[i];
 

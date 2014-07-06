@@ -36,7 +36,7 @@
 		"label"       : "Age",
 		"type"        : "select",
 		"name"        : "age",
-		"value"       : "",
+		"value"       : "Select One",
 		"maxlength"   : "",
 		"filter"      : "10|11|12|13|14|15",
 		"description" : "",
