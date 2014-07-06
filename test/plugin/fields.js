@@ -14,8 +14,6 @@ test("Field 'User Name'", function() {
 	ok(input.val('user!@#$%'), "Define invalid value 'user!@#$%'");
 
 	ok(input.trigger('mousemove'), "Mouse event 'move'");
-	ok(input.trigger('mouseover'), "Mouse event 'over'");
-	ok(input.trigger('mouseout'),  "Mouse event 'out'");
 
 	stop();
 
@@ -29,26 +27,26 @@ test("Field 'User Name'", function() {
 		equal(mesg.text(), 'Supported characters: A-Z, 0-9 and underscore',
 		   "Expected value 'Supported characters: A-Z, 0-9 and underscore'");
 
+		var button = $(webform).find(':submit');
+
+		equal(button.is(':disabled'), true, 'Submit button is disabled');
+
 		start();
 
 		ok(input.val('newuser'), "Define valid value 'newuser'");
 
 		ok(input.trigger('mousemove'), "Mouse event 'move'");
-		ok(input.trigger('mouseover'), "Mouse event 'over'");
-		ok(input.trigger('mouseout'),  "Mouse event 'out'");
 
 		stop();
 
 		setTimeout(function() {
 			ok(!input.hasClass('error_on'), "<input> should not contain class 'error_on'");
 
-			mesg = field.children('p.error_mesg');
-
-			ok(!mesg[0], 'Error message should not be visible');
+			ok(!field.children('p.error_mesg')[0], 'Error message should not be visible');
 
 			start();
 		}, 1000);
-	},500);
+	}, 500);
 });
 
 test("Field 'Password'", function() {
@@ -67,8 +65,6 @@ test("Field 'Password'", function() {
 	ok(input.val('password'), "Define invalid value 'password'");
 
 	ok(input.trigger('mousemove'), "Mouse event 'move'");
-	ok(input.trigger('mouseover'), "Mouse event 'over'");
-	ok(input.trigger('mouseout'),  "Mouse event 'out'");
 
 	stop();
 
@@ -82,13 +78,15 @@ test("Field 'Password'", function() {
 		equal(mesg.text(), 'The password entered is not valid',
 		   "Expected value: The password entered is not valid");
 
+		var button = $(webform).find(':submit');
+
+		equal(button.is(':disabled'), true, 'Submit button is disabled');
+
 		start();
 
 		ok(input.val('pass!@#$%'), "Define valid value 'pass!@#$%'");
 
 		ok(input.trigger('mousemove'), "Mouse event 'move'");
-		ok(input.trigger('mouseover'), "Mouse event 'over'");
-		ok(input.trigger('mouseout'),  "Mouse event 'out'");
 
 		stop();
 
@@ -179,8 +177,6 @@ test("Field 'Message'", function() {
 	ok(input.val('desc!@#$%'), "Define invalid message 'desc!@#$%'");
 
 	ok(input.trigger('mousemove'), "Mouse event 'move'");
-	ok(input.trigger('mouseover'), "Mouse event 'over'");
-	ok(input.trigger('mouseout'),  "Mouse event 'out'");
 
 	stop();
 
@@ -194,13 +190,15 @@ test("Field 'Message'", function() {
 		equal(mesg.text(), 'Supported characters: A-Z, 0-9, _ and spaces',
 		   "Expected value: Supported characters: A-Z, 0-9, _ and spaces");
 
+		var button = $(webform).find(':submit');
+
+		equal(button.is(':disabled'), true, 'Submit button is disabled');
+
 		start();
 
 		ok(input.val('Lorem ipsum dolor sit amet'), "Define valid value 'Lorem ipsum dolor sit amet'");
 
 		ok(input.trigger('mousemove'), "Mouse event 'move'");
-		ok(input.trigger('mouseover'), "Mouse event 'over'");
-		ok(input.trigger('mouseout'),  "Mouse event 'out'");
 
 		stop();
 
@@ -224,6 +222,32 @@ test("Field 'I want to check this box because it's a box'", function() {
 		name     : 'confirm',
 		required : false
 	});
+
+	ok(input.prop('checked', true), 'Checkbox is checked');
+
+	ok(input.trigger('mousemove'), "Mouse event 'move'");
+
+	stop();
+
+	setTimeout(function() {
+		var button = $(webform).find(':submit');
+
+		equal(button.is(':disabled'), false, 'Submit button is enabled');
+
+		start();
+	}, 500);
+});
+
+test('Form Submit', function() {
+	ok($(webform).submit(), "Form event 'submit'");
+
+	stop();
+
+	setTimeout(function() {
+		equal(window.alert.message, "callback(form='example')", "Window alert message expected is 'callback(form='example')'");
+
+		start();
+	}, 500);
 });
 
 function checkFieldAttr(elm, data) {
