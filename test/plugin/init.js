@@ -1,6 +1,10 @@
 module('Webform-Toolkit', {
 	setup : function() {
+		stop();
+
 		$.getJSON('demo.json', function(data) {
+			start();
+
 			$('#qunit-fixture')
 				.WebformToolkit({
 					id     : 'example',
