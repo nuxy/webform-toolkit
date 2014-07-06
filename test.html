@@ -8,8 +8,12 @@
 	<script src="test/unit/qunit-1.14.0.js"></script>
 	<script>
 	QUnit.config.scrolltop = true;
+	QUnit.config.reorder   = false;
 
 	var webform = 'form.webform';
+
+	// run once
+	var setup = false;
 	</script>
 
 	<script src="jquery.webform.toolkit.min.js"></script>
@@ -17,6 +21,7 @@
 
 	<!-- QUnit tests begin (order is important) -->
 
+	<script src="test/plugin/stub.js"></script>
 	<script src="test/plugin/init.js"></script>
 	<script src="test/plugin/fields.js"></script>
 
@@ -30,6 +35,6 @@
 </head>
 <body>
 	<div id="qunit"></div>
-	<div id="qunit-fixture"></div>
+	<div id="qunit-custom"></div>
 </body>
 </html>
