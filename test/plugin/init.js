@@ -1,7 +1,13 @@
 module('Webform-Toolkit', {
 	setup : function() {
+		if (setup) return;   // skip process
+
+		stop();
+
 		$.getJSON('demo.json', function(data) {
-			$('#qunit-fixture')
+			start();
+
+			$('#qunit-custom')
 				.WebformToolkit({
 					id     : 'example',
 					action : 'http://www.domain.com/handler',
@@ -10,13 +16,19 @@ module('Webform-Toolkit', {
 				function(form) {
 					alert("callback(form='" + form.attr('id') + "')");
 				});
+
+			// hide test elements
+			$('#qunit-custom').hide(0);
 		});
-	},
-	teardown : function() {
-		// do nothing - preserve element structure
+
+		setup = true;
 	}
 });
 
+done(function() {
+	$('#qunit-custom').empty();
+});
+
 test('Generate HTML', function() {
-	ok($('#qunit-fixture').find(webform), 'Webform elements created');
+	ok($('#qunit-custom').find(webform), 'Webform elements created');
 });

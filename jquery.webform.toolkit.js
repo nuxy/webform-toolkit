@@ -45,7 +45,7 @@
 
 				// append to existing form
 				else {
-					webform.find('div.webform_submit').before(field);
+					webform.find('div.form_submit').before(field);
 				}
 			});
 		},
@@ -118,7 +118,7 @@
 
 		// create the submit button
 		var div = $('<div></div>')
-			.addClass('webform_submit');
+			.addClass('form_submit');
 
 		var button = $('<input></input>')
 			.attr({
@@ -160,7 +160,8 @@
 	 * @returns {Object}
 	 */
 	function createField(form, config) {
-		var div = $('<div></div>');
+		var div = $('<div></div>')
+			.addClass('field_' + config.name);
 
 		// .. label, if exists
 		if (config.label && config.type != 'checkbox') {
@@ -206,10 +207,6 @@
 			default:
 				$.error('Invalid or missing field type');
 			break;
-		}
-
-		if (config.required == 1) {
-			elm.attr('required', true);
 		}
 
 		// filter with REGEX
@@ -276,6 +273,10 @@
 			input.attr('maxlength', (config.maxlength) ? config.maxlength : config.size);
 		}
 
+		if (config.required == 1) {
+			input.prop('required', true);
+		}
+
 		return input;
 	}
 
@@ -305,10 +306,17 @@
 		var div = $('<div></div>')
 			.addClass('menu');
 
-		var select = $('<select></select>');
+		var select = $('<select></select>')
+			.attr('name', config.name);
 
 		var opts = config.filter.split('|');
 
+		// .. first option (custom)
+		if (config.value) {
+			opts.unshift(config.value);
+		}
+
+		// .. select options
 		for (var i = 0; i < opts.length; i++) {
 			var value = opts[i];
 
@@ -316,10 +324,14 @@
 				.attr('value', value);
 
 			if (value == config.value) {
-				option.attr('selected', true);
+				option.prop('selected', true);
 			}
 
 			select.append(option);
+		}
+
+		if (config.required == 1) {
+			select.prop('required', true);
 		}
 
 		div.append(select);
@@ -349,7 +361,7 @@
 				});
 
 			if (value == config.value) {
-				input.attr('checked', true);
+				input.prop('checked', true);
 			}
 
 			var span = $('<span>' + value + '</span>');
@@ -379,7 +391,11 @@
 			});
 
 		if (config.value) {
-			input.attr('checked', true);
+			input.prop('checked', true);
+		}
+
+		if (config.required == 1) {
+			input.prop('required', true);
 		}
 
 		div.append(input, label);
@@ -393,8 +409,14 @@
 	 * @returns {Object}
 	 */
 	function createTextAreaElm(config) {
-		return $('<textarea></textarea>')
+		var textarea = $('<textarea></textarea>')
 			.attr('name', config.name);
+
+        if (config.required == 1) {
+            textarea.prop('required', true);
+        }
+
+		return textarea;
 	}
 
 	/**
@@ -477,10 +499,10 @@
 		if (!button) return;
 
 		if (errorsExist(form)) {
-			button.attr('disabled', true);
+			button.prop('disabled', true);
 		}
 		else {
-			button.attr('disabled', false);
+			button.prop('disabled', false);
 		}
 	}
 
