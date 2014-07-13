@@ -24,7 +24,7 @@
 	<li>Supports synchronous form-data POST</li>
 	<li>Supports FORM submit callback for custom AJAX handling.</li>
 	<li>Supports dynamic (<a href="#methods">on the fly</a>) field creation.</li>
-	<li>Fast and lightweight (jQuery plug-in *only 4.4 kB)</li>
+	<li>Fast and lightweight (jQuery plug-in *only 6.5 kB)</li>
 </ul>
 
 <p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
@@ -66,6 +66,8 @@
 
 <a name="example"></a>
 
+<h4>Use Example 1 - Webform</h4>
+
 <pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
 
 &lt;script src="/path/to/jquery.webform.toolkit.min.js"&gt;&lt;/script&gt;
@@ -98,6 +100,61 @@ $(document).ready(function() {
 					"error"       : "The password entered is not valid",
 					"required"    : "1"
 				}
+			]
+		}, customHandler);
+&lt;/script&gt;
+
+&lt;link rel="stylesheet" type="text/css" href="/path/to/jquery.webform.toolkit.min.css"&gt;</pre>
+
+<h4>Use Example 2 - Webform using field groups</h4>
+
+<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
+
+&lt;script src="/path/to/jquery.webform.toolkit.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(document).ready(function() {
+	var webform = $('#container')
+		.WebformToolkit({
+			id     : 'example',
+			action : 'http://www.domain.com/handler',
+			fields : [
+				[
+					{
+						"label"       : "User Name",
+						"type"        : "text",
+						"name"        : "username",
+						"value"       : "",
+						"maxlength"   : "15",
+						"filter"      : "^\\w{0,15}$",
+						"description" : "",
+						"error"       : "Supported characters: A-Z, 0-9 and underscore",
+						"required"    : "1"
+					},
+					{
+						"label"       : "Password",
+						"type"        : "text",
+						"name"        : "password",
+						"value"       : "",
+						"maxlength"   : "15",
+						"filter"      : "^(?!password)(.{8,15})$",
+						"description" : "Must be a minimum of 8 characters",
+						"error"       : "The password entered is not valid",
+						"required"    : "1"
+					}
+				],
+				[
+					{
+						"label"       : "Pin Code",
+						"type"        : "text",
+						"name"        : "password",
+						"value"       : "",
+						"maxlength"   : "8",
+						"filter"      : "^\\d{8,15}$",
+						"description" : "Must be a minimum of 8 numeric characters",
+						"error"       : "The pin code entered is not valid",
+						"required"    : "1"
+					}
+				]
 			]
 		}, customHandler);
 &lt;/script&gt;
@@ -170,10 +227,6 @@ $(document).ready(function() {
 
 <a name="callback"></a>
 
-<h2>Filters</h2>
-
-<p>Just because you are filtering form input on the client-side is NO EXCUSE to not do the same on the server-side.  Security is a two-way street, and BOTH ends should be protected.</p>
-
 <h2>Callback Processing</h2>
 
 <p>When a callback function is defined a form object is returned.  This allows you to define a custom AJAX handler based on the requirements of your application.  The following function corresponds to the <a href="#example">example</a> provided above.</p>
@@ -196,20 +249,24 @@ $(document).ready(function() {
 <p>I have added a method to dynamically create form fields that can be added to an existing webform. An optional callback has also been provided to for post-processing FORM and field elements. This makes it easy to show/hide fields using conditions and expressions.</p>
 
 <pre>webform.WebformToolkit('create', {
-	"label"       : "Age Group",
-	"type"        : "radio",
-	"name"        : "age",
-	"value"       : "1-6",
+	"label"       : "New Field",
+	"type"        : "text",
+	"name"        : "new_field",
+	"value"       : "",
 	"size"        : "",
-	"filter"      : "1-6|7-11|12-18",
+	"filter"      : "^[a-zA-Z0-9]{0,255}$",
 	"description" : "",
-	"error"       : "",
+	"error"       : "Supported characters: A-Z, 0-9",
 	"required"    : "0"
 },
 function(form, elm) {
 	form.append(elm);  // default: last in fieldset
 });
 </pre>
+
+<h2>Best Practices</h2>
+
+<p>Just because you are filtering form input on the client-side is NO EXCUSE to not do the same on the server-side.  Security is a two-way street, and BOTH ends should be protected.</p>
 
 <h2>jQuery Support</h2>
 
@@ -221,7 +278,7 @@ function(form, elm) {
 
 <h2>Releases</h2>
 
-<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (4.4 kB) and developers version (unpacked  10.2 kB)</p>
+<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (4.6 kB) and developers version (unpacked  10.8 kB)</p>
 
 <p>You can always find the latest updates within this projects repository.</p>
 
