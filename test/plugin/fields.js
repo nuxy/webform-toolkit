@@ -2,7 +2,7 @@ test("Field 'User Name'", function() {
 	var field = $(webform).find('div.field_username'),
 		input = field.children('input');
 
-	equal(field.children('label').text(), 'User Name', "Label 'User Name'");
+	equal(field.children('label').contents().eq(1).text(), 'User Name', "Label 'User Name'");
 
 	checkFieldAttr(input, {
 		name      : 'username',
@@ -53,7 +53,7 @@ test("Field 'Password'", function() {
 	var field = $(webform).find('div.field_password'),
 		input = field.children('input');
 
-	equal(field.children('label').text(), 'Password', "Label 'Password'");
+	equal(field.children('label').contents().eq(1).text(), 'Password', "Label 'Password'");
 
 	checkFieldAttr(input, {
 		name      : 'password',
@@ -99,7 +99,7 @@ test("Field 'Password'", function() {
 
 			start();
 		}, 1000);
-	},500);
+	}, 500);
 });
 
 test("Field 'Profile Image'", function() {
@@ -122,24 +122,26 @@ test("Field 'Profile Image'", function() {
 	   "Expected value: You can upload a JPG, GIF or PNG (File size limit is 2 MB)");
 });
 
-test("Field 'Age'", function() {
-	var field = $(webform).find('div.field_age'),
+test("Field 'Age Group'", function() {
+	var field = $(webform).find('div.field_age_group'),
 		input = field.find('select');
 
-	equal(field.children('label').text(), 'Age', "Label 'Age'");
+	equal(field.children('label').contents().eq(1).text(), 'Age Group', "Label 'Age Group'");
 
 	checkFieldAttr(input, {
-		name     : 'age',
-		required : false
+		name     : 'age_group',
+		required : true
 	});
 
-	var opts = [ 'Select One', 10, 11, 12, 13, 14, 15 ];
+	var opts = [ 'Select One','18-24','25-34','35-44','45-54','55-64','65 or more' ];
 
 	input.children().each(function(index) {
 		var val = $(this).val();
 
 		equal(opts[index], val, "Menu option '" + val + "' exists");
 	});
+
+	ok(input.val('18-24'), "Define valid value '18-24'");
 });
 
 test("Field 'Gender'", function() {
@@ -148,7 +150,7 @@ test("Field 'Gender'", function() {
 
 	equal(field.children('label').text(), 'Gender', "Label 'Gender'");
 
-	var opts = ['Male','Female'];
+	var opts = ['Male','Female','N/A'];
 
 	input.each(function(index) {
 		var val = $(this).val();
@@ -163,15 +165,15 @@ test("Field 'Gender'", function() {
 	});
 });
 
-test("Field 'Message'", function() {
-	var field = $(webform).find('div.field_message'),
+test("Field 'Comments'", function() {
+	var field = $(webform).find('div.field_comments'),
 		input = field.find('textarea');
 
-	equal(field.children('label').text(), 'Message', "Label 'Message'");
+	equal(field.children('label').text(), 'Comments', "Label 'Comments'");
 
 	checkFieldAttr(input, {
-		name     : 'message',
-		required : true
+		name     : 'comments',
+		required : false
 	});
 
 	ok(input.val('desc!@#$%'), "Define invalid message 'desc!@#$%'");
@@ -211,7 +213,7 @@ test("Field 'Message'", function() {
 
 			start();
 		}, 1000);
-	},500);
+	}, 500);
 });
 
 test("Field 'I want to check this box because it's a box'", function() {

@@ -33,19 +33,13 @@
 		},
 		"create" : function(config, callback) {
 			return this.each(function() {
-				var webform = $(this).data().container,
-					field   = null;
+				var webform = $(this).data().container;
 
-				field = createField(webform, config);
+				var field = createField(webform, config);
 
 				// return callback with form and field objects
 				if (typeof callback === 'function') {
-					callback(webform.find('fieldset'), field);
-				}
-
-				// append to existing form
-				else {
-					webform.find('div.form_submit').before(field);
+					callback(webform, field);
 				}
 			});
 		},
@@ -89,8 +83,6 @@
 			});
 		}
 
-		var set = $('<fieldset></fieldset>');
-
 		// create hidden elements, if POST parameters exist
 		if (config.params) {
 			var pairs = config.params.split('&');
@@ -105,14 +97,23 @@
 						value : name[1]
 					});
 
-				set.append(hidden);
+				form.append(hidden);
 			}
 		}
 
-		// create each field
+		// create form field elements
 		if (config.fields) {
-			for (var j = 0; j < config.fields.length; j++) {
-				set.append( createField(form, config.fields[j]) );
+			var data = (config.fields[0][0]) ? config.fields : new Array(config.fields);
+
+			for (var j = 0; j < data.length; j++) {
+				var fields = $('<fieldset></fieldset>')
+					.addClass('field_group' + j);
+
+				for (var k = 0; k < data[j].length; k++) {
+					fields.append( createField(form, data[j][k]) );
+				}
+
+				form.append(fields);
 			}
 		}
 
@@ -147,8 +148,8 @@
 		});
 
 		div.append(button);
-		set.append(div);
-		form.append(set);
+
+		form.append(div);
 
 		return form;
 	}
@@ -165,7 +166,18 @@
 
 		// .. label, if exists
 		if (config.label && config.type != 'checkbox') {
-			div.append( $('<label>' + config.label + '</label>') );
+			var label = $('<label></label>');
+
+			if (config.required == 1) {
+				var span = $('<span>*</span>')
+					.addClass('required');
+
+				label.append(span);
+			}
+
+			label.append(config.label);
+
+			div.append(label);
 		}
 
 		var elm = jQuery.obj;
@@ -218,18 +230,24 @@
 			});
 
 			// attach form events
-			elm.on('mousedown mousemove mouseout change', function() {
-				validateField(this);
-				setButtonState(form);
-			});
-
 			form.on('mouseover mousemove', function() {
 				validateField(elm);
 				setButtonState( $(this) );
 			});
 
+			// attach field events
+			elm.on('mousedown mousemove mouseout change', function() {
+				validateField(this);
+				setButtonState(form);
+			});
+
 			// attach key events
-			elm.keypress(function(event) {
+			elm.on('keypress', function(event) {
+				validateField(this);
+				setButtonState(form);
+			});
+
+			elm.on('keypress', function(event) {
 				if (event.keyCode != 0) return;
 			});
 		}
@@ -294,6 +312,10 @@
 			input.attr('name', config.name);
 		}
 
+		if (config.maxlength) {
+			input.attr('size', config.maxlength);
+		}
+
 		return input;
 	}
 
@@ -309,19 +331,28 @@
 		var select = $('<select></select>')
 			.attr('name', config.name);
 
-		var opts = config.filter.split('|');
+		var opts  = config.filter.split('|'),
+			first = null;
 
 		// .. first option (custom)
 		if (config.value) {
 			opts.unshift(config.value);
+
+			first = true;
 		}
 
 		// .. select options
 		for (var i = 0; i < opts.length; i++) {
 			var value = opts[i];
 
-			var option = $('<option>' + value + '</option>')
-				.attr('value', value);
+			var option = $('<option>' + value + '</option>');
+
+			if (!first) {
+				option.attr('value', value);
+			}
+			else {
+				first = null;
+			}
 
 			if (value == config.value) {
 				option.prop('selected', true);
@@ -412,9 +443,9 @@
 		var textarea = $('<textarea></textarea>')
 			.attr('name', config.name);
 
-        if (config.required == 1) {
-            textarea.prop('required', true);
-        }
+		if (config.required == 1) {
+			textarea.prop('required', true);
+		}
 
 		return textarea;
 	}
@@ -528,7 +559,7 @@
 			}
 
 			// do errors exist?
-			if ((elm.required && !elm.value) || $(elm).data('error')) {
+			if ((elm.required && (!elm.value || elm.selectedIndex == '')) || $(elm).data('error')) {
 				return true;
 			}
 		}
