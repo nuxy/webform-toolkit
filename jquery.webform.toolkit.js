@@ -236,19 +236,17 @@
 			});
 
 			// attach field events
-			elm.on('mousedown mousemove mouseout change', function() {
-				validateField(this);
-				setButtonState(form);
-			});
-
-			// attach key events
-			elm.on('keypress', function(event) {
+			elm.on('mousedown mouseout focusout', function() {
 				validateField(this);
 				setButtonState(form);
 			});
 
 			elm.on('keypress', function(event) {
-				if (event.keyCode != 0) return;
+				if (event.keyCode == 9) {
+					validateField(this);
+				}
+
+				setButtonState(form);
 			});
 		}
 
