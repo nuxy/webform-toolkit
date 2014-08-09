@@ -2,7 +2,7 @@
 
 Dynamically generate an HTML form with field validation and custom errors using a simple JSON
 
-http://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg
+{<img src="https://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg" alt="Webform-Toolkit" />}[https://labs.mbrooks.info/demos/Webform-Toolkit]
 
 == Features
 
@@ -13,7 +13,7 @@ http://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg
 - Provides form input validation using REGEX ({regular expressions}[http://www.regular-expressions.info/reference.html])
 - Supports synchronous form-data POST
 - Supports FORM submit callback for custom AJAX handling.
-- Supports dynamic ({on the fly}[http://labs.mbrooks.info/demos/Webform-Toolkit/README.html#methods]) field creation.
+- Supports dynamic ({on the fly}[https://labs.mbrooks.info/demos/Webform-Toolkit/README.html#methods]) field creation.
 - Fast and lightweight (jQuery plug-in *only 6.5 kB)
 
 == To Do
@@ -22,7 +22,7 @@ http://github.com/nuxy/Webform-Toolkit/raw/master/preview.jpg
 
 == Installation
 
-Download the latest {sources}[https://github.com/nuxy/Webform-Toolkit/tags] and refer to the {README}[http://labs.mbrooks.info/demos/Webform-Toolkit/README.html] for more information about this package.
+Download the latest {sources}[https://github.com/nuxy/Webform-Toolkit/tags] and refer to the {README}[https://labs.mbrooks.info/demos/Webform-Toolkit/README.html] for more information about this package.
 
 == Author
 
