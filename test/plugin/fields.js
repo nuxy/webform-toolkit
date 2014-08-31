@@ -13,7 +13,7 @@ test("Field 'User Name'", function() {
 
 	ok(input.val('user!@#$%'), "Define invalid value 'user!@#$%'");
 
-	ok(input.trigger('mousemove'), "Mouse event 'move'");
+	ok(input.trigger('mouseout'), "Mouse event 'out'");
 
 	stop();
 
@@ -35,7 +35,7 @@ test("Field 'User Name'", function() {
 
 		ok(input.val('newuser'), "Define valid value 'newuser'");
 
-		ok(input.trigger('mousemove'), "Mouse event 'move'");
+		ok(input.trigger('mouseout'), "Mouse event 'out'");
 
 		stop();
 
@@ -64,7 +64,7 @@ test("Field 'Password'", function() {
 
 	ok(input.val('password'), "Define invalid value 'password'");
 
-	ok(input.trigger('mousemove'), "Mouse event 'move'");
+	ok(input.trigger('mouseout'), "Mouse event 'out'");
 
 	stop();
 
@@ -86,7 +86,7 @@ test("Field 'Password'", function() {
 
 		ok(input.val('pass!@#$%'), "Define valid value 'pass!@#$%'");
 
-		ok(input.trigger('mousemove'), "Mouse event 'move'");
+		ok(input.trigger('mouseout'), "Mouse event 'out'");
 
 		stop();
 
@@ -178,7 +178,7 @@ test("Field 'Comments'", function() {
 
 	ok(input.val('desc!@#$%'), "Define invalid message 'desc!@#$%'");
 
-	ok(input.trigger('mousemove'), "Mouse event 'move'");
+	ok(input.trigger('mouseout'), "Mouse event 'out'");
 
 	stop();
 
@@ -200,7 +200,7 @@ test("Field 'Comments'", function() {
 
 		ok(input.val('Lorem ipsum dolor sit amet'), "Define valid value 'Lorem ipsum dolor sit amet'");
 
-		ok(input.trigger('mousemove'), "Mouse event 'move'");
+		ok(input.trigger('mouseout'), "Mouse event 'out'");
 
 		stop();
 
