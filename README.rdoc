@@ -22,7 +22,11 @@ Dynamically generate an HTML form with field validation and custom errors using 
 
 == Installation
 
-Download the latest {sources}[https://github.com/nuxy/Webform-Toolkit/tags] and refer to the {README}[https://labs.mbrooks.info/demos/Webform-Toolkit/README.html] for more information about this package.
+This package can be easily installed using Bower.
+
+    $ bower install webform-toolkit
+
+Please refer to the {README}[https://labs.mbrooks.info/demos/Webform-Toolkit/README.html] for more information about this package.
 
 == Author
 

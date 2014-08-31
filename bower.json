@@ -1,0 +1,19 @@
+{
+  "name": "webform-toolkit",
+  "version": "0.21.0-beta",
+  "homepage": "https://github.com/nuxy/Webform-Toolkit",
+  "description": "Generate an interactive HTML FORM from JSON",
+  "main": "jquery.webform.toolkit.js",
+  "keywords": [
+    "javascript",
+    "jquery",
+    "library"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "*.rdoc",
+    "Rakefile",
+    "test"
+  ]
+}
