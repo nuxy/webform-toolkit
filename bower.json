@@ -1,6 +1,6 @@
 {
   "name": "webform-toolkit",
-  "version": "1.22.0",
+  "version": "1.22.1",
   "homepage": "https://github.com/nuxy/Webform-Toolkit",
   "description": "Generate an interactive HTML FORM from JSON",
   "main": "jquery.webform.toolkit.js",
@@ -14,6 +14,7 @@
     "**/.*",
     "*.rdoc",
     "Rakefile",
-    "test"
+    "test",
+    "test.html"
   ]
 }
