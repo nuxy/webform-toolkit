@@ -11,7 +11,7 @@
  */
 
 if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
-	alert('Webform-Toolkit requires jQuery 1.8.3 or greater.');
+	throw new Error('Webform-Toolkit requires jQuery 1.8.3 or greater.');
 }
 
 (function($) {
