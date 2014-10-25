@@ -24,7 +24,8 @@ Dynamically generate an HTML form with field validation and custom errors using 
 
 This package can be easily installed using {Bower}[http://bower.io].
 
-    $ bower install webform-toolkit
+    $ bower install webform-toolkit#~1.22 (legacy)
+    $ bower install webform-toolkit#~1.23 (latest)
 
 Please refer to the {README}[https://labs.mbrooks.info/demos/Webform-Toolkit/README.html] for more information about this package.
 
