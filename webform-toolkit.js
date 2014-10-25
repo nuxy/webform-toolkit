@@ -258,10 +258,10 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 
 		// .. description, if exists
 		if (config.description) {
-			var p = $('<p>' + config.description + '</p>')
+			var block = $('<p>' + config.description + '</p>')
 				.addClass('field_desc');
 
-			div.append(p);
+			div.append(block);
 		}
 
 		return div;
@@ -485,11 +485,12 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 			break;
 		}
 
-		var field = $this.parent();
+		var field = $this.parent(),
+			block = null;
 
 		// toggle the error message visibility
 		if (match === false && error === false) {
-			var p = $('<p>' + mesg + '</p>')
+			block = $('<p>' + mesg + '</p>')
 				.addClass('error_mesg');
 
 			// .. arrow elements
@@ -499,24 +500,24 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 			span1.addClass('arrow_lft');
 			span2.addClass('arrow_rgt');
 
-			p.prepend(span1).append(span2);
+			block.prepend(span1).append(span2);
 
-			field.append(p);
+			field.append(block);
 
 			$this.addClass('error_on')
 				.data('error', true);
 
-			p.fadeIn('slow');
+			block.fadeIn('slow');
 		}
 		else
 		if (match === true && error === true) {
-			var p = field.children('p');
+			block = field.children('p');
 
-			p.fadeOut('slow', function() {
+			block.fadeOut('slow', function() {
 				$this.removeClass('error_on')
 					.data('error', false);
 
-				p.remove();
+				block.remove();
 			});
 		}
 
@@ -561,7 +562,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 			}
 
 			// do errors exist?
-			if ((elm.required && (!elm.value || elm.selectedIndex == '')) || $(elm).data('error')) {
+			if ((elm.required && (!elm.value || elm.selectedIndex === '')) || $(elm).data('error')) {
 				return true;
 			}
 		}
