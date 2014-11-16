@@ -9,7 +9,7 @@
 
 <h1>Webform Toolkit</h1>
 
-<p>Dynamically generate an HTML form with field validation and custom errors using a simple JSON</p>
+<p>Dynamically generate an HTML form with field validation and custom errors.</p>
 
 <img class="preview" src="preview.jpg">
 
@@ -79,26 +79,26 @@ $(document).ready(function() {
 			action: 'http://www.domain.com/handler',
 			fields: [
 				{
-					"label":       "User Name",
-					"type":        "text",
-					"name":        "username",
-					"value":       "",
-					"maxlength":   "15",
-					"filter":      "^\\w{0,15}$",
-					"description": "",
-					"error":       "Supported characters: A-Z, 0-9 and underscore",
-					"required":    "1"
+					label:       'User Name',
+					type:        'text',
+					name:        'username',
+					value:       '',
+					maxlength:   '15',
+					filter:      "^\\w{0,15}$",
+					description: '',
+					error:       'Supported characters: A-Z, 0-9 and underscore',
+					required:    true
 				},
 				{
-					"label":       "Password",
-					"type":        "text",
-					"name":        "password",
-					"value":       "",
-					"maxlength":   "15",
-					"filter":      "^(?!password)(.{8,15})$",
-					"description": "Must be a minimum of 8 characters",
-					"error":       "The password entered is not valid",
-					"required":    "1"
+					label:       'Password',
+					type:        'text',
+					name:        'password',
+					value:       '',
+					maxlength:   '15',
+					filter:      "^(?!password)(.{8,15})$",
+					description: 'Must be a minimum of 8 characters',
+					error:       'The password entered is not valid',
+					required:    true
 				}
 			]
 		}, customHandler);
@@ -120,39 +120,39 @@ $(document).ready(function() {
 			fields: [
 				[
 					{
-						"label":       "User Name",
-						"type":        "text",
-						"name":        "username",
-						"value":       "",
-						"maxlength":   "15",
-						"filter":      "^\\w{0,15}$",
-						"description": "",
-						"error":       "Supported characters: A-Z, 0-9 and underscore",
-						"required":    "1"
+						label:       'User Name',
+						type:        'text',
+						name:        'username',
+						value:       '',
+						maxlength:   '15',
+						filter:      "^\\w{0,15}$",
+						description: '',
+						error:       'Supported characters: A-Z, 0-9 and underscore',
+						required:    true
 					},
 					{
-						"label":       "Password",
-						"type":        "text",
-						"name":        "password",
-						"value":       "",
-						"maxlength":   "15",
-						"filter":      "^(?!password)(.{8,15})$",
-						"description": "Must be a minimum of 8 characters",
-						"error":       "The password entered is not valid",
-						"required":    "1"
+						label:       'Password',
+						type:        'text',
+						name:        'password',
+						value:       '',
+						maxlength:   '15',
+						filter:      "^(?!password)(.{8,15})$",
+						description: 'Must be a minimum of 8 characters',
+						error:       'The password entered is not valid',
+						required:    true
 					}
 				],
 				[
 					{
-						"label":       "Pin Code",
-						"type":        "text",
-						"name":        "password",
-						"value":       "",
-						"maxlength":   "8",
-						"filter":      "^\\d{8,15}$",
-						"description": "Must be a minimum of 8 numeric characters",
-						"error":       "The pin code entered is not valid",
-						"required":    "1"
+						label:       'Pin Code',
+						type:        'text',
+						name:        'password',
+						value:       '',
+						maxlength:   '8',
+						filter:      "^\\d{8,15}$",
+						description: 'Must be a minimum of 8 numeric characters',
+						error:       'The pin code entered is not valid',
+						required:    true
 					}
 				]
 			]
