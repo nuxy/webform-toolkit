@@ -75,30 +75,30 @@
 $(document).ready(function() {
 	var webform = $('#container')
 		.WebformToolkit({
-			id     : 'example',
-			action : 'http://www.domain.com/handler',
-			fields : [
+			id:     'example',
+			action: 'http://www.domain.com/handler',
+			fields: [
 				{
-					"label"       : "User Name",
-					"type"        : "text",
-					"name"        : "username",
-					"value"       : "",
-					"maxlength"   : "15",
-					"filter"      : "^\\w{0,15}$",
-					"description" : "",
-					"error"       : "Supported characters: A-Z, 0-9 and underscore",
-					"required"    : "1"
+					"label":       "User Name",
+					"type":        "text",
+					"name":        "username",
+					"value":       "",
+					"maxlength":   "15",
+					"filter":      "^\\w{0,15}$",
+					"description": "",
+					"error":       "Supported characters: A-Z, 0-9 and underscore",
+					"required":    "1"
 				},
 				{
-					"label"       : "Password",
-					"type"        : "text",
-					"name"        : "password",
-					"value"       : "",
-					"maxlength"   : "15",
-					"filter"      : "^(?!password)(.{8,15})$",
-					"description" : "Must be a minimum of 8 characters",
-					"error"       : "The password entered is not valid",
-					"required"    : "1"
+					"label":       "Password",
+					"type":        "text",
+					"name":        "password",
+					"value":       "",
+					"maxlength":   "15",
+					"filter":      "^(?!password)(.{8,15})$",
+					"description": "Must be a minimum of 8 characters",
+					"error":       "The password entered is not valid",
+					"required":    "1"
 				}
 			]
 		}, customHandler);
@@ -115,44 +115,44 @@ $(document).ready(function() {
 $(document).ready(function() {
 	var webform = $('#container')
 		.WebformToolkit({
-			id     : 'example',
-			action : 'http://www.domain.com/handler',
-			fields : [
+			id:     'example',
+			action: 'http://www.domain.com/handler',
+			fields: [
 				[
 					{
-						"label"       : "User Name",
-						"type"        : "text",
-						"name"        : "username",
-						"value"       : "",
-						"maxlength"   : "15",
-						"filter"      : "^\\w{0,15}$",
-						"description" : "",
-						"error"       : "Supported characters: A-Z, 0-9 and underscore",
-						"required"    : "1"
+						"label":       "User Name",
+						"type":        "text",
+						"name":        "username",
+						"value":       "",
+						"maxlength":   "15",
+						"filter":      "^\\w{0,15}$",
+						"description": "",
+						"error":       "Supported characters: A-Z, 0-9 and underscore",
+						"required":    "1"
 					},
 					{
-						"label"       : "Password",
-						"type"        : "text",
-						"name"        : "password",
-						"value"       : "",
-						"maxlength"   : "15",
-						"filter"      : "^(?!password)(.{8,15})$",
-						"description" : "Must be a minimum of 8 characters",
-						"error"       : "The password entered is not valid",
-						"required"    : "1"
+						"label":       "Password",
+						"type":        "text",
+						"name":        "password",
+						"value":       "",
+						"maxlength":   "15",
+						"filter":      "^(?!password)(.{8,15})$",
+						"description": "Must be a minimum of 8 characters",
+						"error":       "The password entered is not valid",
+						"required":    "1"
 					}
 				],
 				[
 					{
-						"label"       : "Pin Code",
-						"type"        : "text",
-						"name"        : "password",
-						"value"       : "",
-						"maxlength"   : "8",
-						"filter"      : "^\\d{8,15}$",
-						"description" : "Must be a minimum of 8 numeric characters",
-						"error"       : "The pin code entered is not valid",
-						"required"    : "1"
+						"label":       "Pin Code",
+						"type":        "text",
+						"name":        "password",
+						"value":       "",
+						"maxlength":   "8",
+						"filter":      "^\\d{8,15}$",
+						"description": "Must be a minimum of 8 numeric characters",
+						"error":       "The pin code entered is not valid",
+						"required":    "1"
 					}
 				]
 			]
@@ -233,9 +233,9 @@ $(document).ready(function() {
 
 <pre>function customHandler(form) {
 	$.ajax({
-		type : 'POST',
-		url  : form.attr('action'),
-		data : form.serialize()
+		type: 'POST',
+		url:  form.attr('action'),
+		data: form.serialize()
 	})
 	.success(function(response) {
 		alert(response);
@@ -249,15 +249,15 @@ $(document).ready(function() {
 <p>I have added a method to dynamically create form fields that can be added to an existing webform. An optional callback has also been provided to for post-processing FORM and field elements. This makes it easy to show/hide fields using conditions and expressions.</p>
 
 <pre>webform.WebformToolkit('create', {
-	"label"       : "New Field",
-	"type"        : "text",
-	"name"        : "new_field",
-	"value"       : "",
-	"size"        : "",
-	"filter"      : "^[a-zA-Z0-9]{0,255}$",
-	"description" : "",
-	"error"       : "Supported characters: A-Z, 0-9",
-	"required"    : "0"
+	"label":       "New Field",
+	"type":        "text",
+	"name":        "new_field",
+	"value":       "",
+	"maxlength":   "",
+	"filter":      "^[a-zA-Z0-9]{0,255}$",
+	"description": "",
+	"error":       "Supported characters: A-Z, 0-9",
+	"required":    "0"
 },
 function(form, elm) {
 	form.append(elm);  // default: last in fieldset

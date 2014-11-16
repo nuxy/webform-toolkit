@@ -9,9 +9,9 @@ module('Webform-Toolkit', {
 
 			$('#qunit-custom')
 				.WebformToolkit({
-					id     : 'example',
-					action : 'http://www.domain.com/handler',
-					fields : data
+					id:     'example',
+					action: 'http://www.domain.com/handler',
+					fields: data
 				},
 				function(form) {
 					alert("callback(form='" + form.attr('id') + "')");

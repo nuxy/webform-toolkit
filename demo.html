@@ -12,9 +12,9 @@
 		$.getJSON('demo.json', function(data) {
 			$('#container')
 				.WebformToolkit({
-					id     : 'example',
-					action : 'http://www.domain.com/handler',
-					fields : data
+					id:     'example',
+					action: 'http://www.domain.com/handler',
+					fields: data
 				},
 				function(form) {
 					alert("callback(form='" + form.attr('id') + "')");

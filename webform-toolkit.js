@@ -16,7 +16,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 
 (function($) {
 	var methods = {
-		"init" : function(config, callback) {
+		"init": function(config, callback) {
 			return this.each(function() {
 				var $this = $(this),
 					data  = $this.data();
@@ -26,7 +26,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 
 				if ( $.isEmptyObject(data) ) {
 					$this.data({
-						container : webform
+						container: webform
 					});
 				}
 
@@ -35,7 +35,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 				return webform;
 			});
 		},
-		"create" : function(config, callback) {
+		"create": function(config, callback) {
 			return this.each(function() {
 				var webform = $(this).data().container;
 
@@ -47,7 +47,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 				}
 			});
 		},
-		"destroy" : function() {
+		"destroy": function() {
 			return this.each(function() {
 				$(this).removeData();
 			});
@@ -81,9 +81,9 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 		// set POST action URI/URL
 		if (config.action) {
 			form.attr({
-				method  : 'POST',
-				enctype : 'multipart/form-data',
-				action  : config.action
+				method:  'POST',
+				enctype: 'multipart/form-data',
+				action:  config.action
 			});
 		}
 
@@ -96,9 +96,9 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 
 				var hidden = $('<input></input>')
 					.attr({
-						type  : 'hidden',
-						name  : name[0],
-						value : name[1]
+						type:  'hidden',
+						name:  name[0],
+						value: name[1]
 					});
 
 				form.append(hidden);
@@ -127,12 +127,12 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 
 		var button = $('<input></input>')
 			.attr({
-				type  : 'submit',
-				value : 'Submit'
+				type:  'submit',
+				value: 'Submit'
 			});
 
 		// bind form submit event
-		form.submit(function(event) {
+		form.on('submit', function(event) {
 			event.preventDefault();
 
 			var $this = $(this);
@@ -228,9 +228,9 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 		// filter with REGEX
 		if (config.filter && config.type != 'hidden') {
 			elm.data({
-				regex : config.filter,
-				mesg  : config.error,
-				error : false
+				regex: config.filter,
+				mesg:  config.error,
+				error: false
 			});
 
 			// attach form events
@@ -307,7 +307,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 	 */
 	function createFileElm(config) {
 		var input = $('<input></input>')
-			.attr('type','file');
+			.attr('type', 'file');
 
 		// .. field attributes
 		if (config.name) {
@@ -388,9 +388,9 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 
 			var input = $('<input></input>')
 				.attr({
-					type  : 'radio',
-					name  : config.name,
-					value : value
+					type:  'radio',
+					name:  config.name,
+					value: value
 				});
 
 			if (value == config.value) {
@@ -418,9 +418,9 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 		var label = $('<span>' + config.label + '</span>'),
 			input = $('<input></input>')
 			.attr({
-				type  : 'checkbox',
-				name  : config.name,
-				value : config.value
+				type:  'checkbox',
+				name:  config.name,
+				value: config.value
 			});
 
 		if (config.value) {
