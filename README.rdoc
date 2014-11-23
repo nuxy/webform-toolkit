@@ -16,10 +16,6 @@ Dynamically generate an HTML form with field validation and custom errors.
 - Supports dynamic ({on the fly}[https://labs.mbrooks.info/demos/Webform-Toolkit/README.html#methods]) field creation.
 - Fast and lightweight (jQuery plug-in *only 7 kB)
 
-== To Do
-
-- Add support for input file-type using AJAX POST method.
-
 == Installation
 
 This package can be easily installed using {Bower}[http://bower.io].
