@@ -27,7 +27,7 @@
 	<li>Supports synchronous form-data POST</li>
 	<li>Supports FORM submit callback for custom AJAX handling.</li>
 	<li>Supports dynamic (<a href="#methods">on the fly</a>) field creation.</li>
-	<li>Fast and lightweight (jQuery plug-in *only 7 kB)</li>
+	<li>Fast and lightweight (jQuery plug-in *only 7.4 kB)</li>
 </ul>
 
 <p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
@@ -35,6 +35,12 @@
 <a name="install"></a>
 
 <h2>Installation</h2>
+
+<p>This package can be easily installed using <a href="http://bower.io">Bower</a>.</p>
+
+<pre>$ bower install webform-toolkit</pre>
+
+<p>Manual install:</p>
 
 <ol>
 	<li>Download the latest <a href="https://github.com/nuxy/Webform-Toolkit/tags">sources</a> to your computer using a web browser.</li>
@@ -82,6 +88,7 @@ $(document).ready(function() {
 			action: 'http://www.domain.com/handler',
 			fields: [
 				{
+					id:          'username_id',
 					label:       'User Name',
 					type:        'text',
 					name:        'username',
@@ -93,6 +100,7 @@ $(document).ready(function() {
 					required:    true
 				},
 				{
+					id:          'password_id',
 					label:       'Password',
 					type:        'text',
 					name:        'password',
@@ -147,6 +155,7 @@ $(document).ready(function() {
 				],
 				[
 					{
+						id:          'pincode_id',
 						label:       'Pin Code',
 						type:        'text',
 						name:        'password',
@@ -226,7 +235,7 @@ $(document).ready(function() {
 	</tr>
 </table>
 
-<p>The <em><a href="#fields">size</a></em> field definition has been <strong>deprecated</strong> to be replaced with <em><a href="#fields">maxlength</a></em> going forward.  Please adapt your code when using this release. For backwards compatibility, I have left support in-tact, but do not expect to be available in future releases.  You have been warned.</p>
+<p>The <em><a href="#fields">size</a></em> field definition has been <strong>deprecated</strong> to be replaced with <em><a href="#fields">maxlength</a></em> going forward.  Please adapt your code when using the latest release.</p>
 
 <a name="callback"></a>
 
@@ -252,6 +261,7 @@ $(document).ready(function() {
 <p>I have added a method to dynamically create form fields that can be added to an existing webform. An optional callback has also been provided to for post-processing FORM and field elements. This makes it easy to show/hide fields using conditions and expressions.</p>
 
 <pre>webform.WebformToolkit('create', {
+	"id":          "new_field_id",
 	"label":       "New Field",
 	"type":        "text",
 	"name":        "new_field",
@@ -281,7 +291,7 @@ function(form, elm) {
 
 <h2>Releases</h2>
 
-<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (4.8 kB) and developers version (unpacked  10 kB)</p>
+<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (5.2 kB) and developers version (unpacked  13 kB)</p>
 
 <p>You can always find the latest updates within this projects repository.</p>
 

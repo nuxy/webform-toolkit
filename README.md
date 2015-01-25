@@ -14,7 +14,7 @@ Dynamically generate an HTML form with field validation and custom errors.
 - Supports synchronous form-data POST
 - Supports FORM submit callback for custom AJAX handling.
 - Supports dynamic ([on the fly](https://labs.mbrooks.info/demos/Webform-Toolkit/README.html#methods)) field creation.
-- Fast and lightweight (jQuery plug-in *only 7 kB)
+- Fast and lightweight (jQuery plug-in *only 7.4 kB)
 
 ## Installation
 
