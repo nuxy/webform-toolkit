@@ -24,6 +24,12 @@ This package can be easily installed using [Bower](http://bower.io).
 
 Please refer to the [README](https://labs.mbrooks.info/demos/Webform-Toolkit/README.html) for more information about this package.
 
+## License and Warranty
+
+This package is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.
+
+_Webform-Toolkit_ is provided under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.php)
+
 ## Author
 
 [Marc S. Brooks](https://github.com/nuxy)
