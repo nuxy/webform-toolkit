@@ -279,6 +279,16 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 
 					$this.WebformToolkit('_setButtonState', form);
 				});
+
+				// attach select menu events
+				if ($('select', elm)[0]) {
+					$('select', elm).on('change', function() {
+						var $this = $(this);
+
+						$this.WebformToolkit('_validateField', this);
+						$this.WebformToolkit('_setButtonState', form);
+					});
+				}
 			}
 
 			div.append(elm);
@@ -616,7 +626,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 				}
 
 				// do errors exist?
-				if ((elm.required && (!elm.value || elm.selectedIndex === '')) || $(elm).data('error')) {
+				if ((elm.required && (!elm.value || elm.selectedIndex == 0)) || $(elm).data('error')) {
 					return true;
 				}
 			}
