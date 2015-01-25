@@ -10,7 +10,7 @@
  *    jquery.js
  */
 
-if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
+if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace('.', '')) < parseInt('1.8.3'.replace('.', '')))) {
 	throw new Error('Webform-Toolkit requires jQuery 1.8.3 or greater.');
 }
 
@@ -41,6 +41,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 				}
 
 				var webform = $this.WebformToolkit('_createForm', callback);
+
 				$this.append(webform);
 				$this.WebformToolkit('_setButtonState', webform);
 
@@ -59,10 +60,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 		"create": function(config, callback) {
 			return this.each(function() {
 				var $this = $(this),
-					data  = $this.data(),
-					form  = $this.find('form');
-
-				var field = this.WebformToolkit('_createField', form, config);
+					field = this.WebformToolkit('_createField', $this.find('form'), config);
 
 				// return callback with form and field objects
 				if ( $.isFunction(callback) ) {
@@ -128,17 +126,17 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 
 			// create form field elements
 			if (data.config.fields) {
-				var data = (data.config.fields[0][0]) ? data.config.fields : new Array(data.config.fields);
+				var fields = (data.config.fields[0][0]) ? data.config.fields : new Array(data.config.fields);
 
-				for (var j = 0; j < data.length; j++) {
-					var fields = $('<fieldset></fieldset>')
+				for (var j = 0; j < fields.length; j++) {
+					var group = $('<fieldset></fieldset>')
 						.addClass('field_group' + j);
 
-					for (var k = 0; k < data[j].length; k++) {
-						fields.append( this.WebformToolkit('_createField', form, data[j][k]) );
+					for (var k = 0; k < fields[j].length; k++) {
+						group.append( this.WebformToolkit('_createField', form, fields[j][k]) );
 					}
 
-					form.append(fields);
+					form.append(group);
 				}
 			}
 
@@ -523,14 +521,15 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 		 * @private
 		 */
 		"_validateField": function(elm) {
-			var $this = $(elm);
+			var $this = $(elm),
+				data  = $this.data();
 
 			var value = elm.value;
 			if (!value) return;
 
-			var regex = $this.data('regex'),
-				error = $this.data('error'),
-				mesg  = $this.data('mesg');
+			var regex = data.regex,
+				error = data.error,
+				mesg  = data.mesg;
 
 			var search = new RegExp(regex, 'g'),
 				match  = null;
@@ -633,7 +632,7 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 				}
 
 				// do errors exist?
-				if ((elm.required && (!elm.value || elm.selectedIndex == 0)) || $(elm).data('error')) {
+				if ((elm.required && (!elm.value || elm.selectedIndex <= 0)) || $(elm).data('error')) {
 					return true;
 				}
 			}
