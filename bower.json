@@ -12,7 +12,7 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "*.rdoc",
+    "*.md",
     "Rakefile",
     "test",
     "test.html"
