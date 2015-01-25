@@ -1,6 +1,6 @@
 {
   "name": "webform-toolkit",
-  "version": "1.3.0",
+  "version": "1.24.0",
   "homepage": "https://github.com/nuxy/Webform-Toolkit",
   "description": "Generate an interactive HTML FORM from JSON",
   "main": "webform-toolkit.js",
