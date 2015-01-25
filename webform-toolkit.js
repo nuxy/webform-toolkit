@@ -34,15 +34,14 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 				var $this = $(this),
 					data  = $this.data();
 
-				var webform = $this.WebformToolkit('_createForm', config, callback);
-				$this.append(webform);
-
 				if ( $.isEmptyObject(data) ) {
 					$this.data({
-						container: webform
+						config: config
 					});
 				}
 
+				var webform = $this.WebformToolkit('_createForm', callback);
+				$this.append(webform);
 				$this.WebformToolkit('_setButtonState', webform);
 
 				return webform;
@@ -59,13 +58,15 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 		 */
 		"create": function(config, callback) {
 			return this.each(function() {
-				var webform = $(this).data().container;
+				var $this = $(this),
+					data  = $this.data(),
+					form  = $this.find('form');
 
-				var field = this.WebformToolkit('_createField', webform, config);
+				var field = this.WebformToolkit('_createField', form, config);
 
 				// return callback with form and field objects
 				if ( $.isFunction(callback) ) {
-					callback(webform, field);
+					callback($this, field);
 				}
 			});
 		},
@@ -86,28 +87,30 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 		 * Create form field elements
 		 * @memberof WebformToolkit
 		 * @method _createForm
-		 * @param {Object} config
 		 * @param {Function} callback
 		 * @returns {Object}
 		 * @private
 		 */
-		"_createForm": function(config, callback) {
+		"_createForm": function(callback) {
+			var $this = $(this),
+				data  = $this.data();
+
 			var form = $('<form></form>')
-				.attr('id', config.id)
+				.attr('id', data.config.id)
 				.addClass('webform');
 
 			// set POST action URI/URL
-			if (config.action) {
+			if (data.config.action) {
 				form.attr({
 					method:  'POST',
 					enctype: 'multipart/form-data',
-					action:  config.action
+					action:  data.config.action
 				});
 			}
 
 			// create hidden elements, if POST parameters exist
-			if (config.params) {
-				var pairs = config.params.split('&');
+			if (data.config.params) {
+				var pairs = data.config.params.split('&');
 
 				for (var i = 0; i < pairs.length; i++) {
 					var name = pairs[i].split('=');
@@ -124,8 +127,8 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 			}
 
 			// create form field elements
-			if (config.fields) {
-				var data = (config.fields[0][0]) ? config.fields : new Array(config.fields);
+			if (data.config.fields) {
+				var data = (data.config.fields[0][0]) ? data.config.fields : new Array(data.config.fields);
 
 				for (var j = 0; j < data.length; j++) {
 					var fields = $('<fieldset></fieldset>')
@@ -246,6 +249,11 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 				break;
 			}
 
+			// assign element ID, if exists
+			if (config.id) {
+				elm.attr('id', config.id);
+			}
+
 			// filter with REGEX
 			if (config.filter && config.type != 'hidden') {
 				elm.data({
@@ -328,9 +336,8 @@ if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
 				input.attr('value', config.value);
 			}
 
-			// config.size to be removed in future release
-			if (config.maxlength || config.size) {
-				input.attr('maxlength', (config.maxlength) ? config.maxlength : config.size);
+			if (config.maxlength) {
+				input.attr('maxlength', config.maxlength);
 			}
 
 			if (config.required == 1) {

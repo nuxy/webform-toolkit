@@ -1,6 +1,7 @@
 [
 	[
 		{
+			"id":          "username",
 			"label":       "User Name",
 			"type":        "text",
 			"name":        "username",
@@ -12,6 +13,7 @@
 			"required":    "1"
 		},
 		{
+			"id":          "password",
 			"label":       "Password",
 			"type":        "password",
 			"name":        "password",
