@@ -5,10 +5,11 @@ test("Field 'User Name'", function() {
 	equal(field.children('label').contents().eq(1).text(), 'User Name', "Label 'User Name'");
 
 	checkFieldAttr(input, {
-		name      : 'username',
-		type      : 'text',
-		maxlength : '15',
-		required  : true
+		id:        'username',
+		name:      'username',
+		type:      'text',
+		maxlength: '15',
+		required:  true
 	});
 
 	ok(input.val('user!@#$%'), "Define invalid value 'user!@#$%'");
@@ -56,10 +57,10 @@ test("Field 'Password'", function() {
 	equal(field.children('label').contents().eq(1).text(), 'Password', "Label 'Password'");
 
 	checkFieldAttr(input, {
-		name      : 'password',
-		type      : 'password',
-		maxlength : '15',
-		required  : true
+		name:       'password',
+		type:       'password',
+		maxlength:  '15',
+		required:   true
 	});
 
 	ok(input.val('password'), "Define invalid value 'password'");
@@ -109,9 +110,9 @@ test("Field 'Profile Image'", function() {
 	equal(field.children('label').text(), 'Profile Image', "Label 'Profile Image'");
 
 	checkFieldAttr(input, {
-		name     : 'upload',
-		type     : 'file',
-		required : false
+		name:     'upload',
+		type:     'file',
+		required: false
 	});
 
 	var desc = field.children('p.field_desc');
@@ -129,8 +130,8 @@ test("Field 'Age Group'", function() {
 	equal(field.children('label').contents().eq(1).text(), 'Age Group', "Label 'Age Group'");
 
 	checkFieldAttr(input, {
-		name     : 'age_group',
-		required : true
+		name:     'age_group',
+		required: true
 	});
 
 	var opts = [ 'Select One','18-24','25-34','35-44','45-54','55-64','65 or more' ];
@@ -158,9 +159,9 @@ test("Field 'Gender'", function() {
 		equal(opts[index], val, "Menu option '" + val + "' exists");
 
 		checkFieldAttr($(this), {
-			name     : 'gender',
-			type     : 'radio',
-			required : false
+			name:     'gender',
+			type:     'radio',
+			required: false
 		});
 	});
 });
@@ -172,8 +173,8 @@ test("Field 'Comments'", function() {
 	equal(field.children('label').text(), 'Comments', "Label 'Comments'");
 
 	checkFieldAttr(input, {
-		name     : 'comments',
-		required : false
+		name:     'comments',
+		required: false
 	});
 
 	ok(input.val('desc!@#$%'), "Define invalid message 'desc!@#$%'");
@@ -221,8 +222,8 @@ test("Field 'I want to check this box because it's a box'", function() {
 		input = field.find('input');
 
 	checkFieldAttr(input, {
-		name     : 'confirm',
-		required : false
+		name:     'confirm',
+		required: false
 	});
 
 	ok(input.prop('checked', true), 'Checkbox is checked');
