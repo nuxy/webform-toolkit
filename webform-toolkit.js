@@ -86,7 +86,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 * @memberof WebformToolkit
 		 * @method _createForm
 		 * @param {Function} callback
-		 * @returns {Object}
+		 * @returns {Object} jQuery object
 		 * @private
 		 */
 		"_createForm": function(callback) {
@@ -183,7 +183,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 * @method _createField
 		 * @param {Object} form
 		 * @param {Object} config
-		 * @returns {Object}
+		 * @returns {Object} jQuery object
 		 * @private
 		 */
 		"_createField": function(form, config) {
@@ -315,7 +315,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 * @memberof WebformToolkit
 		 * @method _createInputElm
 		 * @param {Object} config
-		 * @returns {Object}
+		 * @returns {Object} jQuery object
 		 * @private
 		 */
 		"_createInputElm": function(config) {
@@ -350,7 +350,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 * @memberof WebformToolkit
 		 * @method _createFileElm
 		 * @param {Object} config
-		 * returns {Object}
+		 * @returns {Object} jQuery object
 		 * @private
 		 */
 		"_createFileElm": function(config) {
@@ -374,7 +374,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 * @memberof WebformToolkit
 		 * @method _createMenuElm
 		 * @param {Object} config
-		 * @returns {Object}
+		 * @returns {Object} jQuery object
 		 * @private
 		 */
 		"_createMenuElm": function(config) {
@@ -428,7 +428,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 * @memberof WebformToolkit
 		 * @method _createRadioElm
 		 * @param {Object} config
-		 * @returns {Object}
+		 * @returns {Object} jQuery object
 		 * @private
 		 */
 		"_createRadioElm": function(config) {
@@ -465,7 +465,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 * @memberof WebformToolkit
 		 * @method _createCheckBoxElm
 		 * @param {Object} config
-		 * @returns {Object}
+		 * @returns {Object} jQuery object
 		 * @private
 		 */
 		"_createCheckBoxElm": function(config) {
@@ -498,7 +498,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 * @memberof WebformToolkit
 		 * @method _createTextAreaElm
 		 * @param {Object} config
-		 * @returns {Object}
+		 * @returns {Object} jQuery object
 		 * @private
 		 */
 		"_createTextAreaElm": function(config) {
