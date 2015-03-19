@@ -23,8 +23,13 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create new instance of Webform-Toolkit
+		 *
 		 * @memberof WebformToolkit
 		 * @method init
+		 *
+		 * @example
+		 * $('#container').WebformToolkit(config, callback);
+		 *
 		 * @param {Object} config
 		 * @param {Function} callback
 		 * @returns {Object} jQuery object
@@ -51,8 +56,13 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create new instance of Webform-Toolkit
+		 *
 		 * @memberof WebformToolkit
 		 * @method create
+		 *
+		 * @example
+		 * $('#container').WebformToolkit('create', config, callback);
+		 *
 		 * @param {Object} config
 		 * @param {Function} callback
 		 * @returns {Object} jQuery object
@@ -71,8 +81,12 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Perform cleanup
+		 *
 		 * @memberof WebformToolkit
 		 * @method destroy
+		 *
+		 * @example
+		 * $('#container').WebformToolkit('destroy');
 		 */
 		"destroy": function() {
 			return this.each(function() {
@@ -83,8 +97,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create form field elements
+		 *
 		 * @memberof WebformToolkit
 		 * @method _createForm
+		 *
 		 * @param {Function} callback
 		 * @returns {Object} jQuery object
 		 * @private
@@ -179,8 +195,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create field elements
+		 *
 		 * @memberof WebformToolkit
 		 * @method _createField
+		 *
 		 * @param {Object} form
 		 * @param {Object} config
 		 * @returns {Object} jQuery object
@@ -312,8 +330,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create input elements
+		 *
 		 * @memberof WebformToolkit
 		 * @method _createInputElm
+		 *
 		 * @param {Object} config
 		 * @returns {Object} jQuery object
 		 * @private
@@ -347,8 +367,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create FILE element
+		 *
 		 * @memberof WebformToolkit
 		 * @method _createFileElm
+		 *
 		 * @param {Object} config
 		 * @returns {Object} jQuery object
 		 * @private
@@ -371,8 +393,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create select menu elements
+		 *
 		 * @memberof WebformToolkit
 		 * @method _createMenuElm
+		 *
 		 * @param {Object} config
 		 * @returns {Object} jQuery object
 		 * @private
@@ -425,8 +449,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create RADIO button elements
+		 *
 		 * @memberof WebformToolkit
 		 * @method _createRadioElm
+		 *
 		 * @param {Object} config
 		 * @returns {Object} jQuery object
 		 * @private
@@ -462,8 +488,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create CHECKBOX elements
+		 *
 		 * @memberof WebformToolkit
 		 * @method _createCheckBoxElm
+		 *
 		 * @param {Object} config
 		 * @returns {Object} jQuery object
 		 * @private
@@ -495,8 +523,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create textarea elements
+		 * 
 		 * @memberof WebformToolkit
 		 * @method _createTextAreaElm
+		 *
 		 * @param {Object} config
 		 * @returns {Object} jQuery object
 		 * @private
@@ -514,8 +544,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Validate the form element value
+		 *
 		 * @memberof WebformToolkit
 		 * @method _validateField
+		 *
 		 * @param {Object} elm
 		 * @returns {Boolean}
 		 * @private
@@ -590,8 +622,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Enable/Disable submit button
+		 *
 		 * @memberof WebformToolkit
 		 * @method _setButtonState
+		 *
 		 * @param {Object} form
 		 * @private
 		 */
@@ -609,8 +643,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Return true if form errors exist
+		 *
 		 * @memberof WebformToolkit
 		 * @method _errorsExist
+		 *
 		 * @param {Object} form
 		 * @returns {Boolean}
 		 * @private
