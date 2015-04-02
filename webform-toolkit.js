@@ -94,7 +94,6 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 			});
 		},
 
-
 		/**
 		 * Create form field elements
 		 *
@@ -149,7 +148,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 						.addClass('field_group' + j);
 
 					for (var k = 0; k < fields[j].length; k++) {
-						group.append( this.WebformToolkit('_createField', form, fields[j][k]) );
+						group.append(this.WebformToolkit('_createField', form, fields[j][k]));
 					}
 
 					form.append(group);
@@ -210,7 +209,8 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 			// .. label, if exists
 			if (config.label && config.type != 'checkbox') {
-				var label = $('<label></label>');
+				var label = $('<label></label>')
+					.attr('for', config.name);
 
 				if (config.required == 1) {
 					var span = $('<span>*</span>')
@@ -523,7 +523,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
 		/**
 		 * Create textarea elements
-		 * 
+		 *
 		 * @memberof WebformToolkit
 		 * @method _createTextAreaElm
 		 *
@@ -533,7 +533,10 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 		 */
 		"_createTextAreaElm": function(config) {
 			var textarea = $('<textarea></textarea>')
-				.attr('name', config.name);
+				.attr({
+					'id':   config.name,
+					'name': config.name
+				});
 
 			if (config.required == 1) {
 				textarea.prop('required', true);
