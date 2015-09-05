@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-
-	<!-- JavaScript insert start -->
-
-	<script src="webform-toolkit.min.js"></script>
-	<script>
-	$(document).ready(function() {
-		$.getJSON('demo.json', function(data) {
-			$('#container')
-				.WebformToolkit({
-					id:     'example',
-					action: 'http://www.domain.com/handler',
-					fields: data
-				},
-				function(form) {
-					alert("callback(form='" + form.serialize() + "')");
-				});
-		});
-	});
-	</script>
-
-	<!-- JavaScript insert end -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 
-	<!-- CSS include start -->
+  <!-- JavaScript insert start -->
 
-	<link rel="stylesheet" type="text/css" href="webform-toolkit.min.css">
+  <script src="webform-toolkit.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $.getJSON('demo.json', function(data) {
+      $('#container')
+        .WebformToolkit({
+          id:     'example',
+          action: 'http://www.domain.com/handler',
+          fields: data
+        },
+        function(form) {
+          alert("callback(form='" + form.serialize() + "')");
+        });
+    });
+  });
+  </script>
 
-	<!-- CSS include end -->
+  <!-- JavaScript insert end -->
 
 
-	<!-- CSS overrides start -->
+  <!-- CSS include start -->
 
-	<link rel="stylesheet" type="text/css" href="https://mbrooks.info/demo.min.css">
-	<link rel="stylesheet" type="text/css" href="demo.css">
+  <link rel="stylesheet" type="text/css" href="webform-toolkit.min.css">
 
-	<!-- CSS overrides end -->
+  <!-- CSS include end -->
 
 
-	<title>Webform Toolkit - Generate an interactive HTML FORM from JSON</title>
+  <!-- CSS overrides start -->
+
+  <link rel="stylesheet" type="text/css" href="https://mbrooks.info/demo.min.css">
+  <link rel="stylesheet" type="text/css" href="demo.css">
+
+  <!-- CSS overrides end -->
+
+
+  <title>Webform Toolkit - Generate an interactive HTML FORM from JSON</title>
 </head>
 <body>
 
 <p id="about">
-	This <strong>jQuery</strong> plugin is <a href="webform-toolkit.min.js" title="Only 5.2 kB">lightweight</a>, easy to <a href="README.html#install" title="Installation">install</a> / <a href="demo.css" title="Stylesheet">customize</a>, and works on all modern web browsers.
+  This <strong>jQuery</strong> plugin is <a href="webform-toolkit.min.js" title="Only 5.2 kB">lightweight</a>, easy to <a href="README.html#install" title="Installation">install</a> / <a href="demo.css" title="Stylesheet">customize</a>, and works on all modern web browsers.
 </p>
 
 
@@ -63,7 +63,7 @@
 <!-- footer start -->
 
 <div id="footer">
-	<span class="copy">&#169; 2012-2015 <a href="https://mbrooks.info">Marc S. Brooks</a></span>
+  <span class="copy">&#169; 2012-2015 <a href="https://mbrooks.info">Marc S. Brooks</a></span>
 </div>
 
 <!-- footer end -->

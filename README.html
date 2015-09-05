@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="https://mbrooks.info/readme.min.css">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="https://mbrooks.info/readme.min.css">
 
-	<title>README</title>
+  <title>README</title>
 </head>
 <body>
 
@@ -18,15 +18,15 @@
 <h2>Features</h2>
 
 <ul>
-	<li>Extensible HTML/CSS interface.</li>
-	<li>Compatible with Firefox 3.6+, Chrome, Safari 5+, Opera, and Internet Explorer 7+ web browsers.</li>
-	<li>Compatible with iOS and Android mobile web browsers.</li>
-	<li>Easy to set-up and customize.</li>
-	<li>Provides form input validation using REGEX (<a href="http://www.regular-expressions.info/reference.html">regular expressions</a>)</li>
-	<li>Supports synchronous form-data POST</li>
-	<li>Supports FORM submit callback for custom AJAX handling.</li>
-	<li>Supports dynamic (<a href="#methods">on the fly</a>) field creation.</li>
-	<li>Fast and lightweight (jQuery plug-in *only 7.4 kB)</li>
+  <li>Extensible HTML/CSS interface.</li>
+  <li>Compatible with Firefox 3.6+, Chrome, Safari 5+, Opera, and Internet Explorer 7+ web browsers.</li>
+  <li>Compatible with iOS and Android mobile web browsers.</li>
+  <li>Easy to set-up and customize.</li>
+  <li>Provides form input validation using REGEX (<a href="http://www.regular-expressions.info/reference.html">regular expressions</a>)</li>
+  <li>Supports synchronous form-data POST</li>
+  <li>Supports FORM submit callback for custom AJAX handling.</li>
+  <li>Supports dynamic (<a href="#methods">on the fly</a>) field creation.</li>
+  <li>Fast and lightweight (jQuery plug-in *only 7.4 kB)</li>
 </ul>
 
 <p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
@@ -42,24 +42,24 @@
 <p>Manual install:</p>
 
 <ol>
-	<li>Download the latest <a href="https://github.com/nuxy/Webform-Toolkit/tags">sources</a> to your computer using a web browser.</li>
-	<li>Extract the contents of the <em>.zip</em> into a folder on your local computer.</li>
-	<li>Upload the folder with the <strong>following files</strong> to your web site.</li>
+  <li>Download the latest <a href="https://github.com/nuxy/Webform-Toolkit/tags">sources</a> to your computer using a web browser.</li>
+  <li>Extract the contents of the <em>.zip</em> into a folder on your local computer.</li>
+  <li>Upload the folder with the <strong>following files</strong> to your web site.</li>
 </ol>
 
 <table border="1">
-	<tr>
-		<th>Filename</th>
-		<th>Role</th>
-	</tr>
-	<tr>
-		<td>webform-toolkit.min.js</td>
-		<td>The main script to be included from within your HTML document.</td>
-	</tr>
-	<tr>
-		<td>webform-toolkit.min.css</td>
-		<td>This style sheet that defines the "look & feel" of the HTML form.</td>
-	</tr>
+  <tr>
+    <th>Filename</th>
+    <th>Role</th>
+  </tr>
+  <tr>
+    <td>webform-toolkit.min.js</td>
+    <td>The main script to be included from within your HTML document.</td>
+  </tr>
+  <tr>
+    <td>webform-toolkit.min.css</td>
+    <td>This style sheet that defines the "look & feel" of the HTML form.</td>
+  </tr>
 </table>
 
 <h2>Set-up</h2>
@@ -81,37 +81,37 @@
 &lt;script src="/path/to/webform-toolkit.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(document).ready(function() {
-	var webform = $('#container')
-		.WebformToolkit({
-			id:     'example',
-			action: 'http://www.domain.com/handler',
-			fields: [
-				{
-					id:          'username_id',
-					label:       'User Name',
-					type:        'text',
-					name:        'username',
-					value:       '',
-					maxlength:   '15',
-					filter:      "^\\w{0,15}$",
-					description: '',
-					error:       'Supported characters: A-Z, 0-9 and underscore',
-					required:    true
-				},
-				{
-					id:          'password_id',
-					label:       'Password',
-					type:        'text',
-					name:        'password',
-					value:       '',
-					maxlength:   '15',
-					filter:      "^(?!password)(.{8,15})$",
-					description: 'Must be a minimum of 8 characters',
-					error:       'The password entered is not valid',
-					required:    true
-				}
-			]
-		}, customHandler);
+  var webform = $('#container')
+    .WebformToolkit({
+      id:     'example',
+      action: 'http://www.domain.com/handler',
+      fields: [
+        {
+          id:          'username_id',
+          label:       'User Name',
+          type:        'text',
+          name:        'username',
+          value:       '',
+          maxlength:   '15',
+          filter:      "^\\w{0,15}$",
+          description: '',
+          error:       'Supported characters: A-Z, 0-9 and underscore',
+          required:    true
+        },
+        {
+          id:          'password_id',
+          label:       'Password',
+          type:        'text',
+          name:        'password',
+          value:       '',
+          maxlength:   '15',
+          filter:      "^(?!password)(.{8,15})$",
+          description: 'Must be a minimum of 8 characters',
+          error:       'The password entered is not valid',
+          required:    true
+        }
+      ]
+    }, customHandler);
 &lt;/script&gt;
 
 &lt;link rel="stylesheet" type="text/css" href="/path/to/webform-toolkit.min.css"&gt;</pre>
@@ -123,51 +123,51 @@ $(document).ready(function() {
 &lt;script src="/path/to/webform-toolkit.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(document).ready(function() {
-	var webform = $('#container')
-		.WebformToolkit({
-			id:     'example',
-			action: 'http://www.domain.com/handler',
-			fields: [
-				[
-					{
-						label:       'User Name',
-						type:        'text',
-						name:        'username',
-						value:       '',
-						maxlength:   '15',
-						filter:      "^\\w{0,15}$",
-						description: '',
-						error:       'Supported characters: A-Z, 0-9 and underscore',
-						required:    true
-					},
-					{
-						label:       'Password',
-						type:        'text',
-						name:        'password',
-						value:       '',
-						maxlength:   '15',
-						filter:      "^(?!password)(.{8,15})$",
-						description: 'Must be a minimum of 8 characters',
-						error:       'The password entered is not valid',
-						required:    true
-					}
-				],
-				[
-					{
-						id:          'pincode_id',
-						label:       'Pin Code',
-						type:        'text',
-						name:        'password',
-						value:       '',
-						maxlength:   '8',
-						filter:      "^\\d{8,15}$",
-						description: 'Must be a minimum of 8 numeric characters',
-						error:       'The pin code entered is not valid',
-						required:    true
-					}
-				]
-			]
-		}, customHandler);
+  var webform = $('#container')
+    .WebformToolkit({
+      id:     'example',
+      action: 'http://www.domain.com/handler',
+      fields: [
+        [
+          {
+            label:       'User Name',
+            type:        'text',
+            name:        'username',
+            value:       '',
+            maxlength:   '15',
+            filter:      "^\\w{0,15}$",
+            description: '',
+            error:       'Supported characters: A-Z, 0-9 and underscore',
+            required:    true
+          },
+          {
+            label:       'Password',
+            type:        'text',
+            name:        'password',
+            value:       '',
+            maxlength:   '15',
+            filter:      "^(?!password)(.{8,15})$",
+            description: 'Must be a minimum of 8 characters',
+            error:       'The password entered is not valid',
+            required:    true
+          }
+        ],
+        [
+          {
+            id:          'pincode_id',
+            label:       'Pin Code',
+            type:        'text',
+            name:        'password',
+            value:       '',
+            maxlength:   '8',
+            filter:      "^\\d{8,15}$",
+            description: 'Must be a minimum of 8 numeric characters',
+            error:       'The pin code entered is not valid',
+            required:    true
+          }
+        ]
+      ]
+    }, customHandler);
 &lt;/script&gt;
 
 &lt;link rel="stylesheet" type="text/css" href="/path/to/webform-toolkit.min.css"&gt;</pre>
@@ -177,61 +177,61 @@ $(document).ready(function() {
 <h2>Field Definitions</h2>
 
 <table border="1">
-	<tr>
-		<th>Attribute</th>
-		<th>Description</th>
-		<th>Required</th>
-	</tr>
-	<tr>
-		<td>label</td>
-		<td>Field label value</td>
-		<td>true</td>
-	</tr>
-	<tr>
-		<td>type</td>
-		<td>Supported types: text|hidden|password|checkbox|radio|file|select|textarea</td>
-		<td>true</td>
-	</tr>
-	<tr>
-		<td>name</td>
-		<td>Form element name</td>
-		<td>true</td>
-	</tr>
-	<tr>
-		<td>value</td>
-		<td>Default value</td>
-		<td>true</td>
-	</tr>
-	<tr class="deprecated">
-		<td><strike>size</strike></td>
-		<td><strike>Input type maximum length</strike> (use maxlength)</td>
-		<td><strike>false</strike></td>
-	</tr>
-	<tr>
-		<td>maxlength</td>
-		<td>Input type maximum length</td>
-		<td>false</td>
-	</tr>
-	<tr>
-		<td>filter</td>
-		<td>Validate form input using REGEX</td>
-		<td>false</td>
-	</tr>
-	<tr>
-		<td>description</td>
-		<td>Custom field description</td>
-		<td>false</td>
-	</tr>
-	<tr>
-		<td>error</td>
-		<td>Custom error message</td>
-		<td>false</td>
-	</tr>
-	<tr>
-		<td>required</td>
-		<td>Required field</td>
-		<td>false</td>
-	</tr>
+  <tr>
+    <th>Attribute</th>
+    <th>Description</th>
+    <th>Required</th>
+  </tr>
+  <tr>
+    <td>label</td>
+    <td>Field label value</td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>Supported types: text|hidden|password|checkbox|radio|file|select|textarea</td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>Form element name</td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>value</td>
+    <td>Default value</td>
+    <td>true</td>
+  </tr>
+  <tr class="deprecated">
+    <td><strike>size</strike></td>
+    <td><strike>Input type maximum length</strike> (use maxlength)</td>
+    <td><strike>false</strike></td>
+  </tr>
+  <tr>
+    <td>maxlength</td>
+    <td>Input type maximum length</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>filter</td>
+    <td>Validate form input using REGEX</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>description</td>
+    <td>Custom field description</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>error</td>
+    <td>Custom error message</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>required</td>
+    <td>Required field</td>
+    <td>false</td>
+  </tr>
 </table>
 
 <p>The <em><a href="#fields">size</a></em> field definition has been <strong>deprecated</strong> to be replaced with <em><a href="#fields">maxlength</a></em> going forward.  Please adapt your code when using the latest release.</p>
@@ -243,14 +243,14 @@ $(document).ready(function() {
 <p>When a callback function is defined a form object is returned.  This allows you to define a custom AJAX handler based on the requirements of your application.  The following function corresponds to the <a href="#example">example</a> provided above.</p>
 
 <pre>function customHandler(form) {
-	$.ajax({
-		type: 'POST',
-		url:  form.attr('action'),
-		data: form.serialize()
-	})
-	.success(function(response) {
-		alert(response);
-	});
+  $.ajax({
+    type: 'POST',
+    url:  form.attr('action'),
+    data: form.serialize()
+  })
+  .success(function(response) {
+    alert(response);
+  });
 }</pre>
 
 <a name="methods"></a>
@@ -260,19 +260,19 @@ $(document).ready(function() {
 <p>I have added a method to dynamically create form fields that can be added to an existing webform. An optional callback has also been provided to for post-processing FORM and field elements. This makes it easy to show/hide fields using conditions and expressions.</p>
 
 <pre>webform.WebformToolkit('create', {
-	"id":          "new_field_id",
-	"label":       "New Field",
-	"type":        "text",
-	"name":        "new_field",
-	"value":       "",
-	"maxlength":   "",
-	"filter":      "^[a-zA-Z0-9]{0,255}$",
-	"description": "",
-	"error":       "Supported characters: A-Z, 0-9",
-	"required":    "0"
+  "id":          "new_field_id",
+  "label":       "New Field",
+  "type":        "text",
+  "name":        "new_field",
+  "value":       "",
+  "maxlength":   "",
+  "filter":      "^[a-zA-Z0-9]{0,255}$",
+  "description": "",
+  "error":       "Supported characters: A-Z, 0-9",
+  "required":    "0"
 },
 function(form, elm) {
-	form.append(elm);  // default: last in fieldset
+  form.append(elm);  // default: last in fieldset
 });
 </pre>
 

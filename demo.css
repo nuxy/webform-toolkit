@@ -1,86 +1,86 @@
 /* customize */
 
 #container {
-	margin: 7% auto 0px auto;
-	width: 675px;
+  margin: 7% auto 0px auto;
+  width: 675px;
 }
 
 #container fieldset {
-	float: left;
-	min-height: 75px;
-	padding: 5px;
-	margin: 5px;
-	width: 315px;
+  float: left;
+  min-height: 75px;
+  padding: 5px;
+  margin: 5px;
+  width: 315px;
 }
 
 #container div.checkbox input,
 #container div.checkbox span {
-	float: left;
+  float: left;
 }
 
 #container div.checkbox input {
-	margin-left: 40px;
+  margin-left: 40px;
 }
 
 #container div.checkbox span {
-	font-size: 12px;
-	padding-left: 5px;
+  font-size: 12px;
+  padding-left: 5px;
 }
 
 #container label {
-	margin-bottom: 10px 0px 2px 0px;
-	width: 100px;
+  margin-bottom: 10px 0px 2px 0px;
+  width: 100px;
 }
 
 #container label span {
-	margin-right: 4px;
+  margin-right: 4px;
 }
 
 #container input[type=text],
 #container input[type=password],
 #container textarea {
-	padding: 4px;
-	width: 200px;
+  padding: 4px;
+  width: 200px;
 }
 
 #container input[type=radio] {
-	margin: 8px 4px 8px 4px;
+  margin: 8px 4px 8px 4px;
 }
 
 #container input[type=submit] {
-	display: block;
-	margin: 10px auto 0px auto;
-	width: 80px;
+  display: block;
+  margin: 10px auto 0px auto;
+  width: 80px;
 }
 
 #container select {
-	margin: 5px;
+  margin: 5px;
 }
 
 #container p.field_desc {
-	width: 100%;
+  width: 100%;
 }
 
 #container p.error_mesg {
-	margin: 5px 0px 10px 0px;
-	width: 298px;
+  margin: 5px 0px 10px 0px;
+  width: 298px;
 }
 
 /* field groups */
 
 #container fieldset.field_group2 {
-	float: right;
+  float: right;
 }
 
 #container fieldset.field_group4 {
-	min-height: 30px;
-	margin: 0px;
-	padding: 0px;
-	width: 100%;
+  min-height: 30px;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
 }
 
 #container fieldset.field_group4 div.field_confirm {
-	float: none;
-	margin: 0px auto 0px auto;
-	width: 300px;
+  float: none;
+  margin: 0px auto 0px auto;
+  width: 300px;
 }
