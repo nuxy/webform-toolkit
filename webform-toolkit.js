@@ -32,6 +32,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      *
      * @param {Object} config
      * @param {Function} callback
+     *
      * @returns {Object} jQuery object
      */
     "init": function(config, callback) {
@@ -65,6 +66,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      *
      * @param {Object} config
      * @param {Function} callback
+     *
      * @returns {Object} jQuery object
      */
     "create": function(config, callback) {
@@ -72,7 +74,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         var $this = $(this),
             field = this.WebformToolkit('_createField', $this.find('form'), config);
 
-        // return callback with form and field objects
+        // Return callback with form and field objects.
         if ( $.isFunction(callback) ) {
           callback($this, field);
         }
@@ -95,14 +97,14 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Create form field elements
+     * Create form field elements.
      *
      * @memberof WebformToolkit
      * @method _createForm
+     * @private
      *
      * @param {Function} callback
      * @returns {Object} jQuery object
-     * @private
      */
     "_createForm": function(callback) {
       var $this = $(this),
@@ -112,7 +114,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         .attr('id', data.config.id)
         .addClass('webform');
 
-      // set POST action URI/URL
+      // Set POST action URI/URL
       if (data.config.action) {
         form.attr({
           method:  'POST',
@@ -121,7 +123,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         });
       }
 
-      // create hidden elements, if POST parameters exist
+      // Create hidden elements, if POST parameters exist.
       if (data.config.params) {
         var pairs = data.config.params.split('&');
 
@@ -139,7 +141,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         }
       }
 
-      // create form field elements
+      // Create form field elements.
       if (data.config.fields) {
         var fields = (data.config.fields[0][0]) ? data.config.fields : new Array(data.config.fields);
 
@@ -155,7 +157,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         }
       }
 
-      // create the submit button
+      // Create the submit button.
       var div = $('<div></div>')
         .addClass('form_submit');
 
@@ -165,7 +167,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
           value: 'Submit'
         });
 
-      // bind form submit event
+      // Bind form submit event
       form.on('submit', function(event) {
         event.preventDefault();
 
@@ -173,12 +175,12 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
         if (!$this.WebformToolkit('_errorsExist', $this)) {
 
-          // return callback with form object response
+          // Return callback with form object response.
           if ( $.isFunction(callback) ) {
             callback($this);
           }
 
-          // POST form values
+          // POST form values.
           else {
             $this.get(0).submit();
           }
@@ -193,21 +195,22 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Create field elements
+     * Create field elements.
      *
      * @memberof WebformToolkit
      * @method _createField
+     * @private
      *
      * @param {Object} form
      * @param {Object} config
+     *
      * @returns {Object} jQuery object
-     * @private
      */
     "_createField": function(form, config) {
       var div = $('<div></div>')
         .addClass('field_' + config.name);
 
-      // .. label, if exists
+      // .. Label, if exists
       if (config.label && config.type != 'checkbox') {
         var label = $('<label></label>')
           .attr('for', config.name);
@@ -226,7 +229,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
       var elm = jQuery.obj;
 
-      // supported elements
+      // Supported elements
       switch (config.type) {
         case 'text':
           elm = this.WebformToolkit('_createInputElm', config);
@@ -265,12 +268,12 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         break;
       }
 
-      // assign element ID, if exists
+      // Assign element ID, if exists.
       if (config.id) {
         elm.attr('id', config.id);
       }
 
-      // filter with REGEX
+      // Filter with REGEX
       if (config.filter && config.type != 'hidden') {
         elm.data({
           regex: config.filter,
@@ -278,7 +281,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
           error: false
         });
 
-        // attach form events
+        // Attach form events
         form.on('mouseover mousemove', function() {
           var $this = $(this);
 
@@ -286,7 +289,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
           $this.WebformToolkit('_setButtonState', $this);
         });
 
-        // attach field events
+        // Attach field events
         elm.on('mousedown mouseout focusout', function() {
           var $this = $(this);
 
@@ -304,7 +307,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
           $this.WebformToolkit('_setButtonState', form);
         });
 
-        // attach select menu events
+        // Attach select menu events
         if ($('select', elm)[0]) {
           $('select', elm).on('change', function() {
             var $this = $(this);
@@ -317,7 +320,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
 
       div.append(elm);
 
-      // .. description, if exists
+      // .. Description, if exists
       if (config.description) {
         var block = $('<p>' + config.description + '</p>')
           .addClass('field_desc');
@@ -329,19 +332,19 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Create input elements
+     * Create input elements.
      *
      * @memberof WebformToolkit
      * @method _createInputElm
+     * @private
      *
      * @param {Object} config
      * @returns {Object} jQuery object
-     * @private
      */
     "_createInputElm": function(config) {
       var input = $('<input></input>');
 
-      // .. field attributes
+      // .. Field attributes
       if (config.type) {
         input.attr('type', config.type);
       }
@@ -366,20 +369,20 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Create FILE element
+     * Create FILE element.
      *
      * @memberof WebformToolkit
      * @method _createFileElm
+     * @private
      *
      * @param {Object} config
      * @returns {Object} jQuery object
-     * @private
      */
     "_createFileElm": function(config) {
       var input = $('<input></input>')
         .attr('type', 'file');
 
-      // .. field attributes
+      // .. Field attributes
       if (config.name) {
         input.attr('name', config.name);
       }
@@ -392,14 +395,15 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Create select menu elements
+     * Create select menu elements.
      *
      * @memberof WebformToolkit
      * @method _createMenuElm
+     * @private
      *
      * @param {Object} config
+     *
      * @returns {Object} jQuery object
-     * @private
      */
     "_createMenuElm": function(config) {
       var div = $('<div></div>')
@@ -411,14 +415,14 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
       var opts  = config.filter.split('|'),
           first = null;
 
-      // .. first option (custom)
+      // .. First option (custom)
       if (config.value) {
         opts.unshift(config.value);
 
         first = true;
       }
 
-      // .. select options
+      // .. Select options
       for (var i = 0; i < opts.length; i++) {
         var value = opts[i];
 
@@ -448,14 +452,15 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Create RADIO button elements
+     * Create RADIO button elements.
      *
      * @memberof WebformToolkit
      * @method _createRadioElm
+     * @private
      *
      * @param {Object} config
+     *
      * @returns {Object} jQuery object
-     * @private
      */
     "_createRadioElm": function(config) {
       var div = $('<div></div>')
@@ -487,14 +492,15 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Create CHECKBOX elements
+     * Create CHECKBOX elements.
      *
      * @memberof WebformToolkit
      * @method _createCheckBoxElm
+     * @private
      *
      * @param {Object} config
+     *
      * @returns {Object} jQuery object
-     * @private
      */
     "_createCheckBoxElm": function(config) {
       var div = $('<div></div>')
@@ -522,14 +528,15 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Create textarea elements
+     * Create textarea elements.
      *
      * @memberof WebformToolkit
      * @method _createTextAreaElm
+     * @private
      *
      * @param {Object} config
+     *
      * @returns {Object} jQuery object
-     * @private
      */
     "_createTextAreaElm": function(config) {
       var textarea = $('<textarea></textarea>')
@@ -546,14 +553,15 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Validate the form element value
+     * Validate the form element value.
      *
      * @memberof WebformToolkit
      * @method _validateField
+     * @private
      *
      * @param {Object} elm
+     *
      * @returns {Boolean}
-     * @private
      */
     "_validateField": function(elm) {
       var $this = $(elm),
@@ -587,12 +595,12 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
       var field = $this.parent(),
           block = null;
 
-        // toggle the error message visibility
+        // Toggle the error message visibility.
         if (match === false && error === false) {
         block = $('<p>' + mesg + '</p>')
           .addClass('error_mesg');
 
-        // .. arrow elements
+        // .. Arrow elements
         var span1 = $('<span></span>'),
           span2 = $('<span></span>');
 
@@ -624,13 +632,13 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Enable/Disable submit button
+     * Enable/Disable submit button.
      *
      * @memberof WebformToolkit
      * @method _setButtonState
+     * @private
      *
      * @param {Object} form
-     * @private
      */
     "_setButtonState": function(form) {
       var button = form.find('input:submit');
@@ -645,14 +653,15 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
     },
 
     /**
-     * Return true if form errors exist
+     * Return true if form errors exist.
      *
      * @memberof WebformToolkit
      * @method _errorsExist
+     * @private
      *
      * @param {Object} form
+     *
      * @returns {Boolean}
-     * @private
      */
     "_errorsExist": function(form) {
       var fields = form[0].elements;
@@ -660,7 +669,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
       for (var i = 0; i < fields.length; i++) {
         var elm = fields[i];
 
-        // supported elements
+        // Supported elements
         if (!/INPUT|SELECT|TEXTAREA/.test(elm.nodeName)) {
           continue;
         }
@@ -670,7 +679,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
           continue;
         }
 
-        // do errors exist?
+        // Do errors exist?
         if ((elm.required && (!elm.value || elm.selectedIndex <= 0)) || $(elm).data('error')) {
           return true;
         }
