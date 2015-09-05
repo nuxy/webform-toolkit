@@ -1,5 +1,6 @@
-/* customize */
-
+/**
+ * Customize
+ */
 #container {
   margin: 7% auto 0px auto;
   width: 675px;
@@ -13,16 +14,16 @@
   width: 315px;
 }
 
-#container div.checkbox input,
-#container div.checkbox span {
+#container .checkbox input,
+#container .checkbox span {
   float: left;
 }
 
-#container div.checkbox input {
+#container .checkbox input {
   margin-left: 40px;
 }
 
-#container div.checkbox span {
+#container .checkbox span {
   font-size: 12px;
   padding-left: 5px;
 }
@@ -57,29 +58,30 @@
   margin: 5px;
 }
 
-#container p.field_desc {
+#container .field_desc {
   width: 100%;
 }
 
-#container p.error_mesg {
+#container .error_mesg {
   margin: 5px 0px 10px 0px;
   width: 298px;
 }
 
-/* field groups */
-
-#container fieldset.field_group2 {
+/**
+ * Field groups
+ */
+#container .field_group2 {
   float: right;
 }
 
-#container fieldset.field_group4 {
+#container .field_group4 {
   min-height: 30px;
   margin: 0px;
   padding: 0px;
   width: 100%;
 }
 
-#container fieldset.field_group4 div.field_confirm {
+#container .field_group4 .field_confirm {
   float: none;
   margin: 0px auto 0px auto;
   width: 300px;
