@@ -1,6 +1,8 @@
-Webform Toolkit - Generate an interactive HTML FORM from JSON
+Webform Toolkit
+Dynamically generate an HTML form with field validation and custom errors
+from JSON
 
-Copyright 2012-2015, Marc S. Brooks (http://mbrooks.info)
+Copyright 2012-2015, Marc S. Brooks (https://mbrooks.info)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

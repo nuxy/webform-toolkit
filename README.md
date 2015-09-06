@@ -1,6 +1,6 @@
 # Webform Toolkit [<img src="https://travis-ci.org/nuxy/Webform-Toolkit.svg?branch=master" alt="Build Status" />](https://travis-ci.org/nuxy/Webform-Toolkit)
 
-Dynamically generate an HTML form with field validation and custom errors.
+Dynamically generate an HTML form with field validation and custom errors from JSON
 
 [<img src="https://nuxy.github.io/Webform-Toolkit/preview.jpg" alt="Webform-Toolkit" />](https://nuxy.github.io/Webform-Toolkit)
 
