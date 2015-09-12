@@ -4,7 +4,7 @@ module('Webform-Toolkit', {
 
     stop();
 
-    $.getJSON('https://nuxy.github.io/Webform-Toolkit/demo.json', function(data) {
+    $.getJSON('test.json', function(data) {
       start();
 
       $('#qunit-custom')
