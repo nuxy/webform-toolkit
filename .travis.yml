@@ -1,6 +1,8 @@
 language: ruby
 rvm:
   - 1.9.3
+
 before_script:
   - 'export DISPLAY=:99.0'
+  - "export PHANTOMJS_EXECUTABLE='phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes'"
   - 'sh -e /etc/init.d/xvfb start'
