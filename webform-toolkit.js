@@ -576,7 +576,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
           mesg  = data.mesg;
 
       var search = new RegExp(regex, 'g'),
-        match  = null;
+          match  = null;
 
       // .. REGEX by type
       switch(elm.nodeName) {
