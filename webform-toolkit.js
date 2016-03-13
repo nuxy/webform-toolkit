@@ -3,19 +3,13 @@
  *  Dynamically generate an HTML form with field validation and custom errors
  *  from JSON
  *
- *  Copyright 2012-2015, Marc S. Brooks (https://mbrooks.info)
+ *  Copyright 2012-2016, Marc S. Brooks (https://mbrooks.info)
  *  Licensed under the MIT license:
  *  http://www.opensource.org/licenses/mit-license.php
- *
- *  Dependencies:
- *    jquery.js
  */
 
-if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace('.', '')) < parseInt('1.8.3'.replace('.', '')))) {
-  throw new Error('Webform-Toolkit requires jQuery 1.8.3 or greater.');
-}
-
-(function($) {
+(function() {
+ "use strict";
 
   /**
    * @namespace WebformToolkit
@@ -29,31 +23,26 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @method init
      *
      * @example
-     * $('#container').WebformToolkit(config, callback);
+     * document.getElementById('container').WebformToolkit(config, callback);
      *
      * @param {Object} config
      * @param {Function} callback
      *
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "init": function(config, callback) {
-      return this.each(function() {
-        var $this = $(this),
-            data  = $this.data();
+        var _self = this;
 
-        if ( $.isEmptyObject(data) ) {
-          $this.data({
+        if (typeof _self.data === 'undefined') {
+          _self.data = {
             config: config
-          });
+          };
         }
 
-        var webform = $this.WebformToolkit('_createForm', callback);
-
-        $this.append(webform);
-        $this.WebformToolkit('_setButtonState', webform);
-
+        var webform = _self.WebformToolkit('_createForm', callback);
+        _self.appendChild(webform);
+        _self.WebformToolkit('_setButtonState', webform);
         return webform;
-      });
     },
 
     /**
@@ -63,21 +52,20 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @method create
      *
      * @example
-     * $('#container').WebformToolkit('create', config, callback);
+     * document.getElementById('container').WebformToolkit('create', config, callback);
      *
      * @param {Object} config
      * @param {Function} callback
      *
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "create": function(config, callback) {
-      return this.each(function() {
-        var $this = $(this),
-            field = this.WebformToolkit('_createField', $this.find('form'), config);
+      return this.forEach(function(_self) {
+        var field = _self.WebformToolkit('_createField', _self.querySelector('form'), config);
 
         // Return callback with form and field objects.
-        if ( $.isFunction(callback) ) {
-          callback($this, field);
+        if (typeof data === 'function') {
+          callback(_self, field);
         }
       });
     },
@@ -89,11 +77,11 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @method destroy
      *
      * @example
-     * $('#container').WebformToolkit('destroy');
+     * document.getElementById('container').WebformToolkit('destroy');
      */
     "destroy": function() {
-      return this.each(function() {
-        $(this).removeData();
+      return this.forEach(function(_self) {
+        _self.remove();
       });
     },
 
@@ -105,23 +93,21 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @private
      *
      * @param {Function} callback
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "_createForm": function(callback) {
-      var $this = $(this),
-          data  = $this.data();
+      var _self = this,
+          data  = _self.data;
 
-      var form = $('<form></form>')
-        .attr('id', data.config.id)
-        .addClass('webform');
+      var form = document.createElement('form');
+      form.setAttribute('id', data.config.id);
+      form.className = 'webform';
 
       // Set POST action URI/URL
       if (data.config.action) {
-        form.attr({
-          method:  'POST',
-          enctype: 'multipart/form-data',
-          action:  data.config.action
-        });
+        form.setAttribute('method', 'POST');
+        form.setAttribute('enctype', 'multipart/form-data');
+        form.setAttribute('action', data.config.action);
       }
 
       // Create hidden elements, if POST parameters exist.
@@ -131,14 +117,12 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         for (var i = 0; i < pairs.length; i++) {
           var name = pairs[i].split('=');
 
-          var hidden = $('<input></input>')
-            .attr({
-              type:  'hidden',
-              name:  name[0],
-              value: name[1]
-            });
+          var hidden = document.createElement('input');
+          hidden.setAttribute('type', 'hidden');
+          hidden.setAttribute('name',  name[0]);
+          hidden.setAttribute('value', name[1]);
 
-          form.append(hidden);
+          form.appendChild(hidden);
         }
       }
 
@@ -147,50 +131,48 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         var fields = (data.config.fields[0][0]) ? data.config.fields : new Array(data.config.fields);
 
         for (var j = 0; j < fields.length; j++) {
-          var group = $('<fieldset></fieldset>')
-            .addClass('field_group' + j);
+          var group = document.createElement('fieldset');
+          group.className = 'field_group' + j;
 
           for (var k = 0; k < fields[j].length; k++) {
-            group.append(this.WebformToolkit('_createField', form, fields[j][k]));
+            group.appendChild(_self.WebformToolkit('_createField', form, fields[j][k]));
           }
 
-          form.append(group);
+          form.appendChild(group);
         }
       }
 
       // Create the submit button.
-      var div = $('<div></div>')
-        .addClass('form_submit');
+      var div = document.createElement('div');
+      div.className = 'form_submit';
 
-      var button = $('<input></input>')
-        .attr({
-          type:  'submit',
-          value: 'Submit'
-        });
+      var button = document.createElement('input');
+      button.setAttribute('type', 'submit');
+      button.setAttribute('value', 'Submit');
 
       // Bind form submit event
-      form.on('submit', function(event) {
+      form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        var $this = $(this);
+        var _self = this;
 
-        if (!$this.WebformToolkit('_errorsExist', $this)) {
+        if (!_self.WebformToolkit('_errorsExist', _self)) {
 
           // Return callback with form object response.
-          if ( $.isFunction(callback) ) {
-            callback($this);
+          if (typeof callback === 'function') {
+            callback(_self);
           }
 
           // POST form values.
           else {
-            $this.get(0).submit();
+            _self.submit();
           }
         }
       });
 
-      div.append(button);
+      div.appendChild(button);
 
-      form.append(div);
+      form.appendChild(div);
 
       return form;
     },
@@ -205,128 +187,136 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @param {Object} form
      * @param {Object} config
      *
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "_createField": function(form, config) {
-      var div = $('<div></div>')
-        .addClass('field_' + config.name);
+      var _self = this;
+
+      var div = document.createElement('div');
+      div.className = 'field_' + config.name;
 
       // .. Label, if exists
       if (config.label && config.type != 'checkbox') {
-        var label = $('<label></label>')
-          .attr('for', config.name);
+        var label = document.createElement('label');
+        label.setAttribute('for', config.name);
 
         if (config.required == 1) {
-          var span = $('<span>*</span>')
-            .addClass('required');
+          var span = document.createElement('span');
+          span.className = 'required';
 
-          label.append(span);
+          label.appendChild(span);
         }
 
-        label.append(config.label);
+        label.textContent = config.label;
 
-        div.append(label);
+        div.appendChild(label);
       }
 
-      var elm = jQuery.obj;
+      var elm = [];
 
       // Supported elements
       switch (config.type) {
         case 'text':
-          elm = this.WebformToolkit('_createInputElm', config);
+          elm = _self.WebformToolkit('_createInputElm', config);
         break;
 
         case 'password':
-          elm = this.WebformToolkit('_createInputElm', config);
+          elm = _self.WebformToolkit('_createInputElm', config);
         break;
 
         case 'hidden':
-          elm = this.WebformToolkit('_createInputElm', config);
+          elm = _self.WebformToolkit('_createInputElm', config);
         break;
 
         case 'file':
-          elm = this.WebformToolkit('_createFileElm', config);
+          elm = _self.WebformToolkit('_createFileElm', config);
         break;
 
         case 'textarea':
-          elm = this.WebformToolkit('_createTextAreaElm', config);
+          elm = _self.WebformToolkit('_createTextAreaElm', config);
         break;
 
         case 'select':
-          elm = this.WebformToolkit('_createMenuElm', config);
+          elm = _self.WebformToolkit('_createMenuElm', config);
         break;
 
         case 'radio':
-          elm = this.WebformToolkit('_createRadioElm', config);
+          elm = _self.WebformToolkit('_createRadioElm', config);
         break;
 
         case 'checkbox':
-          elm = this.WebformToolkit('_createCheckBoxElm', config);
+          elm = _self.WebformToolkit('_createCheckBoxElm', config);
         break;
 
         default:
-          $.error('Invalid or missing field type');
-        break;
+          throw new Error('Invalid or missing field type');
       }
 
       // Assign element ID, if exists.
       if (config.id) {
-        elm.attr('id', config.id);
+        elm.setAttribute('id', config.id);
       }
 
       // Filter with REGEX
       if (config.filter && config.type != 'hidden') {
-        elm.data({
-          regex: config.filter,
-          mesg:  config.error,
-          error: false
-        });
+        elm.data = [];
+        elm.data.regex = config.filter;
+        elm.data.mesg  = config.error;
+        elm.data.error = false;
 
         // Attach form events
-        form.on('mouseover mousemove', function() {
-          var $this = $(this);
+        var formEvents = function() {
+          var _self = this;
 
-          $this.WebformToolkit('_validateField', elm);
-          $this.WebformToolkit('_setButtonState', $this);
-        });
+          _self.WebformToolkit('_validateField',  elm);
+          _self.WebformToolkit('_setButtonState', _self);
+        };
+
+        form.addEventListener('mouseover', formEvents);
+        form.addEventListener('mousemove', formEvents);
 
         // Attach field events
-        elm.on('mousedown mouseout focusout', function() {
-          var $this = $(this);
+        var fieldEvents = function() {
+          var _self = this;
 
-          $this.WebformToolkit('_validateField', this);
-          $this.WebformToolkit('_setButtonState', form);
-        });
+          _self.WebformToolkit('_validateField',  _self);
+          _self.WebformToolkit('_setButtonState', form);
+        };
 
-        elm.on('keypress', function(event) {
-          var $this = $(this);
+        elm.addEventListener('mousedown', fieldEvents);
+        elm.addEventListener('mouseout',  fieldEvents);
+        elm.addEventListener('focusout',  fieldEvents);
+        elm.addEventListener('keypress', function(event) {
+          var _self = this;
 
           if (event.keyCode == 9) {
-            $this.WebformToolkit('_validateField', $this);
+            _self.WebformToolkit('_validateField', _self);
           }
 
-          $this.WebformToolkit('_setButtonState', form);
+          _self.WebformToolkit('_setButtonState', form);
         });
 
         // Attach select menu events
-        if ($('select', elm)[0]) {
-          $('select', elm).on('change', function() {
-            var $this = $(this);
+        var select = elm.querySelector('select');
+        if (select) {
+          select.addEventListener('change', function() {
+            var _self = this;
 
-            $this.WebformToolkit('_validateField', this);
-            $this.WebformToolkit('_setButtonState', form);
+            _self.WebformToolkit('_validateField', _self);
+            _self.WebformToolkit('_setButtonState', form);
           });
         }
       }
 
-      div.append(elm);
+      div.appendChild(elm);
 
       // .. Description, if exists
       if (config.description) {
-        var block = $('<p>' + config.description + '</p>')
-          .addClass('field_desc');
+        var block = document.createElement('p');
+        block.className   = 'field_desc';
+        block.textContent = config.description;
 
-        div.append(block);
+        div.appendChild(block);
       }
 
       return div;
@@ -340,30 +330,30 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @private
      *
      * @param {Object} config
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "_createInputElm": function(config) {
-      var input = $('<input></input>');
+      var input = document.createElement('input');
 
       // .. Field attributes
       if (config.type) {
-        input.attr('type', config.type);
+        input.setAttribute('type', config.type);
       }
 
       if (config.name) {
-        input.attr('name', config.name);
+        input.setAttribute('name', config.name);
       }
 
       if (config.value) {
-        input.attr('value', config.value);
+        input.setAttribute('value', config.value);
       }
 
       if (config.maxlength) {
-        input.attr('maxlength', config.maxlength);
+        input.setAttribute('maxlength', config.maxlength);
       }
 
       if (config.required == 1) {
-        input.prop('required', true);
+        input.required = true;
       }
 
       return input;
@@ -377,19 +367,19 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @private
      *
      * @param {Object} config
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "_createFileElm": function(config) {
-      var input = $('<input></input>')
-        .attr('type', 'file');
+      var input = document.createElement('input');
+      input.setAttribute('type', 'file');
 
       // .. Field attributes
       if (config.name) {
-        input.attr('name', config.name);
+        input.setAttribute('name', config.name);
       }
 
       if (config.maxlength) {
-        input.attr('size', config.maxlength);
+        input.setAttribute('size', config.maxlength);
       }
 
       return input;
@@ -404,14 +394,14 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      *
      * @param {Object} config
      *
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "_createMenuElm": function(config) {
-      var div = $('<div></div>')
-        .addClass('menu');
+      var div = document.createElement('div');
+      div.className = 'menu';
 
-      var select = $('<select></select>')
-        .attr('name', config.name);
+      var select = document.createElement('select');
+      select.setAttribute('name', config.name);
 
       var opts  = config.filter.split('|'),
           first = null;
@@ -427,27 +417,28 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
       for (var i = 0; i < opts.length; i++) {
         var value = opts[i];
 
-        var option = $('<option>' + value + '</option>');
+        var option = document.createElement('option');
+        option.textContent = value;
 
         if (!first) {
-          option.attr('value', value);
+          option.setAttribute('value', value);
         }
         else {
           first = null;
         }
 
         if (value == config.value) {
-          option.prop('selected', true);
+          option.selected = true;
         }
 
-        select.append(option);
+        select.appendChild(option);
       }
 
       if (config.required == 1) {
-        select.prop('required', true);
+        select.required = true;
       }
 
-      div.append(select);
+      div.appendChild(select);
 
       return div;
     },
@@ -461,32 +452,31 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      *
      * @param {Object} config
      *
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "_createRadioElm": function(config) {
-      var div = $('<div></div>')
-        .addClass('radios');
+      var div = document.createElement('div');
+      div.className = 'radios';
 
       var opts = config.filter.split('|');
 
       for (var i = 0; i < opts.length; i++) {
         var value = opts[i];
 
-        var input = $('<input></input>')
-          .attr({
-            type:  'radio',
-            name:  config.name,
-            value: value
-          });
+        var input = document.createElement('input');
+        input.setAttribute('type', 'radio');
+        input.setAttribute('name', config.name);
+        input.setAttribute('value', value);
 
         if (value == config.value) {
-          input.prop('checked', true);
+          input.checked = true;
         }
 
-        var span = $('<span>' + value + '</span>');
+        var span = document.createElement('span');
+        span.textContent = value;
 
-        div.append(input);
-        div.append(span);
+        div.appendChild(input);
+        div.appendChild(span);
       }
 
       return div;
@@ -501,29 +491,30 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      *
      * @param {Object} config
      *
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "_createCheckBoxElm": function(config) {
-      var div = $('<div></div>')
-        .addClass('checkbox');
+      var div = document.createElement('div');
+      div.className = 'checkbox';
 
-      var label = $('<span>' + config.label + '</span>'),
-          input = $('<input></input>')
-        .attr({
-          type:  'checkbox',
-          name:  config.name,
-          value: config.value
-        });
+      var label = document.createElement('span');
+      label.textContent = config.label;
+
+      var input = document.createElement('input');
+      input.setAttribute('type',  'checkbox');
+      input.setAttribute('name',  config.name);
+      input.setAttribute('value', config.value);
 
       if (config.value) {
-        input.prop('checked', true);
+        input.checked = true;
       }
 
       if (config.required == 1) {
-        input.prop('required', true);
+        input.required = true;
       }
 
-      div.append(input, label);
+      div.appendChild(input);
+      div.appendChild(label);
 
       return div;
     },
@@ -537,17 +528,15 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      *
      * @param {Object} config
      *
-     * @returns {Object} jQuery object
+     * @returns {Object} DOM element
      */
     "_createTextAreaElm": function(config) {
-      var textarea = $('<textarea></textarea>')
-        .attr({
-          'id':   config.name,
-          'name': config.name
-        });
+      var textarea = document.createElement('textarea');
+      textarea.setAttribute('id',   config.name);
+      textarea.setAttribute('name', config.name);
 
       if (config.required == 1) {
-        textarea.prop('required', true);
+        textarea.required = true;
       }
 
       return textarea;
@@ -565,8 +554,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @returns {Boolean}
      */
     "_validateField": function(elm) {
-      var $this = $(elm),
-          data  = $this.data();
+      var data = elm.data;
 
       var value = elm.value;
       if (!value) return;
@@ -593,40 +581,61 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         break;
       }
 
-      var field = $this.parent(),
+      var field = elm.parentNode,
           block = null;
 
-        // Toggle the error message visibility.
-        if (match === false && error === false) {
-        block = $('<p>' + mesg + '</p>')
-          .addClass('error_mesg');
+      // Toggle the error message visibility.
+      if (match === false && error === false) {
+        block = document.createElement('p');
+        block.className   = 'error_mesg';
+        block.textContent = mesg;
 
         // .. Arrow elements
-        var span1 = $('<span></span>'),
-          span2 = $('<span></span>');
+        var span1 = document.createElement('span'),
+            span2 = document.createElement('span');
 
-        span1.addClass('arrow_lft');
-        span2.addClass('arrow_rgt');
+        span1.className = 'arrow_lft';
+        span2.className = 'arrow_rgt';
 
-        block.prepend(span1).append(span2);
+        block.insertBefore(span1, block.firstChild);
+        block.appendChild(span2);
 
-        field.append(block);
+        field.appendChild(block);
 
-        $this.addClass('error_on')
-          .data('error', true);
+        elm.className = 'error_on';
+        elm.data.error = true;
 
-        block.fadeIn('slow');
+        block.style.display = 'block';
+        block.style.opacity = 0;
+
+        // Show error message.
+        (function fadeIn() {
+          var val = parseFloat(block.style.opacity);
+
+          if (!((val += .1) > 1)) {
+            block.style.opacity = val;
+
+            requestAnimationFrame(fadeIn);
+          }
+        })();
       }
       else
       if (match === true && error === true) {
         block = field.children('p');
+        block.style.opacity = 1;
 
-        block.fadeOut('slow', function() {
-          $this.removeClass('error_on')
-            .data('error', false);
-
-          $(this).remove();
-        });
+        // Hide error message.
+        (function fadeOut() {
+          if ((block.style.opacity -= .1) < 0) {
+            block.className     = '';
+            block.data.error    = false;
+            block.style.display = 'none';
+            block.remove();
+          }
+          else {
+            requestAnimationFrame(fadeOut);
+          }
+        })();
       }
 
       return true;
@@ -642,14 +651,14 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @param {Object} form
      */
     "_setButtonState": function(form) {
-      var button = form.find('input:submit');
+      var button = form.querySelector('input[type="submit"]');
       if (!button) return;
 
       if (this.WebformToolkit('_errorsExist', form)) {
-        button.prop('disabled', true);
+        button.disabled = true;
       }
       else {
-        button.prop('disabled', false);
+        button.disabled = false;
       }
     },
 
@@ -681,14 +690,14 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         }
 
         // Do errors exist?
-        if ((elm.required && (!elm.value || elm.selectedIndex <= 0)) || $(elm).data('error')) {
+        if ((elm.required && (!elm.value || elm.selectedIndex <= 0)) || elm.data.error) {
           return true;
         }
       }
     }
   };
 
-  $.fn.WebformToolkit = function(method) {
+  Element.prototype.WebformToolkit = function(method) {
     if (methods[method]) {
       return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
     }
@@ -697,7 +706,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
       return methods.init.apply(this, arguments);
     }
     else {
-      $.error('Method ' +  method + ' does not exist in jQuery.WebformToolkit');
+      throw new Error('Method ' +  method + ' does not exist in WebformToolkit');
     }
   };
-})(jQuery);
+})();
