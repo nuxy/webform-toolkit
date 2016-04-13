@@ -415,19 +415,19 @@
 
       // .. Select options
       for (var i = 0; i < opts.length; i++) {
-        var value = opts[i];
+        var val = opts[i];
 
         var option = document.createElement('option');
-        option.textContent = value;
+        option.textContent = val;
 
         if (!first) {
-          option.setAttribute('value', value);
+          option.setAttribute('value', val);
         }
         else {
           first = null;
         }
 
-        if (value == config.value) {
+        if (val == config.value) {
           option.selected = true;
         }
 
@@ -461,19 +461,19 @@
       var opts = config.filter.split('|');
 
       for (var i = 0; i < opts.length; i++) {
-        var value = opts[i];
+        var val = opts[i];
 
         var input = document.createElement('input');
         input.setAttribute('type', 'radio');
         input.setAttribute('name', config.name);
-        input.setAttribute('value', value);
+        input.setAttribute('value', val);
 
-        if (value == config.value) {
+        if (val == config.value) {
           input.checked = true;
         }
 
         var span = document.createElement('span');
-        span.textContent = value;
+        span.textContent = val;
 
         div.appendChild(input);
         div.appendChild(span);
@@ -554,10 +554,10 @@
      * @returns {Boolean}
      */
     "_validateField": function(elm) {
-      var data = elm.data;
+      var data = elm.data,
+          val  = elm.value;
 
-      var value = elm.value;
-      if (!value) return;
+      if (typeof val === 'undefined') return;
 
       var regex = data.regex,
           error = data.error,
@@ -569,15 +569,15 @@
       // .. REGEX by type
       switch(elm.nodeName) {
         case 'INPUT' :
-          match = search.test(value);
+          match = search.test(val);
         break;
 
         case 'SELECT' :
-          match = search.test(value);
+          match = search.test(val);
         break;
 
         case 'TEXTAREA' :
-          match = search.test(value);
+          match = search.test(val);
         break;
       }
 
@@ -621,14 +621,14 @@
       }
       else
       if (match === true && error === true) {
-        block = field.children('p');
-        block.style.opacity = 1;
+        block = field.querySelector('p');
 
         // Hide error message.
         (function fadeOut() {
           if ((block.style.opacity -= .1) < 0) {
-            block.className     = '';
-            block.data.error    = false;
+            elm.className  = '';
+            elm.data.error = false;
+
             block.style.display = 'none';
             block.remove();
           }
