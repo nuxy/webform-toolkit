@@ -266,10 +266,8 @@
 
         // Attach form events
         var formEvents = function() {
-          var _self = this;
-
-          _self.WebformToolkit('_validateField',  elm);
-          _self.WebformToolkit('_setButtonState', _self);
+          this.WebformToolkit('_validateField',  elm);
+          this.WebformToolkit('_setButtonState', this);
         };
 
         form.addEventListener('mouseover', formEvents);
@@ -277,33 +275,27 @@
 
         // Attach field events
         var fieldEvents = function() {
-          var _self = this;
-
-          _self.WebformToolkit('_validateField',  _self);
-          _self.WebformToolkit('_setButtonState', form);
+          this.WebformToolkit('_validateField',  this);
+          this.WebformToolkit('_setButtonState', form);
         };
 
         elm.addEventListener('mousedown', fieldEvents);
         elm.addEventListener('mouseout',  fieldEvents);
         elm.addEventListener('focusout',  fieldEvents);
         elm.addEventListener('keypress', function(event) {
-          var _self = this;
-
           if (event.keyCode == 9) {
-            _self.WebformToolkit('_validateField', _self);
+            this.WebformToolkit('_validateField', this);
           }
 
-          _self.WebformToolkit('_setButtonState', form);
+          this.WebformToolkit('_setButtonState', form);
         });
 
         // Attach select menu events
         var select = elm.querySelector('select');
         if (select) {
           select.addEventListener('change', function() {
-            var _self = this;
-
-            _self.WebformToolkit('_validateField', _self);
-            _self.WebformToolkit('_setButtonState', form);
+            this.WebformToolkit('_validateField',  this);
+            this.WebformToolkit('_setButtonState', form);
           });
         }
       }
