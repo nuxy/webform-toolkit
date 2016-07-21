@@ -1,8 +1,9 @@
 test("Field 'User Name'", function() {
-  var field = $(webform).find('div.field_username'),
-      input = field.children('input');
+  var event = new Event('mouseout'),
+      field = document.querySelector(webform).querySelector('div.field_username'),
+      input = field.querySelector('input');
 
-  equal(field.children('label').contents().eq(1).text(), 'User Name', "Label 'User Name'");
+  equal(field.querySelector('label').textContent, 'User Name', "Label 'User Name'");
 
   checkFieldAttr(input, {
     id:        'username',
@@ -12,49 +13,56 @@ test("Field 'User Name'", function() {
     required:  true
   });
 
-  ok(input.val('user!@#$%'), "Define invalid value 'user!@#$%'");
+  ok(input.value = 'user!@#$%', "Define invalid value 'user!@#$%'");
 
-  ok(input.trigger('mouseout'), "Mouse event 'out'");
+  ok(input.dispatchEvent(event), "Mouse event 'out'");
 
   stop();
 
   setTimeout(function() {
-    ok(input.hasClass('error_on'), "<input> contains required class 'error_on'");
+    ok(input.className == 'error_on', "<input> contains required class 'error_on'");
 
-    var mesg = field.children('p.error_mesg');
+    var mesg = field.querySelector('p.error_mesg');
 
-    ok(mesg[0], 'Error message should be visible');
+    ok(mesg, 'Error message should be visible');
 
-    equal(mesg.text(), 'Supported characters: A-Z, 0-9 and underscore',
-       "Expected value 'Supported characters: A-Z, 0-9 and underscore'");
+    if (mesg) {
+      equal(mesg.textContent, 'Supported characters: A-Z, 0-9 and underscore',
+        "Expected value 'Supported characters: A-Z, 0-9 and underscore'");
+    }
 
-    var button = $(webform).find(':submit');
+    var button = document.querySelector(webform).querySelector('input[type="submit"]');
 
-    equal(button.is(':disabled'), true, 'Submit button is disabled');
+    equal(button.disabled, true, 'Submit button is disabled');
 
     start();
 
-    ok(input.val('newuser'), "Define valid value 'newuser'");
+    ok(input.value = 'newuser', "Define valid value 'newuser'");
 
-    ok(input.trigger('mouseout'), "Mouse event 'out'");
+    ok(input.dispatchEvent(event), "Mouse event 'out'");
 
     stop();
 
     setTimeout(function() {
-      ok(!input.hasClass('error_on'), "<input> should not contain class 'error_on'");
+      ok(input.className != 'error_on', "<input> should not contain class 'error_on'");
 
-      ok(!field.children('p.error_mesg')[0], 'Error message should not be visible');
+      mesg = field.querySelector('p.error_mesg');
+
+      ok(!mesg, 'Error message should not be visible');
 
       start();
+
+      equal(button.disabled, true, 'Submit button is disabled');
     }, 1000);
   }, 500);
 });
 
 test("Field 'Password'", function() {
-  var field = $(webform).find('div.field_password'),
-    input = field.children('input');
+  var event = new Event('mouseout'),
+      field = document.querySelector(webform).querySelector('div.field_password'),
+      input = field.querySelector('input');
 
-  equal(field.children('label').contents().eq(1).text(), 'Password', "Label 'Password'");
+  equal(field.querySelector('label').textContent, 'Password', "Label 'Password'");
 
   checkFieldAttr(input, {
     name:       'password',
@@ -63,40 +71,44 @@ test("Field 'Password'", function() {
     required:   true
   });
 
-  ok(input.val('password'), "Define invalid value 'password'");
+  ok(input.value = 'password', "Define invalid value 'password'");
 
-  ok(input.trigger('mouseout'), "Mouse event 'out'");
+  ok(input.dispatchEvent(event), "Mouse event 'out'");
 
   stop();
 
   setTimeout(function() {
-    ok(input.hasClass('error_on'), "<input> contains required class 'error_on'");
+    ok(input.className == 'error_on', "<input> contains required class 'error_on'");
 
-    var mesg = field.children('p.error_mesg');
+    var mesg = field.querySelector('p.error_mesg');
 
-    ok(mesg[0], 'Error message should be visible');
+    ok(mesg, 'Error message should be visible');
 
-    equal(mesg.text(), 'The password entered is not valid',
-       "Expected value: The password entered is not valid");
+    if (mesg) {
+      equal(mesg.textContent, 'The password entered is not valid',
+        "Expected value: The password entered is not valid");
+    }
 
-    var button = $(webform).find(':submit');
+    var button = document.querySelector(webform).querySelector('input[type="submit"]');
 
-    equal(button.is(':disabled'), true, 'Submit button is disabled');
+    equal(button.disabled, true, 'Submit button is disabled');
 
     start();
 
-    ok(input.val('pass!@#$%'), "Define valid value 'pass!@#$%'");
+    ok(input.value = 'pass!@#$%', "Define valid value 'pass!@#$%'");
 
-    ok(input.trigger('mouseout'), "Mouse event 'out'");
+    ok(input.dispatchEvent(event), "Mouse event 'out'");
 
     stop();
 
     setTimeout(function() {
-      ok(!input.hasClass('error_on'), "<input> should not contain class 'error_on'");
+      ok(input.className != 'error_on', "<input> should not contain class 'error_on'");
 
-      mesg = field.children('p.error_mesg');
+      mesg = field.querySelector('p.error_mesg');
 
-      ok(!mesg[0], 'Error message should not be visible');
+      ok(!mesg, 'Error message should not be visible');
+
+      equal(button.disabled, false, 'Submit button is disabled');
 
       start();
     }, 1000);
@@ -104,10 +116,10 @@ test("Field 'Password'", function() {
 });
 
 test("Field 'Profile Image'", function() {
-  var field = $(webform).find('div.field_upload'),
-    input = field.children('input');
+  var field = document.querySelector(webform).querySelector('div.field_upload'),
+      input = field.querySelector('input');
 
-  equal(field.children('label').text(), 'Profile Image', "Label 'Profile Image'");
+  equal(field.querySelector('label').textContent, 'Profile Image', "Label 'Profile Image'");
 
   checkFieldAttr(input, {
     name:     'upload',
@@ -115,102 +127,107 @@ test("Field 'Profile Image'", function() {
     required: false
   });
 
-  var desc = field.children('p.field_desc');
+  var desc = field.querySelector('p.field_desc');
 
-  ok(desc[0], 'Field description should be visible');
+  ok(desc, 'Field description should be visible');
 
-  equal(desc.text(), 'You can upload a JPG, GIF or PNG (File size limit is 2 MB)',
-     "Expected value: You can upload a JPG, GIF or PNG (File size limit is 2 MB)");
+  if (desc) {
+    equal(desc.textContent, 'You can upload a JPG, GIF or PNG (File size limit is 2 MB)',
+      "Expected value: You can upload a JPG, GIF or PNG (File size limit is 2 MB)");
+  }
 });
 
 test("Field 'Age Group'", function() {
-  var field = $(webform).find('div.field_age_group'),
-    input = field.find('select');
+  var field = document.querySelector(webform).querySelector('div.field_age_group'),
+      menu  = field.querySelector('select');
 
-  equal(field.children('label').contents().eq(1).text(), 'Age Group', "Label 'Age Group'");
+  equal(field.querySelector('label').textContent, 'Age Group', "Label 'Age Group'");
 
-  checkFieldAttr(input, {
+  checkFieldAttr(menu, {
     name:     'age_group',
     required: true
   });
 
-  var opts = [ 'Select One','18-24','25-34','35-44','45-54','55-64','65 or more' ];
+  var opts = ['Select One', '18-24', '25-34', '35-44', '45-54', '55-64', '65 or more'];
 
-  input.children().each(function(index) {
-    var val = $(this).val();
+  for (var i = 0; i < menu.options.length; i++) {
+    var val = menu.options[i].text;
 
-    equal(opts[index], val, "Menu option '" + val + "' exists");
-  });
+    equal(opts[i], val, "Menu option '" + val + "' exists");
+  }
 
-  ok(input.val('18-24'), "Define valid value '18-24'");
+  ok(menu.value = '18-24', "Define valid value '18-24'");
 });
 
 test("Field 'Gender'", function() {
-  var field = $(webform).find('div.field_gender'),
-    input = field.find('input');
+  var field = document.querySelector(webform).querySelector('div.field_gender'),
+      input = field.querySelectorAll('input');
 
-  equal(field.children('label').text(), 'Gender', "Label 'Gender'");
+  equal(field.querySelector('label').textContent, 'Gender', "Label 'Gender'");
 
   var opts = ['Male','Female','N/A'];
 
-  input.each(function(index) {
-    var val = $(this).val();
+  for (var i = 0; i < input.length; i++) {
+    var val = input[i].value;
 
-    equal(opts[index], val, "Menu option '" + val + "' exists");
+    equal(opts[i], val, "Menu option '" + val + "' exists");
 
-    checkFieldAttr($(this), {
+    checkFieldAttr(input[i], {
       name:     'gender',
       type:     'radio',
       required: false
     });
-  });
+  }
 });
 
 test("Field 'Comments'", function() {
-  var field = $(webform).find('div.field_comments'),
-    input = field.find('textarea');
+  var event = new Event('mouseout'),
+      field = document.querySelector(webform).querySelector('div.field_comments'),
+      input = field.querySelector('textarea');
 
-  equal(field.children('label').text(), 'Comments', "Label 'Comments'");
+  equal(field.querySelector('label').textContent, 'Comments', "Label 'Comments'");
 
   checkFieldAttr(input, {
     name:     'comments',
     required: false
   });
 
-  ok(input.val('desc!@#$%'), "Define invalid message 'desc!@#$%'");
+  ok(input.value = 'desc!@#$%', "Define invalid value 'desc!@#$%'");
 
-  ok(input.trigger('mouseout'), "Mouse event 'out'");
+  ok(input.dispatchEvent(event), "Mouse event 'out'");
 
   stop();
 
   setTimeout(function() {
-    ok(input.hasClass('error_on'), "<input> contains required class 'error_on'");
+    ok(input.className == 'error_on', "<input> contains required class 'error_on'");
 
-    var mesg = field.children('p.error_mesg');
+    var mesg = field.querySelector('p.error_mesg');
 
-    ok(mesg[0], 'Error message should be visible');
+    ok(mesg, 'Error message should be visible');
 
-    equal(mesg.text(), 'Supported characters: A-Z, 0-9, _ and spaces',
-       "Expected value: Supported characters: A-Z, 0-9, _ and spaces");
+    if (mesg) {
+      equal(mesg.textContent, 'Supported characters: A-Z, 0-9, _ and spaces',
+        "Expected value: Supported characters: A-Z, 0-9, _ and spaces");
+    }
 
-    var button = $(webform).find(':submit');
+    var button = document.querySelector(webform).querySelector('input[type="submit"]');
 
-    equal(button.is(':disabled'), true, 'Submit button is disabled');
+    equal(button.disabled, true, 'Submit button is disabled');
 
     start();
 
-    ok(input.val('Lorem ipsum dolor sit amet'), "Define valid value 'Lorem ipsum dolor sit amet'");
+    ok(input.value = 'Lorem ipsum dolor sit amet', "Define valid value 'Lorem ipsum dolor sit amet'");
 
-    ok(input.trigger('mouseout'), "Mouse event 'out'");
+    ok(input.dispatchEvent(event), "Mouse event 'out'");
 
     stop();
 
     setTimeout(function() {
-      ok(!input.hasClass('error_on'), "<input> should not contain class 'error_on'");
+      ok(input.className != 'error_on', "<input> should not contain class 'error_on'");
 
-      mesg = field.children('p.error_mesg');
+      mesg = field.querySelector('p.error_mesg');
 
-      ok(!mesg[0], 'Error message should not be visible');
+      ok(!mesg, 'Error message should not be visible');
 
       start();
     }, 1000);
@@ -218,31 +235,27 @@ test("Field 'Comments'", function() {
 });
 
 test("Field 'I want to check this box because it's a box'", function() {
-  var field = $(webform).find('div.field_confirm'),
-    input = field.find('input');
+  var event = new Event('mousemove'),
+      field = document.querySelector(webform).querySelector('div.field_confirm'),
+      input = field.querySelector('input');
 
   checkFieldAttr(input, {
     name:     'confirm',
     required: false
   });
 
-  ok(input.prop('checked', true), 'Checkbox is checked');
+  ok(input.checked, true, 'Checkbox is checked');
 
-  ok(input.trigger('mousemove'), "Mouse event 'move'");
-
-  stop();
-
-  setTimeout(function() {
-    var button = $(webform).find(':submit');
-
-    equal(button.is(':disabled'), false, 'Submit button is enabled');
-
-    start();
-  }, 500);
+  ok(input.dispatchEvent(event), "Mouse event 'move'");
 });
 
 test('Form Submit', function() {
-  ok($(webform).submit(), "Form event 'submit'");
+  var event  = new Event('submit'),
+      button = document.querySelector(webform).querySelector('input[type="submit"]');
+
+  equal(button.disabled, false, 'Submit button is enabled');
+
+  ok(document.querySelector(webform).dispatchEvent(event), "Form event 'submit'");
 
   stop();
 
@@ -255,18 +268,18 @@ test('Form Submit', function() {
 
 function checkFieldAttr(elm, data) {
   if (data.name) {
-    equal(elm.attr('name'), data.name, "Name '" + data.name + "'");
+    equal(elm.name, data.name, "Name '" + data.name + "'");
   }
 
   if (data.type) {
-    equal(elm.attr('type'), data.type, "Type '" + data.type + "'");
+    equal(elm.type, data.type, "Type '" + data.type + "'");
   }
 
   if (data.maxlength) {
-    equal(elm.attr('maxlength'), data.maxlength, "Maxlength = '" + data.maxlength + "'");
+    equal(elm.maxLength, data.maxlength, "Maxlength = '" + data.maxlength + "'");
   }
 
   if (data.required) {
-    equal(elm.prop('required'), true, 'Required field');
+    equal(elm.required, true, 'Required field');
   }
 }
