@@ -147,7 +147,7 @@
       div.className = 'form_submit';
 
       var button = document.createElement('input');
-      button.setAttribute('type', 'submit');
+      button.setAttribute('type',  'submit');
       button.setAttribute('value', 'Submit');
 
       // Bind form submit event
@@ -156,7 +156,7 @@
 
         var _self = this;
 
-        if (!_self.WebformToolkit('_errorsExist', _self)) {
+        if (!_self.WebformToolkit('_checkErrorsExist', _self)) {
 
           // Return callback with form object response.
           if (typeof callback === 'function') {
@@ -264,39 +264,21 @@
         elm.data.mesg  = config.error;
         elm.data.error = false;
 
-        // Attach form events
-        var formEvents = function() {
-          this.WebformToolkit('_validateField',  elm);
-          this.WebformToolkit('_setButtonState', this);
-        };
-
-        form.addEventListener('mouseover', formEvents);
-        form.addEventListener('mousemove', formEvents);
-
-        // Attach field events
-        var fieldEvents = function() {
+        // Attach events
+        var handler = function(event) {
           this.WebformToolkit('_validateField',  this);
           this.WebformToolkit('_setButtonState', form);
         };
 
-        elm.addEventListener('mousedown', fieldEvents);
-        elm.addEventListener('mouseout',  fieldEvents);
-        elm.addEventListener('focusout',  fieldEvents);
-        elm.addEventListener('keypress', function(event) {
-          if (event.keyCode == 9) {
-            this.WebformToolkit('_validateField', this);
-          }
-
-          this.WebformToolkit('_setButtonState', form);
-        });
+        elm.addEventListener('focusout', handler);
+        elm.addEventListener('keypress', handler);
+        elm.addEventListener('keyup',    handler);
+        elm.addEventListener('mouseout', handler);
 
         // Attach select menu events
         var select = elm.querySelector('select');
         if (select) {
-          select.addEventListener('change', function() {
-            this.WebformToolkit('_validateField',  this);
-            this.WebformToolkit('_setButtonState', form);
-          });
+          select.addEventListener('change', handler);
         }
       }
 
@@ -607,7 +589,7 @@
           if (!((val += .1) > 1)) {
             block.style.opacity = val;
 
-            requestAnimationFrame(fadeIn);
+            window.requestAnimationFrame(fadeIn);
           }
         })();
       }
@@ -615,17 +597,18 @@
       if (match === true && error === true) {
         block = field.querySelector('p');
 
+        elm.data.error = false;
+
         // Hide error message.
         (function fadeOut() {
           if ((block.style.opacity -= .1) < 0) {
             elm.className  = '';
-            elm.data.error = false;
 
             block.style.display = 'none';
             block.remove();
           }
           else {
-            requestAnimationFrame(fadeOut);
+            window.requestAnimationFrame(fadeOut);
           }
         })();
       }
@@ -646,7 +629,7 @@
       var button = form.querySelector('input[type="submit"]');
       if (!button) return;
 
-      if (this.WebformToolkit('_errorsExist', form)) {
+      if (this.WebformToolkit('_checkErrorsExist', form)) {
         button.disabled = true;
       }
       else {
@@ -658,32 +641,40 @@
      * Return true if form errors exist.
      *
      * @memberof WebformToolkit
-     * @method _errorsExist
+     * @method _checkErrorsExist
      * @private
      *
      * @param {Object} form
      *
      * @returns {Boolean}
      */
-    "_errorsExist": function(form) {
-      var fields = form[0].elements;
+    "_checkErrorsExist": function(form) {
+      var groups = form.querySelectorAll('fieldset');
 
-      for (var i = 0; i < fields.length; i++) {
-        var elm = fields[i];
+      for (var i = 0; i < groups.length; i++) {
+        var blocks = groups[i].childNodes;
 
-        // Supported elements
-        if (!/INPUT|SELECT|TEXTAREA/.test(elm.nodeName)) {
-          continue;
-        }
+        for (var j = 0; j < blocks.length; j++) {
+          var fields = blocks[j].childNodes;
 
-        if (elm.nodeName == 'INPUT' &&
-          !/text|password|radio/.test(elm.type)) {
-          continue;
-        }
+          for (var k = 0; k < fields.length; k++) {
+            var field = fields[k];
 
-        // Do errors exist?
-        if ((elm.required && (!elm.value || elm.selectedIndex <= 0)) || elm.data.error) {
-          return true;
+            // Supported elements
+            if (!/INPUT|SELECT|TEXTAREA/.test(field.nodeName)) {
+              continue;
+            }
+
+            if (field.nodeName == 'INPUT' &&
+              !/text|password|radio|checkbox/.test(field.type)) {
+              continue;
+            }
+
+            // Do errors exist?
+            if ((field.required && (!field.value || field.selectedIndex <= 0)) || field.data.error) {
+              return true;
+            }
+          }
         }
       }
     }
