@@ -250,12 +250,15 @@ test("Field 'I want to check this box because it's a box'", function() {
 });
 
 test('Form Submit', function() {
-  var event  = new Event('submit'),
-      button = document.querySelector(webform).querySelector('input[type="submit"]');
+  var event  = new Event('submit', { cancelable: true }),
+      form   = document.querySelector(webform),
+      button = form.querySelector('input[type="submit"]');
 
   equal(button.disabled, false, 'Submit button is enabled');
 
-  ok(document.querySelector(webform).dispatchEvent(event), "Form event 'submit'");
+  ok(form[0].dispatchEvent(event), "Form event 'submit'");
+
+  form.dispatchEvent(event);
 
   stop();
 
