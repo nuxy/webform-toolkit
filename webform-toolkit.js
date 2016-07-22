@@ -586,7 +586,7 @@
         (function fadeIn() {
           var val = parseFloat(block.style.opacity);
 
-          if (!((val += .1) > 1)) {
+          if (((val += 0.1) > 1) === false) {
             block.style.opacity = val;
 
             window.requestAnimationFrame(fadeIn);
@@ -601,7 +601,7 @@
 
         // Hide error message.
         (function fadeOut() {
-          if ((block.style.opacity -= .1) < 0) {
+          if ((block.style.opacity -= 0.1) < 0.1) {
             elm.className  = '';
 
             block.style.display = 'none';
