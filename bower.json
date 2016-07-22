@@ -4,6 +4,10 @@
   "homepage": "https://github.com/nuxy/Webform-Toolkit",
   "description": "Dynamically generate an HTML form with field validation and custom errors from JSON",
   "main": "webform-toolkit.js",
+  "dependencies": {
+    "webform-toolkit-legacy": "webform-toolkit#^1",
+    "webform-toolkit-modern": "webform-toolkit#^2"
+  },
   "keywords": [
     "javascript",
     "library"

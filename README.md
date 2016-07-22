@@ -14,13 +14,21 @@ Dynamically generate an HTML form with field validation and custom errors from J
 - Supports synchronous form-data POST
 - Supports FORM submit callback for custom AJAX handling.
 - Supports dynamic ([on the fly](https://nuxy.github.io/Webform-Toolkit/#methods)) field creation.
-- Fast and lightweight (jQuery plug-in *only 7.2 kB)
+- Fast and lightweight (JavaScript plug-in *only 7.3 kB)
 
 ## Installation
 
 This package can be easily installed using [Bower](http://bower.io).
 
-    $ bower install webform-toolkit
+### Modern v2 (no dependencies)
+
+    $ bower install webform-toolkit#2
+
+### Legacy v1 (requires [jQuery 1.8.3](http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js))
+
+Compatible with Firefox 3.6, Chrome, Safari 5, Opera, and Internet Explorer 7+ web browsers.
+
+    $ bower install webform-toolkit#1
 
 Please refer to the [README](https://nuxy.github.io/Webform-Toolkit) for more information about this package.
 
