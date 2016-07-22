@@ -17,7 +17,7 @@ module('Webform-Toolkit', {
             fields: JSON.parse(this.responseText)
           },
           function(form) {
-            alert("callback(form='" + form.id + "')");
+            window.alert("callback(form='" + form.id + "')");
           });
 
         setup = true;
