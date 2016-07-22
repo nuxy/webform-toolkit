@@ -1,7 +1,7 @@
 test("Field 'User Name'", function() {
-  var event = new Event('mouseout'),
-      field = document.querySelector(webform).querySelector('div.field_username'),
-      input = field.querySelector('input');
+  var mouseout = new Event('mouseout'),
+      field    = document.querySelector(webform).querySelector('div.field_username'),
+      input    = field.querySelector('input');
 
   equal(field.querySelector('label').textContent, 'User Name', "Label 'User Name'");
 
@@ -15,7 +15,7 @@ test("Field 'User Name'", function() {
 
   ok(input.value = 'user!@#$%', "Define invalid value 'user!@#$%'");
 
-  ok(input.dispatchEvent(event), "Mouse event 'out'");
+  ok(input.dispatchEvent(mouseout), "Mouse event 'out'");
 
   stop();
 
@@ -39,7 +39,7 @@ test("Field 'User Name'", function() {
 
     ok(input.value = 'newuser', "Define valid value 'newuser'");
 
-    ok(input.dispatchEvent(event), "Mouse event 'out'");
+    ok(input.dispatchEvent(mouseout), "Mouse event 'out'");
 
     stop();
 
@@ -58,7 +58,7 @@ test("Field 'User Name'", function() {
 });
 
 test("Field 'Password'", function() {
-  var event = new Event('mouseout'),
+  var mouseout = new Event('mouseout'),
       field = document.querySelector(webform).querySelector('div.field_password'),
       input = field.querySelector('input');
 
@@ -73,7 +73,7 @@ test("Field 'Password'", function() {
 
   ok(input.value = 'password', "Define invalid value 'password'");
 
-  ok(input.dispatchEvent(event), "Mouse event 'out'");
+  ok(input.dispatchEvent(mouseout), "Mouse event 'out'");
 
   stop();
 
@@ -97,7 +97,7 @@ test("Field 'Password'", function() {
 
     ok(input.value = 'pass!@#$%', "Define valid value 'pass!@#$%'");
 
-    ok(input.dispatchEvent(event), "Mouse event 'out'");
+    ok(input.dispatchEvent(mouseout), "Mouse event 'out'");
 
     stop();
 
@@ -181,9 +181,9 @@ test("Field 'Gender'", function() {
 });
 
 test("Field 'Comments'", function() {
-  var event = new Event('mouseout'),
-      field = document.querySelector(webform).querySelector('div.field_comments'),
-      input = field.querySelector('textarea');
+  var mouseout = new Event('mouseout'),
+      field    = document.querySelector(webform).querySelector('div.field_comments'),
+      input    = field.querySelector('textarea');
 
   equal(field.querySelector('label').textContent, 'Comments', "Label 'Comments'");
 
@@ -194,7 +194,7 @@ test("Field 'Comments'", function() {
 
   ok(input.value = 'desc!@#$%', "Define invalid value 'desc!@#$%'");
 
-  ok(input.dispatchEvent(event), "Mouse event 'out'");
+  ok(input.dispatchEvent(mouseout), "Mouse event 'out'");
 
   stop();
 
@@ -218,7 +218,7 @@ test("Field 'Comments'", function() {
 
     ok(input.value = 'Lorem ipsum dolor sit amet', "Define valid value 'Lorem ipsum dolor sit amet'");
 
-    ok(input.dispatchEvent(event), "Mouse event 'out'");
+    ok(input.dispatchEvent(mouseout), "Mouse event 'out'");
 
     stop();
 
@@ -235,7 +235,7 @@ test("Field 'Comments'", function() {
 });
 
 test("Field 'I want to check this box because it's a box'", function() {
-  var event = new Event('mousemove'),
+  var mousemove = new Event('mousemove'),
       field = document.querySelector(webform).querySelector('div.field_confirm'),
       input = field.querySelector('input');
 
@@ -246,19 +246,19 @@ test("Field 'I want to check this box because it's a box'", function() {
 
   ok(input.checked, true, 'Checkbox is checked');
 
-  ok(input.dispatchEvent(event), "Mouse event 'move'");
+  ok(input.dispatchEvent(mousemove), "Mouse event 'move'");
 });
 
 test('Form Submit', function() {
-  var event  = new Event('submit', { cancelable: true }),
+  var submit = new Event('submit', { cancelable: true }),
       form   = document.querySelector(webform),
       button = form.querySelector('input[type="submit"]');
 
   equal(button.disabled, false, 'Submit button is enabled');
 
-  ok(form[0].dispatchEvent(event), "Form event 'submit'");
+  ok(form[0].dispatchEvent(submit), "Form event 'submit'");
 
-  form.dispatchEvent(event);
+  form.dispatchEvent(submit);
 
   stop();
 
