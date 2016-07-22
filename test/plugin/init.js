@@ -33,7 +33,10 @@ module('Webform-Toolkit', {
 });
 
 done(function() {
-  document.getElementById('qunit-custom').querySelector(webform).remove();
+  var elm = document.getElementById('qunit-custom');
+  while (elm.firstChild) {
+    elm.removeChild(elm.firstChild);
+  }
 });
 
 test('Generate HTML', function() {
