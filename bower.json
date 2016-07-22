@@ -1,12 +1,11 @@
 {
   "name": "webform-toolkit",
-  "version": "1.26.3",
+  "version": "2.0.0",
   "homepage": "https://github.com/nuxy/Webform-Toolkit",
   "description": "Dynamically generate an HTML form with field validation and custom errors from JSON",
   "main": "webform-toolkit.js",
   "keywords": [
     "javascript",
-    "jquery",
     "library"
   ],
   "license": "MIT",

@@ -4,31 +4,41 @@ module('Webform-Toolkit', {
 
     stop();
 
-    $.getJSON('https://nuxy.github.io/Webform-Toolkit/demo.json', function(data) {
-      start();
+    var xhr = new XMLHttpRequest();
 
-      $('#qunit-custom')
-        .WebformToolkit({
-          id:     'example',
-          action: 'http://www.domain.com/handler',
-          fields: data
-        },
-        function(form) {
-          alert("callback(form='" + form.attr('id') + "')");
-        });
+    xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        start();
 
-      // Hide test elements
-      $('#qunit-custom').hide(0);
-    });
+        document.getElementById('qunit-custom')
+          .WebformToolkit({
+            id:     'example',
+            action: 'http://www.domain.com/handler',
+            fields: JSON.parse(this.responseText)
+          },
+          function(form) {
+            window.alert("callback(form='" + form.id + "')");
+          });
 
-    setup = true;
+        setup = true;
+      }
+    };
+
+    xhr.open('GET', 'https://nuxy.github.io/Webform-Toolkit/demo.json');
+    xhr.send(null);
+
+    // Hide test elements
+    document.getElementById('qunit-custom').style.display = 'none';
   }
 });
 
 done(function() {
-  $('#qunit-custom').empty();
+  var elm = document.getElementById('qunit-custom');
+  while (elm.firstChild) {
+    elm.removeChild(elm.firstChild);
+  }
 });
 
 test('Generate HTML', function() {
-  ok($('#qunit-custom').find(webform), 'Webform elements created');
+  ok(document.getElementById('qunit-custom').querySelector(webform), 'Webform elements created');
 });
