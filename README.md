@@ -7,8 +7,7 @@ Dynamically generate an HTML form with field validation and custom errors from J
 ## Features
 
 - Extensible HTML/CSS interface.
-- Compatible with Firefox 3.6, Chrome, Safari 5, Opera, and Internet Explorer 7+ web browsers.
-- Compatible with iOS and Android mobile web browsers.
+- Compatible with all modern desktop and mobile web browsers.
 - Easy to set-up and customize.
 - Provides form input validation using REGEX ([regular expressions](http://www.regular-expressions.info/reference.html))
 - Supports synchronous form-data POST
