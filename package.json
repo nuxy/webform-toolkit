@@ -1,0 +1,32 @@
+{
+  "name": "webform-toolkit",
+  "version": "2.0.0",
+  "homepage": "https://github.com/nuxy/Webform-Toolkit",
+  "description": "Dynamically generate an HTML form with field validation and custom errors from JSON",
+  "main": "webform-toolkit.js",
+  "keywords": [
+    "javascript",
+    "library"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nuxy/Webform-Toolkit.git"
+  },
+  "author": "Marc S. Brooks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nuxy/Webform-Toolkit/issues"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.2",
+    "minifier": "^0.8.0",
+    "packer": "0.0.6",
+    "phantomjs": "^2.1.7"
+  },
+  "scripts": {
+    "jshint": "jshint webform-toolkit.js",
+    "minify": "minify --output webform-toolkit.min.css webform-toolkit.css",
+    "packer": "packer -i webform-toolkit.js -o webform-toolkit.min.js -b",
+    "phantomjs": "phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes test/run-qunit.js test.html"
+  }
+}
