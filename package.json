@@ -21,12 +21,14 @@
     "jshint": "^2.9.2",
     "minifier": "^0.8.0",
     "packer": "0.0.6",
-    "phantomjs": "^2.1.7"
+    "phantomjs": "^2.1.7",
+    "qunitjs": "1.14.0"
   },
   "scripts": {
     "jshint": "jshint webform-toolkit.js",
     "minify": "minify --output webform-toolkit.min.css webform-toolkit.css",
     "packer": "packer -i webform-toolkit.js -o webform-toolkit.min.js -b",
-    "phantomjs": "phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes test/run-qunit.js test.html"
+    "phantomjs": "phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes test/run-qunit.js test.html",
+    "postinstall": "cp -r node_modules/qunitjs/qunit test/"
   }
 }
