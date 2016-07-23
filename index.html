@@ -21,14 +21,14 @@
 
 <ul>
   <li>Extensible HTML/CSS interface.</li>
-  <li>Compatible with Firefox 3.6+, Chrome, Safari 5+, Opera, and Internet Explorer 7+ web browsers.</li>
+  <li>Compatible with all modern desktop and mobile web browsers.</li>
   <li>Compatible with iOS and Android mobile web browsers.</li>
   <li>Easy to set-up and customize.</li>
   <li>Provides form input validation using REGEX (<a href="http://www.regular-expressions.info/reference.html">regular expressions</a>)</li>
   <li>Supports synchronous form-data POST</li>
   <li>Supports FORM submit callback for custom AJAX handling.</li>
   <li>Supports dynamic (<a href="#methods">on the fly</a>) field creation.</li>
-  <li>Fast and lightweight (jQuery plug-in *only 7.2 kB)</li>
+  <li>Fast and lightweight (JavaScript plug-in *only 7.3 kB)</li>
 </ul>
 
 <p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
@@ -39,7 +39,15 @@
 
 <p>This package can be easily installed using <a href="http://bower.io">Bower</a>.</p>
 
-<pre>$ bower install webform-toolkit</pre>
+<h4>Modern v2 (no dependencies)</h4>
+
+<pre>$ bower install webform-toolkit#2</pre>
+
+<h4>Legacy v1 (requires <a href="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">jQuery 1.8.3</a>)</h4>
+
+<p>Compatible with Firefox 3.6, Chrome, Safari 5, Opera, and Internet Explorer 7+ web browsers.</p>
+
+<pre>$ bower install webform-toolkit#1</pre>
 
 <p>Manual install:</p>
 
@@ -66,9 +74,9 @@
 
 <h2>Set-up</h2>
 
-<p>It's as simple as defining the target element <code>#container</code> using the <a href="http://api.jquery.com/category/selectors">jQuery selector</a> and passing form field properties as JSON.  An optional callback can also be defined for post-processing data on submit event.</p>
+<p>It's as simple as defining a node <code>container</code> using a JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">selector</a> and passing tabular data as JSON. An optional callback can also be defined for post-processing data on submit event.</p>
 
-<pre>$(selector).WebformTookit(<em>config</em>, <a href="#callback"><em>callback</em></a>);</pre>
+<pre>document.getElementById('container').WebformTookit(<em>config</em>, <a href="#callback"><em>callback</em></a>);</pre>
 
 <h2>Source Code</h2>
 
@@ -78,18 +86,54 @@
 
 <h4>Use Example 1 - General Webform</h4>
 
-<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
-
-&lt;script src="/path/to/webform-toolkit.min.js"&gt;&lt;/script&gt;
+<pre>&lt;script src="/path/to/webform-toolkit.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-$(document).ready(function() {
-  var webform = $('#container')
-    .WebformToolkit({
-      id:     'example',
-      action: 'http://www.domain.com/handler',
-      fields: [
+var webform = document.getElementById('container')
+  .WebformToolkit({
+    id:     'example',
+    action: 'http://www.domain.com/handler',
+    fields: [
+      {
+        id:          'username_id',
+        label:       'User Name',
+        type:        'text',
+        name:        'username',
+        value:       '',
+        maxlength:   '15',
+        filter:      "^\\w{0,15}$",
+        description: '',
+        error:       'Supported characters: A-Z, 0-9 and underscore',
+        required:    true
+      },
+      {
+        id:          'password_id',
+        label:       'Password',
+        type:        'text',
+        name:        'password',
+        value:       '',
+        maxlength:   '15',
+        filter:      "^(?!password)(.{8,15})$",
+        description: 'Must be a minimum of 8 characters',
+        error:       'The password entered is not valid',
+        required:    true
+      }
+    ]
+  }, customHandler);
+&lt;/script&gt;
+
+&lt;link rel="stylesheet" type="text/css" href="/path/to/webform-toolkit.min.css"&gt;</pre>
+
+<h4>Use Example 2 - Webform using field groups</h4>
+
+<pre>&lt;script src="/path/to/webform-toolkit.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var webform = document.getElementById('container')
+  .WebformToolkit({
+    id:     'example',
+    action: 'http://www.domain.com/handler',
+    fields: [
+      [
         {
-          id:          'username_id',
           label:       'User Name',
           type:        'text',
           name:        'username',
@@ -101,7 +145,6 @@ $(document).ready(function() {
           required:    true
         },
         {
-          id:          'password_id',
           label:       'Password',
           type:        'text',
           name:        'password',
@@ -112,64 +155,23 @@ $(document).ready(function() {
           error:       'The password entered is not valid',
           required:    true
         }
+      ],
+      [
+        {
+          id:          'pincode_id',
+          label:       'Pin Code',
+          type:        'text',
+          name:        'password',
+          value:       '',
+          maxlength:   '8',
+          filter:      "^\\d{8,15}$",
+          description: 'Must be a minimum of 8 numeric characters',
+          error:       'The pin code entered is not valid',
+          required:    true
+        }
       ]
-    }, customHandler);
-&lt;/script&gt;
-
-&lt;link rel="stylesheet" type="text/css" href="/path/to/webform-toolkit.min.css"&gt;</pre>
-
-<h4>Use Example 2 - Webform using field groups</h4>
-
-<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
-
-&lt;script src="/path/to/webform-toolkit.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-$(document).ready(function() {
-  var webform = $('#container')
-    .WebformToolkit({
-      id:     'example',
-      action: 'http://www.domain.com/handler',
-      fields: [
-        [
-          {
-            label:       'User Name',
-            type:        'text',
-            name:        'username',
-            value:       '',
-            maxlength:   '15',
-            filter:      "^\\w{0,15}$",
-            description: '',
-            error:       'Supported characters: A-Z, 0-9 and underscore',
-            required:    true
-          },
-          {
-            label:       'Password',
-            type:        'text',
-            name:        'password',
-            value:       '',
-            maxlength:   '15',
-            filter:      "^(?!password)(.{8,15})$",
-            description: 'Must be a minimum of 8 characters',
-            error:       'The password entered is not valid',
-            required:    true
-          }
-        ],
-        [
-          {
-            id:          'pincode_id',
-            label:       'Pin Code',
-            type:        'text',
-            name:        'password',
-            value:       '',
-            maxlength:   '8',
-            filter:      "^\\d{8,15}$",
-            description: 'Must be a minimum of 8 numeric characters',
-            error:       'The pin code entered is not valid',
-            required:    true
-          }
-        ]
-      ]
-    }, customHandler);
+    ]
+  }, customHandler);
 &lt;/script&gt;
 
 &lt;link rel="stylesheet" type="text/css" href="/path/to/webform-toolkit.min.css"&gt;</pre>
@@ -245,14 +247,16 @@ $(document).ready(function() {
 <p>When a callback function is defined a form object is returned.  This allows you to define a custom AJAX handler based on the requirements of your application.  The following function corresponds to the <a href="#example">example</a> provided above.</p>
 
 <pre>function customHandler(form) {
-  $.ajax({
-    type: 'POST',
-    url:  form.attr('action'),
-    data: form.serialize()
-  })
-  .success(function(response) {
-    alert(response);
-  });
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      alert(response);
+    }
+  };
+
+  xhr.open('GET', form.getAttribute('action'));
+  xhr.send(new FormData(form));
 }</pre>
 
 <a name="methods"></a>
@@ -274,7 +278,7 @@ $(document).ready(function() {
   "required":    "0"
 },
 function(form, elm) {
-  form.append(elm);  // default: last in fieldset
+  form.appendChild(elm);  // default: last in fieldset
 });
 </pre>
 
@@ -282,17 +286,13 @@ function(form, elm) {
 
 <p>Just because you are filtering form input on the client-side is NO EXCUSE to not do the same on the server-side.  Security is a two-way street, and BOTH ends should be protected.</p>
 
-<h2>jQuery Support</h2>
-
-<p>In order to support older web browsers, specifically Internet Explorer 7, this package requires <a href="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">jQuery 1.8.3</a>.  Furthermore, jQuery has recently dropped support for IE8 in version 2, so if there is no compelling reason to support these two web browsers it is recommended that you upgrade to the latest version of jQuery.  If you still need to support IE8 please upgrade to <a href="http://blog.jquery.com/2012/06/28/jquery-core-version-1-9-and-beyond/">jQuery 1.9+</a>.</p>
-
 <h2>Functional Testing</h2>
 
 <p>This package has been preconfigured to support <a href="http://qunitjs.com">QUnit</a> headless testing using <a href="http://www.travis-ci.org">Travis-CI</a>.  If you plan on using another integration tool you will have to create a custom project that combines the use of <em>QUnit</em> and <a href="http://www.phantomjs.org">PhantomJS</a> plugins.  If headless testing in not available you can manually run <code>test.html</code> in your web browser.</p>
 
 <h2>Releases</h2>
 
-<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (5.2 kB) and developers version (unpacked 14 kB)</p>
+<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (5.3 kB) and developers version (unpacked 14 kB)</p>
 
 <p>You can always find the latest updates within this projects repository.</p>
 
@@ -312,7 +312,7 @@ function(form, elm) {
 
 <p>Webform Toolkit is provided under the terms of the <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
 
-<p>Webform Toolkit &#169;2012-2015 <a href="https://mbrooks.info">Marc S. Brooks</a></p>
+<p>Webform Toolkit &#169;2012-2016 <a href="https://mbrooks.info">Marc S. Brooks</a></p>
 
 </body>
 </html>
