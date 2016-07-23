@@ -9,7 +9,7 @@
  */
 
 (function() {
- "use strict";
+  "use strict";
 
   /**
    * @namespace WebformToolkit
