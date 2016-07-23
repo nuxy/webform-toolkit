@@ -1,8 +1,8 @@
-language: ruby
-rvm:
-  - 1.9.3
 install:
   - npm install
 before_script:
-  - 'export DISPLAY=:99.0'
-  - 'sh -e /etc/init.d/xvfb start'
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+script:
+  - npm run jshint
+  - npm run phantomjs
