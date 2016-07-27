@@ -6,8 +6,8 @@ module('Webform-Toolkit', {
 
     var xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
+    xhr.addEventListener('load', function() {
+      if (this.status == 200) {
         start();
 
         document.getElementById('qunit-custom')
@@ -22,7 +22,7 @@ module('Webform-Toolkit', {
 
         setup = true;
       }
-    };
+    });
 
     xhr.open('GET', 'https://nuxy.github.io/Webform-Toolkit/demo.json');
     xhr.send(null);
