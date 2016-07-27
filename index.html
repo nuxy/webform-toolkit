@@ -249,13 +249,13 @@ var webform = document.getElementById('container')
 <pre>function customHandler(form) {
   var xhr = new XMLHttpRequest();
 
-  xhr.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+  xhr.addEventListener('load', function() {
+    if (this.status == 200) {
       alert(response);
     }
-  };
+  });
 
-  xhr.open('GET', form.getAttribute('action'));
+  xhr.open('POST', form.getAttribute('action'));
   xhr.send(new FormData(form));
 }</pre>
 
