@@ -1,4 +1,4 @@
-# Webform Toolkit [![Bower version](https://badge.fury.io/bo/webform-toolkit.svg)](https://badge.fury.io/bo/webform-toolkit) [![Build status](https://travis-ci.org/nuxy/Webform-Toolkit.svg?branch=master)](https://travis-ci.org/nuxy/Webform-Toolkit)
+# Webform Toolkit [![Bower version](https://badge.fury.io/bo/webform-toolkit.svg)](https://badge.fury.io/bo/webform-toolkit) [![Build Status](https://api.travis-ci.com/nuxy/Webform-Toolkit.svg?branch=master)](https://app.travis-ci.com/github/nuxy/Webform-Toolkit)
 
 Dynamically generate an HTML form with field validation and custom errors from JSON
 
