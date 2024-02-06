@@ -162,15 +162,9 @@ function WebformToolkit(container, settings, callback) {
 
     // Supported elements
     switch (config.type) {
-      case 'text':
-        elm = createInputElm(config);
-      break;
-
-      case 'password':
-        elm = createInputElm(config);
-      break;
-
       case 'hidden':
+      case 'password':
+      case 'text':
         elm = createInputElm(config);
       break;
 
