@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../dist/webform-toolkit.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+    <script type="text/javascript" src="../dist/webform-toolkit.min.js"></script>
+    <script>
+      let output;
+
+      window.onload = function() {
+        var settings = {
+          action: 'https://www.domain.com/handler',
+          fields: [
+            [
+              {
+                id: 'username',
+                label: 'User Name',
+                type: 'text',
+                name: 'username',
+                value: '',
+                maxlength: '15',
+                filter: '^\\w{0,15}$',
+                description: '',
+                error: 'Supported characters: A-Z, 0-9 and underscore',
+                required: '1'
+              },
+              {
+                id: 'password',
+                label: 'Password',
+                type: 'password',
+                name: 'password',
+                value: '',
+                maxlength: '15',
+                filter: '^(?!password)(.{0,15})$',
+                description: '',
+                error: 'The password entered is not valid',
+                required: '1'
+              }
+            ],
+            [
+              {
+                id: 'image',
+                label: 'Profile Image',
+                type: 'file',
+                name: 'upload',
+                value: '',
+                maxlength: '18',
+                filter: '',
+                description: 'You can upload a JPG, GIF or PNG (File size limit is 2 MB)',
+                error: 'The upload failed due to unknown error',
+                required: '0'
+              }
+            ],
+            [
+              {
+                id: 'age',
+                label: 'Age Group',
+                type: 'select',
+                name: 'age',
+                value: 'Select One',
+                maxlength: '',
+                filter: '18-24|25-34|35-44|45-54|55-64|65 or more',
+                description: '',
+                error: '',
+                required: '1'
+              },
+              {
+                id: 'gender',
+                label: 'Gender',
+                type: 'radio',
+                name: 'gender',
+                value: 'Male',
+                maxlength: '',
+                filter: 'Male|Female|N/A',
+                description: '',
+                error: '',
+                required: '0'
+              }
+            ],
+            [
+              {
+                id: 'comments',
+                label: 'Comments',
+                type: 'textarea',
+                name: 'comments',
+                value: '',
+                maxlength: '',
+                filter: '^(?:\\w|\\s|\\.|,|\\?){0,55}$',
+                description: '',
+                error: 'Supported characters: Alphanumeric and ,.? characters',
+                required: '0'
+              }
+            ],
+            [
+              {
+                id: 'confirm',
+                label: "I want to check this box because it's a box",
+                type: 'checkbox',
+                name: 'confirm',
+                maxlength: '',
+                value: '1',
+                filter: '',
+                description: '',
+                error: '',
+                required: '0'
+              }
+            ]
+          ]
+        };
+
+        var callback = data => {
+
+          // Convert File instance.
+          var {lastModified, lastModifiedDate, name, size, type} = data.upload;
+          data.upload = {lastModified, lastModifiedDate, name, size, type};
+
+          output.innerText = 'DATA:';
+
+          var pre = document.createElement('pre');
+          pre.innerText = JSON.stringify(data, null, 2);
+
+          output.appendChild(pre);
+        };
+
+        var container = document.getElementById('webform-toolkit');
+
+        webformToolkit(container, settings, callback);
+
+        output = document.getElementById('output');
+    };
+  </script>
+
+  <title>Dynamically generate an HTML form with field validation and custom errors | Webform Toolkit</title>
+</head>
+<body>
+  <div id="webform-toolkit"></div>
+  <div id="output"></div>
+</body>
+</html>
