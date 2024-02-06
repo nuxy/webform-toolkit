@@ -1,32 +1,46 @@
 {
   "name": "webform-toolkit",
-  "version": "2.3.1",
-  "homepage": "https://github.com/nuxy/Webform-Toolkit",
-  "description": "Dynamically generate an HTML form with field validation and custom errors from JSON",
-  "main": "webform-toolkit.js",
-  "keywords": [
-    "javascript",
-    "library"
-  ],
+  "version": "3.0.0",
+  "description": "Dynamically generate an HTML form with field validation and custom errors.",
+  "main": "src/webform-toolkit.js",
+  "scripts": {
+    "build": "babel src -s -D -d dist && npm run sass && npm run minify-css && npm run minify-js",
+    "lint": "eslint --ignore-path .gitignore src test",
+    "sass": "sass src/webform-toolkit.scss dist/webform-toolkit.css",
+    "minify-css": "node-minify --compressor clean-css --input 'dist/webform-toolkit.css' --output 'dist/webform-toolkit.min.css'",
+    "minify-js": "node-minify --compressor uglify-js --input 'dist/webform-toolkit.js' --output 'dist/webform-toolkit.min.js'",
+    "prepack": "npm run build"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nuxy/Webform-Toolkit.git"
+    "url": "git+https://github.com/nuxy/webform-toolkit.git"
   },
-  "author": "Marc S. Brooks",
-  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "browser",
+    "plugin",
+    "webform",
+    "generator"
+  ],
   "bugs": {
-    "url": "https://github.com/nuxy/Webform-Toolkit/issues"
+    "url": "https://github.com/nuxy/webform-toolkit/issues"
   },
+  "homepage": "https://github.com/nuxy/webform-toolkit#readme",
+  "author": "Marc S. Brooks <devel@mbrooks.info> (https://mbrooks.info)",
+  "license": "MIT",
   "devDependencies": {
-    "jshint": "^2.10.2",
-    "minify": "^3.0.5",
-    "phantomjs-prebuilt": "^2.1.7",
-    "qunitjs": "1.14.0"
-  },
-  "scripts": {
-    "jshint": "jshint webform-toolkit.js",
-    "minify": "minify webform-toolkit.css > webform-toolkit.min.css ; minify webform-toolkit.js > webform-toolkit.min.js",
-    "phantomjs": "phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes test/run-qunit.js test.html",
-    "postinstall": "cp -r node_modules/qunitjs/qunit test/"
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
+    "@babel/eslint-parser": "^7.23.10",
+    "@babel/plugin-proposal-class-properties": "^7.17.12",
+    "@babel/plugin-proposal-decorators": "^7.23.9",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/register": "^7.23.7",
+    "@node-minify/clean-css": "^4.0.5",
+    "@node-minify/cli": "^6.2.0",
+    "@node-minify/uglify-js": "^4.0.5",
+    "eslint": "^8.56.0",
+    "sass": "^1.70.0"
   }
 }
