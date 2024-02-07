@@ -19,24 +19,24 @@
                 label: 'User Name',
                 type: 'text',
                 name: 'username',
-                value: '',
-                maxlength: '15',
+                value: null,
+                maxlength: 15,
                 filter: '^\\w{0,15}$',
-                description: '',
+                description: null,
                 error: 'Supported characters: A-Z, 0-9 and underscore',
-                required: '1'
+                required: true
               },
               {
                 id: 'password',
                 label: 'Password',
                 type: 'password',
                 name: 'password',
-                value: '',
-                maxlength: '15',
+                value: null,
+                maxlength: 15,
                 filter: '^(?!password)(.{0,15})$',
-                description: '',
+                description: null,
                 error: 'The password entered is not valid',
-                required: '1'
+                required: true
               }
             ],
             [
@@ -45,12 +45,12 @@
                 label: 'Profile Image',
                 type: 'file',
                 name: 'upload',
-                value: '',
-                maxlength: '18',
-                filter: '',
+                value: null,
+                maxlength: 18,
+                filter: null,
                 description: 'You can upload a JPG, GIF or PNG (File size limit is 2 MB)',
                 error: 'The upload failed due to unknown error',
-                required: '0'
+                required: false
               }
             ],
             [
@@ -60,11 +60,11 @@
                 type: 'select',
                 name: 'age',
                 value: 'Select One',
-                maxlength: '',
+                maxlength: null,
                 filter: '18-24|25-34|35-44|45-54|55-64|65 or more',
-                description: '',
-                error: '',
-                required: '1'
+                description: null,
+                error: null,
+                required: true
               },
               {
                 id: 'gender',
@@ -72,11 +72,11 @@
                 type: 'radio',
                 name: 'gender',
                 value: 'Male',
-                maxlength: '',
+                maxlength: null,
                 filter: 'Male|Female|N/A',
-                description: '',
-                error: '',
-                required: '0'
+                description: null,
+                error: null,
+                required: false
               }
             ],
             [
@@ -85,12 +85,12 @@
                 label: 'Comments',
                 type: 'textarea',
                 name: 'comments',
-                value: '',
-                maxlength: '',
+                value: null,
+                maxlength: null,
                 filter: '^(?:\\w|\\s|\\.|,|\\?){0,55}$',
-                description: '',
+                description: null,
                 error: 'Supported characters: Alphanumeric and ,.? characters',
-                required: '0'
+                required: false
               }
             ],
             [
@@ -99,12 +99,12 @@
                 label: "I want to check this box because it's a box",
                 type: 'checkbox',
                 name: 'confirm',
-                maxlength: '',
-                value: '1',
-                filter: '',
-                description: '',
-                error: '',
-                required: '0'
+                maxlength: null,
+                value: true,
+                filter: null,
+                description: null,
+                error: null,
+                required: false
               }
             ]
           ]
