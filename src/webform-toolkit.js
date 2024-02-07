@@ -68,6 +68,7 @@ function WebformToolkit(container, settings, callback) {
         const name = pairs[i].split('=');
 
         const hidden = document.createElement('input');
+        hidden.setAttribute('aria-hidden', 'true');
         hidden.setAttribute('type', 'hidden');
         hidden.setAttribute('name',  name[0]);
         hidden.setAttribute('value', name[1]);
@@ -146,7 +147,7 @@ function WebformToolkit(container, settings, callback) {
       const label = document.createElement('label');
       label.setAttribute('for', config.id);
 
-      if (config.required == 1) {
+      if (config.required) {
         const span = document.createElement('span');
         span.classList.add('required');
 
@@ -260,9 +261,7 @@ function WebformToolkit(container, settings, callback) {
       input.setAttribute('maxlength', config.maxlength);
     }
 
-    if (config.required == 1) {
-      input.required = true;
-    }
+    input.required = !!config.required;
 
     return input;
   }
@@ -332,9 +331,7 @@ function WebformToolkit(container, settings, callback) {
       select.appendChild(option);
     }
 
-    if (config.required == 1) {
-      select.required = true;
-    }
+    select.required = !!config.required;
 
     return select;
   }
@@ -399,9 +396,7 @@ function WebformToolkit(container, settings, callback) {
       input.checked = true;
     }
 
-    if (config.required == 1) {
-      input.required = true;
-    }
+    input.required = !!config.required;
 
     div.appendChild(input);
     div.appendChild(label);
@@ -421,9 +416,7 @@ function WebformToolkit(container, settings, callback) {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('name', config.name);
 
-    if (config.required == 1) {
-      textarea.required = true;
-    }
+    textarea.required = !!config.required;
 
     return textarea;
   }
