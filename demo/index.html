@@ -23,8 +23,9 @@
                 maxlength: 15,
                 filter: '^\\w{0,15}$',
                 description: null,
-                error: 'Supported characters: A-Z, 0-9 and underscore',
-                required: true
+                placeholder: null,
+                error:       'Supported characters: A-Z, 0-9 and underscore',
+                required:    true
               },
               {
                 id: 'password',
@@ -35,8 +36,9 @@
                 maxlength: 15,
                 filter: '^(?!password)(.{0,15})$',
                 description: null,
-                error: 'The password entered is not valid',
-                required: true
+                placeholder: null,
+                error:       'The password entered is not valid',
+                required:    true
               }
             ],
             [

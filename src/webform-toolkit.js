@@ -261,6 +261,10 @@ function WebformToolkit(container, settings, callback) {
       input.setAttribute('maxlength', config.maxlength);
     }
 
+    if (config.placeholder) {
+      input.setAttribute('placeholder', config.placeholder);
+    }
+
     input.required = !!config.required;
 
     return input;
@@ -415,6 +419,10 @@ function WebformToolkit(container, settings, callback) {
   function createTextAreaElm(config) {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('name', config.name);
+
+    if (config.placeholder) {
+      textarea.setAttribute('placeholder', config.placeholder);
+    }
 
     textarea.required = !!config.required;
 
