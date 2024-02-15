@@ -12,103 +12,114 @@
       window.onload = function() {
         var settings = {
           action: 'https://www.domain.com/handler',
-          fields: [
-            [
-              {
-                id: 'username',
-                label: 'User Name',
-                type: 'text',
-                name: 'username',
-                value: null,
-                maxlength: 15,
-                filter: '^\\w{0,15}$',
-                description: null,
-                placeholder: null,
-                error:       'Supported characters: A-Z, 0-9 and underscore',
-                required:    true
-              },
-              {
-                id: 'password',
-                label: 'Password',
-                type: 'password',
-                name: 'password',
-                value: null,
-                maxlength: 15,
-                filter: '^(?!password)(.{0,15})$',
-                description: null,
-                placeholder: null,
-                error:       'The password entered is not valid',
-                required:    true
-              }
-            ],
-            [
-              {
-                id: 'image',
-                label: 'Profile Image',
-                type: 'file',
-                name: 'upload',
-                value: null,
-                maxlength: 18,
-                filter: null,
-                description: 'You can upload a JPG, GIF or PNG (File size limit is 2 MB)',
-                error: 'The upload failed due to unknown error',
-                required: false
-              }
-            ],
-            [
-              {
-                id: 'age',
-                label: 'Age Group',
-                type: 'select',
-                name: 'age',
-                value: 'Select One',
-                maxlength: null,
-                filter: '18-24|25-34|35-44|45-54|55-64|65 or more',
-                description: null,
-                error: null,
-                required: true
-              },
-              {
-                id: 'gender',
-                label: 'Gender',
-                type: 'radio',
-                name: 'gender',
-                value: 'Male',
-                maxlength: null,
-                filter: 'Male|Female|N/A',
-                description: null,
-                error: null,
-                required: false
-              }
-            ],
-            [
-              {
-                id: 'comments',
-                label: 'Comments',
-                type: 'textarea',
-                name: 'comments',
-                value: null,
-                maxlength: null,
-                filter: '^(?:\\w|\\s|\\.|,|\\?){0,55}$',
-                description: null,
-                error: 'Supported characters: Alphanumeric and ,.? characters',
-                required: false
-              }
-            ],
-            [
-              {
-                id: 'confirm',
-                label: "I want to check this box because it's a box",
-                type: 'checkbox',
-                name: 'confirm',
-                maxlength: null,
-                value: true,
-                filter: null,
-                description: null,
-                error: null,
-                required: false
-              }
-            ]
+          params: null,
+          groups: [
+            {
+              legend: null,
+              fields: [
+                {
+                  id: 'username',
+                  label: 'User Name',
+                  type: 'text',
+                  name: 'username',
+                  value: null,
+                  maxlength: 15,
+                  filter: '^\\w{0,15}$',
+                  description: null,
+                  placeholder: null,
+                  error: 'Supported characters: A-Z, 0-9 and underscore',
+                  required: true
+                },
+                {
+                  id: 'password',
+                  label: 'Password',
+                  type: 'password',
+                  name: 'password',
+                  value: null,
+                  maxlength: 15,
+                  filter: '^(?!password)(.{0,15})$',
+                  description: null,
+                  placeholder: null,
+                  error: 'The password entered is not valid',
+                  required: true
+                }
+              ]
+            },
+            {
+              legend: null,
+              fields: [
+                {
+                  id: 'image',
+                  label: 'Profile Image',
+                  type: 'file',
+                  name: 'upload',
+                  maxlength: 18,
+                  description: 'You can upload a JPG, GIF or PNG (File size < 2 MB)',
+                  error: 'The upload failed due to unknown error',
+                  required: false
+                }
+              ]
+            },
+            {
+              legend: null,
+              fields: [
+                {
+                  id: 'age',
+                  label: 'Age Group',
+                  type: 'select',
+                  name: 'age',
+                  value: 'Select One',
+                  filter: '18-24|25-34|35-44|45-54|55-64|65 or more',
+                  description: null,
+                  error: 'Must select a valid age group',
+                  required: true
+                },
+                {
+                  id: 'gender',
+                  label: 'Gender',
+                  type: 'radio',
+                  name: 'gender',
+                  value: 'Male',
+                  filter: 'Male|Female|N/A',
+                  description: null,
+                  error: null,
+                  required: false
+                }
+              ]
+            },
+            {
+              legend: null,
+              fields: [
+                {
+                  id: 'comments',
+                  label: 'Comments',
+                  type: 'textarea',
+                  name: 'comments',
+                  value: null,
+                  maxlength: null,
+                  filter: '^(?:\\w|\\s|\\.|,|\\?){0,55}$',
+                  description: null,
+                  placeholder: null,
+                  error: 'Supported characters: Alphanumeric and ,.? characters',
+                  required: false
+                }
+              ]
+            },
+            {
+              legend: null,
+              fields: [
+                {
+                  id: 'confirm',
+                  label: "I want to check this box because it's a box",
+                  type: 'checkbox',
+                  name: 'confirm',
+                  value: 1,
+                  description: null,
+                  error: null,
+                  required: false
+                }
+              ]
+            }
           ]
         };
 

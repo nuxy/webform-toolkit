@@ -14,7 +14,7 @@
  *   Containing HTML element.
  *
  * @param {Function} setttings
- *   Webform fields.
+ *   Webform form settings.
  *
  * @param {Function} callback
  *   Returns defined webform values.
@@ -23,9 +23,9 @@ function WebformToolkit(container, settings, callback) {
   const self = this;
 
   (function() {
-    const {action, fields} = settings;
+    const {action, groups} = settings;
 
-    if (action && fields.length) {
+    if (action && groups.length) {
       renderWebform();
     } else {
       throw new Error('Failed to initialize (missing settings)');
@@ -38,10 +38,9 @@ function WebformToolkit(container, settings, callback) {
    * @return {Element}
    */
   function renderWebform() {
-    const form = createFormElm();
+    const form = createForm();
     container.appendChild(form);
     setButtonState(form);
-    return form;
   }
 
   /**
@@ -49,7 +48,7 @@ function WebformToolkit(container, settings, callback) {
    *
    * @return {Element}
    */
-  function createFormElm() {
+  function createForm() {
     const form = document.createElement('form');
     form.classList.add('webform');
 
@@ -77,20 +76,20 @@ function WebformToolkit(container, settings, callback) {
       }
     }
 
-    // Create form field elements.
-    if (settings.fields) {
-      const fields = (settings.fields[0][0]) ? settings.fields : new Array(settings.fields);
+    // Create field elements.
+    for (let i = 0; i < settings.groups.length; i++) {
+      const group = settings.groups[i];
 
-      for (let j = 0; j < fields.length; j++) {
-        const group = document.createElement('fieldset');
-        group.classList.add('field-group' + j);
+      const fieldset = document.createElement('fieldset');
+      fieldset.classList.add('field-group' + i);
 
-        for (let k = 0; k < fields[j].length; k++) {
-          group.appendChild(createField(form, fields[j][k]));
-        }
+      for (let j = 0; j < group.fields.length; j++) {
+        const field = group.fields[j];
 
-        form.appendChild(group);
+        fieldset.appendChild(createField(form, field));
       }
+
+      form.appendChild(fieldset);
     }
 
     // Create submit button.
