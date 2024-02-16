@@ -554,6 +554,23 @@ function WebformToolkit(container, settings, callback) {
       }
     }
   }
+
+  /**
+   * Protected members.
+   */
+  self.create = function(config, callback) {
+    const form = container.querySelector('form');
+
+    const elm = createField(form, config);
+
+    if (form && elm && typeof callback === 'function') {
+      callback(form, elm);
+    } else {
+      throw new Error('Failed to create (malformed config)');
+    }
+  };
+
+  return self;
 }
 
 /**
