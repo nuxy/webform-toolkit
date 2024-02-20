@@ -200,21 +200,23 @@ function WebformToolkit(container, settings, callback) {
       elm.message = config.error;
       elm.error   = false;
 
-      // Attach events
+      // Attach field events.
       const handler = function() {
         validateField(this),
         setButtonState(form);
       };
 
-      elm.addEventListener('focusout', handler);
-      elm.addEventListener('keypress', handler);
-      elm.addEventListener('keyup',    handler);
-      elm.addEventListener('mouseout', handler);
+      if (elm.tagName === 'SELECT') {
 
-      // .. select menu
-      const select = elm.querySelector('select');
-      if (select) {
-        select.addEventListener('change', handler);
+        // .. Select menu
+        elm.addEventListener('change', handler);
+      } else {
+
+        // .. Everything else.
+        elm.addEventListener('focusout', handler);
+        elm.addEventListener('keypress', handler);
+        elm.addEventListener('keyup',    handler);
+        elm.addEventListener('mouseout', handler);
       }
     }
 
