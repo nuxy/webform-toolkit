@@ -2,7 +2,7 @@
 
 Dynamically generate an HTML form with field validation and custom errors.
 
-![Preview](https://nuxy.github.io/webform-toolkit/preview.jpg)
+![Preview](https://nuxy.github.io/webform-toolkit/preview.gif)
 
 ## Features
 
@@ -177,6 +177,10 @@ Run [ESLint](https://eslint.org) on project sources:
 Transpile ES6 sources (using [Babel](https://babeljs.io)) and minify to a distribution:
 
     $ npm run build
+
+Run [WebdriverIO](https://webdriver.io) E2E tests:
+
+    $ npm run test
 
 ## Unsupported releases
 
