@@ -23,9 +23,7 @@ describe('Select menu element', function() {
     it('should contain text', async function() {
       const label = await fieldset.$('label');
 
-      await expect(label).toHaveText('Age Group', {
-        message: "Contains value 'Age Group'"
-      });
+      await expect(label).toHaveText('Age Group');
     });
   });
 

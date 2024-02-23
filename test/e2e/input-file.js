@@ -23,9 +23,7 @@ describe('Input file element', function() {
     it('should contain text', async function() {
       const label = await fieldset.$('label');
 
-      await expect(label).toHaveText('Profile Image', {
-        message: "Contains value 'Profile Image'"
-      });
+      await expect(label).toHaveText('Profile Image');
     });
   });
 

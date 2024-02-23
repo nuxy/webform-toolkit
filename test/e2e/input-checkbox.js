@@ -15,11 +15,8 @@ describe('Input checkbox element', function() {
   describe('Container', function() {
     it('should show message', async function() {
       const message = await container.$('span');
-      const text    = "I want to check this box because it's a box";
 
-      await expect(message).toHaveText(text, {
-        message: `Contains value '${text}'`
-      });
+      await expect(message).toHaveText("I want to check this box because it's a box");
     });
   });
 

@@ -37,11 +37,8 @@ describe('Radio element', function() {
 
       for (let i = 0; i < messages.length; i++) {
         const message = messages[i];
-        const text    = values[i];
 
-        await expect(message).toHaveText(text, {
-          message: `Contains value '${text}'`
-        });
+        await expect(message).toHaveText(values[i]);
       }
     });
 

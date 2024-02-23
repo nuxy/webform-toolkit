@@ -40,9 +40,7 @@ describe('Input text elements', function() {
 
         const label = await container.$('label');
 
-        await expect(label).toHaveText(textValue, {
-          message: `Contains value '${textValue}'`
-        });
+        await expect(label).toHaveText(textValue);
       }
     });
   });

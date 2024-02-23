@@ -23,9 +23,7 @@ describe('Textarea element', function() {
     it('should contain text', async function() {
       const label = await fieldset.$('label');
 
-      await expect(label).toHaveText('Comments', {
-        message: "Contains value 'Comments'"
-      });
+      await expect(label).toHaveText('Comments');
     });
   });
 
