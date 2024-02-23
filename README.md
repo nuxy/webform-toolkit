@@ -2,7 +2,7 @@
 
 Dynamically generate an HTML form with field validation and custom errors.
 
-![Preview](https://nuxy.github.io/webform-toolkit/preview.gif)
+![Preview](https://raw.githubusercontent.com/nuxy/webform-toolkit/master/package.gif)
 
 ## Features
 
