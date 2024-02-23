@@ -3,12 +3,13 @@
 import {browser, expect, $} from '@wdio/globals';
 
 describe('Select menu element', function() {
-  let fieldset;
+  let fieldset, container;
 
   beforeEach(async function() {
     await browser.url(`${process.cwd()}/demo/index.html`);
 
-    fieldset = await $('.field-group2 div:first-child');
+    fieldset  = await $('.field-group2 div:first-child');
+    container = await fieldset.$$('div')[0];
   });
 
   describe('Label', function() {

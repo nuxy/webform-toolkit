@@ -9,7 +9,7 @@ describe('Radio element', function() {
     await browser.url(`${process.cwd()}/demo/index.html`);
 
     fieldset  = await $('.field-group2');
-    container = await fieldset.$('.radios');
+    container = await fieldset.$$('div')[1];
   });
 
   describe('Field', function() {
