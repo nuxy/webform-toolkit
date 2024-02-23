@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/webform-toolkit.svg)](https://badge.fury.io/js/webform-toolkit) [![](https://img.shields.io/npm/dm/webform-toolkit)](https://www.npmjs.com/package/webform-toolkit) [![Build Status](https://api.travis-ci.com/nuxy/webform-toolkit.svg?branch=master)](https://app.travis-ci.com/github/nuxy/webform-toolkit) [![Install size](https://packagephobia.com/badge?p=webform-toolkit)](https://packagephobia.com/result?p=webform-toolkit) [![](https://img.shields.io/github/v/release/nuxy/webform-toolkit)](https://github.com/nuxy/webform-toolkit/releases)
 
-Dynamically generate an HTML form with field validation and custom errors.
+Create a HTML form with field validation and custom errors.
 
 ![Preview](https://raw.githubusercontent.com/nuxy/webform-toolkit/master/package.gif)
 

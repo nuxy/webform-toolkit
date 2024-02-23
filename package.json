@@ -1,7 +1,7 @@
 {
   "name": "webform-toolkit",
   "version": "2.3.1",
-  "description": "Dynamically generate an HTML form with field validation and custom errors.",
+  "description": "Create a HTML form with field validation and custom errors.",
   "main": "src/webform-toolkit.js",
   "scripts": {
     "build": "babel src -s -D -d dist && npm run sass && npm run minify-css && npm run minify-js",

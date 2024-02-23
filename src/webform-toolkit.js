@@ -1,6 +1,6 @@
 /**
  *  webform-toolkit
- *  Dynamically generate an HTML form with field validation and custom errors.
+ *  Create a HTML form with field validation and custom errors.
  *
  *  Copyright 2012-2024, Marc S. Brooks (https://mbrooks.info)
  *  Licensed under the MIT license:
