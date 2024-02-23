@@ -15,15 +15,15 @@ describe('Textarea element', function() {
     it('should contain attributes', async function() {
       const label = await fieldset.$('label');
 
-      await expect(label).toHaveAttribute('for', 'comments', {
-        message: 'Attribute for="comments" is defined'
+      await expect(label).toHaveAttribute('for', 'description', {
+        message: 'Attribute for="description" is defined'
       });
     });
 
     it('should contain text', async function() {
       const label = await fieldset.$('label');
 
-      await expect(label).toHaveText('Comments');
+      await expect(label).toHaveText('Description');
     });
   });
 
@@ -31,12 +31,12 @@ describe('Textarea element', function() {
     it('should contain attributes', async function() {
       const field = await fieldset.$('textarea');
 
-      await expect(field).toHaveAttribute('id', 'comments', {
-        message: `Attribute id="comments" is defined`
+      await expect(field).toHaveAttribute('id', 'description', {
+        message: `Attribute id="description" is defined`
       });
 
-      await expect(field).toHaveAttribute('name', 'comments', {
-        message: `Attribute name="comments" is defined`
+      await expect(field).toHaveAttribute('name', 'description', {
+        message: `Attribute name="description" is defined`
       });
     });
 

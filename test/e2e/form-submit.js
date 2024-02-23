@@ -29,7 +29,7 @@ describe('Form submit button', function() {
       const field5 = await form.$('#image');
       await field5.setValue(join(process.cwd(), 'package.gif'));
 
-      const field6 = await form.$('#comments');
+      const field6 = await form.$('#description');
       await field6.setValue('Lorem ipsum dolor sit amet, consectetur adipiscing.');
 
       const field7 = await form.$('#confirm input');
@@ -55,7 +55,7 @@ describe('Form submit button', function() {
         },
         age: '18-24',
         gender: 'N/A',
-        comments: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
       });
     });
   });
