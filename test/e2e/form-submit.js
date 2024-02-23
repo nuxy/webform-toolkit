@@ -50,7 +50,7 @@ describe('Form submit button', function() {
         upload: {
           lastModified: 1234567890,
           name: 'package.gif',
-          size: 67755,
+          size: 2177507,
           type: 'image/gif'
         },
         age: '18-24',
