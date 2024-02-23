@@ -129,7 +129,7 @@
           var {lastModified, lastModifiedDate, name, size, type} = data.upload;
           data.upload = {lastModified, lastModifiedDate, name, size, type};
 
-          output.innerText = 'DATA:';
+          output.textContent = 'DATA:';
 
           var pre = document.createElement('pre');
           pre.innerText = JSON.stringify(data, null, 2);
