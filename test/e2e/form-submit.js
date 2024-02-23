@@ -43,6 +43,7 @@ describe('Form submit button', function() {
 
       // Override dynamic data.
       data.upload.lastModified = 1234567890;
+      data.upload.size         = 100000;
 
       expect(data).toMatchObject({
         username: 'john_doe',
@@ -50,7 +51,7 @@ describe('Form submit button', function() {
         upload: {
           lastModified: 1234567890,
           name: 'package.gif',
-          size: 2177507,
+          size: 100000,
           type: 'image/gif'
         },
         age: '18-24',
