@@ -200,7 +200,9 @@ function WebformToolkit(container, settings, callback) {
         throw new Error('Invalid or missing field type');
     }
 
-    elm.setAttribute('id', config.id);
+    if (config?.id) {
+      elm.setAttribute('id', config.id);
+    }
 
     // Filter with REGEX
     if (config?.filter && config.type != 'hidden') {
