@@ -11,6 +11,14 @@ describe('Input file element', function() {
     fieldset = await $('.field-group1');
   });
 
+  describe('Legend', function() {
+    it('should contain text', async function() {
+      const legend = fieldset.$('legend');
+
+      await expect(legend).toHaveText('User Profile');
+    });
+  });
+
   describe('Label', function() {
     it('should contain attributes', async function() {
       const label = await fieldset.$('label');
@@ -23,7 +31,7 @@ describe('Input file element', function() {
     it('should contain text', async function() {
       const label = await fieldset.$('label');
 
-      await expect(label).toHaveText('Profile Image');
+      await expect(label).toHaveText('Avatar Image');
     });
   });
 

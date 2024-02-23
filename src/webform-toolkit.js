@@ -83,10 +83,18 @@ function WebformToolkit(container, settings, callback) {
       const fieldset = document.createElement('fieldset');
       fieldset.classList.add('field-group' + i);
 
-      for (let j = 0; j < group.fields.length; j++) {
-        const field = group.fields[j];
+      // .. Legend, if exists.
+      if (group.legend) {
+        const legend = document.createElement('legend');
+        legend.textContent = group.legend;
 
-        fieldset.appendChild(createField(form, field));
+        fieldset.appendChild(legend);
+      }
+
+      for (let j = 0; j < group.fields.length; j++) {
+        const elm = createField(form, group.fields[j]);
+
+        fieldset.appendChild(elm);
       }
 
       form.appendChild(fieldset);

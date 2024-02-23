@@ -11,6 +11,14 @@ describe('Input text elements', function() {
     fieldset = await $('.field-group0');
   });
 
+  describe('Legend', function() {
+    it('should contain text', async function() {
+      const legend = fieldset.$('legend');
+
+      await expect(legend).toHaveText('Account Info');
+    });
+  });
+
   describe('Label', function() {
     it('should contain attributes', async function() {
       const attrValues = ['username', 'password'];
@@ -82,11 +90,10 @@ describe('Input text elements', function() {
     });
 
     it('should validate input', async function() {
-      const container1 = await fieldset.$('div:first-child');
-      const container2 = await fieldset.$('div:last-child');
+      const containers = await fieldset.$$('div');
 
-      const field1 = await container1.$('#username');
-      const error1 = await container1.$('.error-message');
+      const field1 = await containers[0].$('#username');
+      const error1 = await containers[0].$('.error-message');
 
       await field1.setValue('john3$%&');
       await field1.click();
@@ -100,8 +107,8 @@ describe('Input text elements', function() {
 
       await expect(error1).not.toBePresent();
 
-      const field2 = await container2.$('#password');
-      const error2 = await container2.$('.error-message');
+      const field2 = await containers[1].$('#password');
+      const error2 = await containers[1].$('.error-message');
 
       await field2.setValue('password');
       await field2.click();

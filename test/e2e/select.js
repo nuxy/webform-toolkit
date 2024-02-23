@@ -8,13 +8,13 @@ describe('Select menu element', function() {
   beforeEach(async function() {
     await browser.url(`${process.cwd()}/demo/index.html`);
 
-    fieldset  = await $('.field-group2 div:first-child');
+    fieldset  = await $('.field-group2');
     container = await fieldset.$$('div')[0];
   });
 
   describe('Label', function() {
     it('should contain attributes', async function() {
-      const label = await fieldset.$('label');
+      const label = await container.$('label');
 
       await expect(label).toHaveAttribute('for', 'age', {
         message: 'Attribute for="age" is defined'
@@ -22,7 +22,7 @@ describe('Select menu element', function() {
     });
 
     it('should contain text', async function() {
-      const label = await fieldset.$('label');
+      const label = await container.$('label');
 
       await expect(label).toHaveText('Age Group');
     });
