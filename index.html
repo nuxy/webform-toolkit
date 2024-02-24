@@ -1,318 +1,164 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" type="text/css" href="https://mbrooks.info/css/alias/readme.css">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="webform-toolkit.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
 
-  <title>Webform Toolkit - README</title>
+    <script type="text/javascript" src="webform-toolkit.min.js"></script>
+    <script>
+      let output;
+
+      window.onload = function() {
+        var settings = {
+          action: 'https://www.domain.com/handler',
+          params: null,
+          groups: [
+            {
+              legend: 'Account Info',
+              fields: [
+                {
+                  id: 'username',
+                  label: 'User Name',
+                  type: 'text',
+                  name: 'username',
+                  value: null,
+                  maxlength: 15,
+                  filter: '^\\w{0,15}$',
+                  description: null,
+                  placeholder: null,
+                  error: 'Supported characters: A-Z, 0-9 and underscore',
+                  required: true
+                },
+                {
+                  id: 'password',
+                  label: 'Password',
+                  type: 'password',
+                  name: 'password',
+                  value: null,
+                  maxlength: 15,
+                  filter: '^(?!password)(.{0,15})$',
+                  description: null,
+                  placeholder: null,
+                  error: 'The password entered is not valid',
+                  required: true
+                }
+              ]
+            },
+            {
+              legend: 'User Profile',
+              fields: [
+                {
+                  id: 'image',
+                  label: 'Avatar Image',
+                  type: 'file',
+                  name: 'upload',
+                  maxlength: 18,
+                  description: 'You can upload a JPG, GIF or PNG (File size < 2 MB)',
+                  error: 'The upload failed due to unknown error',
+                  required: false
+                }
+              ]
+            },
+            {
+              legend: 'Demographics',
+              fields: [
+                {
+                  id: 'age',
+                  label: 'Age Group',
+                  type: 'select',
+                  name: 'age',
+                  value: 'Select One',
+                  filter: '18-24|25-34|35-44|45-54|55-64|65 or more',
+                  description: null,
+                  error: 'Must select a valid age group',
+                  required: true
+                },
+                {
+                  id: 'gender',
+                  label: 'Gender',
+                  type: 'radio',
+                  name: 'gender',
+                  value: 'Male',
+                  filter: 'Male|Female|N/A',
+                  description: null,
+                  error: null,
+                  required: false
+                }
+              ]
+            },
+            {
+              legend: null,
+              fields: [
+                {
+                  id: 'description',
+                  label: 'Description',
+                  type: 'textarea',
+                  name: 'description',
+                  value: null,
+                  maxlength: null,
+                  filter: '^(?:\\w|\\s|\\.|,|\\?){0,55}$',
+                  description: null,
+                  placeholder: null,
+                  error: 'Supported characters: Alphanumeric and ,.? characters',
+                  required: false
+                }
+              ]
+            },
+            {
+              legend: null,
+              fields: [
+                {
+                  id: 'confirm',
+                  label: "I want to check this box because it's a box",
+                  type: 'checkbox',
+                  name: 'confirm',
+                  value: 1,
+                  description: null,
+                  error: null,
+                  required: false
+                }
+              ]
+            }
+          ]
+        };
+
+        var callback = data => {
+
+          // Convert File instance.
+          var {lastModified, lastModifiedDate, name, size, type} = data.upload;
+          data.upload = {lastModified, lastModifiedDate, name, size, type};
+
+          output.textContent = 'DATA:';
+
+          var pre = document.createElement('pre');
+          pre.innerText = JSON.stringify(data, null, 2);
+
+          output.appendChild(pre);
+        };
+
+        var container = document.getElementById('webform-toolkit');
+
+        const webform = webformToolkit(container, settings, callback);
+
+        // Add hidden input element.
+        webform.create({
+          type: 'hidden',
+          name: 'token',
+          value: '00112233-4455-6677-8899-aabbccddeeff'
+        },
+        function(form, elm) {
+          form.appendChild(elm);
+        });
+
+        output = document.getElementById('output');
+    };
+  </script>
+
+  <title>Create a HTML form with field validation and custom errors | Webform Toolkit</title>
 </head>
 <body>
-
-<a href="https://github.com/nuxy/Webform-Toolkit"><img class="forkme_ribbon" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
-
-<h1>Webform Toolkit <a href="https://travis-ci.org/nuxy/Webform-Toolkit"><img class="build_status" src="https://travis-ci.org/nuxy/Webform-Toolkit.svg?branch=master" alt="Build Status"></a></h1>
-
-<p>Dynamically generate an HTML form with field validation and custom errors as JSON</p>
-
-<img class="preview" src="preview.jpg">
-
-<h2>Features</h2>
-
-<ul>
-  <li>Extensible HTML/CSS interface.</li>
-  <li>Compatible with all modern desktop and mobile web browsers.</li>
-  <li>Compatible with iOS and Android mobile web browsers.</li>
-  <li>Easy to set-up and customize.</li>
-  <li>Provides form input validation using REGEX (<a href="http://www.regular-expressions.info/reference.html">regular expressions</a>)</li>
-  <li>Supports synchronous form-data POST</li>
-  <li>Supports FORM submit callback for custom AJAX handling.</li>
-  <li>Supports dynamic (<a href="#methods">on the fly</a>) field creation.</li>
-  <li>Fast and lightweight (JavaScript plug-in *only 7.3 kB)</li>
-</ul>
-
-<p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
-
-<a name="install"></a>
-
-<h2>Installation</h2>
-
-<p>This package can be easily installed using <a href="http://bower.io">Bower</a>.</p>
-
-<h4>Modern v2 (no dependencies)</h4>
-
-<pre>$ bower install webform-toolkit#2</pre>
-
-<h4>Legacy v1 (requires <a href="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">jQuery 1.8.3</a>)</h4>
-
-<p>Compatible with Firefox 3.6, Chrome, Safari 5, Opera, and Internet Explorer 7+ web browsers.</p>
-
-<pre>$ bower install webform-toolkit#1</pre>
-
-<p>Manual install:</p>
-
-<ol>
-  <li>Download the latest <a href="https://github.com/nuxy/Webform-Toolkit/tags">sources</a> to your computer using a web browser.</li>
-  <li>Extract the contents of the <em>.zip</em> into a folder on your local computer.</li>
-  <li>Upload the folder with the <strong>following files</strong> to your web site.</li>
-</ol>
-
-<table border="1">
-  <tr>
-    <th>Filename</th>
-    <th>Role</th>
-  </tr>
-  <tr>
-    <td>webform-toolkit.min.js</td>
-    <td>The main script to be included from within your HTML document.</td>
-  </tr>
-  <tr>
-    <td>webform-toolkit.min.css</td>
-    <td>This style sheet that defines the "look & feel" of the HTML form.</td>
-  </tr>
-</table>
-
-<h2>Set-up</h2>
-
-<p>It's as simple as defining a node <code>container</code> using a JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">selector</a> and passing tabular data as JSON. An optional callback can also be defined for post-processing data on submit event.</p>
-
-<pre>document.getElementById('container').WebformTookit(<em>config</em>, <a href="#callback"><em>callback</em></a>);</pre>
-
-<h2>Source Code</h2>
-
-<p>Add the following JavaScript/CSS between the <code>&lt;head&gt;&lt;/head&gt;</code> tags of your HTML document.</p>
-
-<a name="example"></a>
-
-<h4>Use Example 1 - General Webform</h4>
-
-<pre>&lt;script src="/path/to/webform-toolkit.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-var webform = document.getElementById('container')
-  .WebformToolkit({
-    id:     'example',
-    action: 'http://www.domain.com/handler',
-    fields: [
-      {
-        id:          'username_id',
-        label:       'User Name',
-        type:        'text',
-        name:        'username',
-        value:       '',
-        maxlength:   '15',
-        filter:      "^\\w{0,15}$",
-        description: '',
-        error:       'Supported characters: A-Z, 0-9 and underscore',
-        required:    true
-      },
-      {
-        id:          'password_id',
-        label:       'Password',
-        type:        'text',
-        name:        'password',
-        value:       '',
-        maxlength:   '15',
-        filter:      "^(?!password)(.{8,15})$",
-        description: 'Must be a minimum of 8 characters',
-        error:       'The password entered is not valid',
-        required:    true
-      }
-    ]
-  }, customHandler);
-&lt;/script&gt;
-
-&lt;link rel="stylesheet" type="text/css" href="/path/to/webform-toolkit.min.css"&gt;</pre>
-
-<h4>Use Example 2 - Webform using field groups</h4>
-
-<pre>&lt;script src="/path/to/webform-toolkit.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-var webform = document.getElementById('container')
-  .WebformToolkit({
-    id:     'example',
-    action: 'http://www.domain.com/handler',
-    fields: [
-      [
-        {
-          label:       'User Name',
-          type:        'text',
-          name:        'username',
-          value:       '',
-          maxlength:   '15',
-          filter:      "^\\w{0,15}$",
-          description: '',
-          error:       'Supported characters: A-Z, 0-9 and underscore',
-          required:    true
-        },
-        {
-          label:       'Password',
-          type:        'text',
-          name:        'password',
-          value:       '',
-          maxlength:   '15',
-          filter:      "^(?!password)(.{8,15})$",
-          description: 'Must be a minimum of 8 characters',
-          error:       'The password entered is not valid',
-          required:    true
-        }
-      ],
-      [
-        {
-          id:          'pincode_id',
-          label:       'Pin Code',
-          type:        'text',
-          name:        'password',
-          value:       '',
-          maxlength:   '8',
-          filter:      "^\\d{8,15}$",
-          description: 'Must be a minimum of 8 numeric characters',
-          error:       'The pin code entered is not valid',
-          required:    true
-        }
-      ]
-    ]
-  }, customHandler);
-&lt;/script&gt;
-
-&lt;link rel="stylesheet" type="text/css" href="/path/to/webform-toolkit.min.css"&gt;</pre>
-
-<a name="fields"></a>
-
-<h2>Field Definitions</h2>
-
-<table border="1">
-  <tr>
-    <th>Attribute</th>
-    <th>Description</th>
-    <th>Required</th>
-  </tr>
-  <tr>
-    <td>label</td>
-    <td>Field label value</td>
-    <td>true</td>
-  </tr>
-  <tr>
-    <td>type</td>
-    <td>Supported types: text|hidden|password|checkbox|radio|file|select|textarea</td>
-    <td>true</td>
-  </tr>
-  <tr>
-    <td>name</td>
-    <td>Form element name</td>
-    <td>true</td>
-  </tr>
-  <tr>
-    <td>value</td>
-    <td>Default value</td>
-    <td>true</td>
-  </tr>
-  <tr class="deprecated">
-    <td><strike>size</strike></td>
-    <td><strike>Input type maximum length</strike> (use maxlength)</td>
-    <td><strike>false</strike></td>
-  </tr>
-  <tr>
-    <td>maxlength</td>
-    <td>Input type maximum length</td>
-    <td>false</td>
-  </tr>
-  <tr>
-    <td>filter</td>
-    <td>Validate form input using REGEX</td>
-    <td>false</td>
-  </tr>
-  <tr>
-    <td>description</td>
-    <td>Custom field description</td>
-    <td>false</td>
-  </tr>
-  <tr>
-    <td>error</td>
-    <td>Custom error message</td>
-    <td>false</td>
-  </tr>
-  <tr>
-    <td>required</td>
-    <td>Required field</td>
-    <td>false</td>
-  </tr>
-</table>
-
-<p>The <em><a href="#fields">size</a></em> field definition has been <strong>deprecated</strong> to be replaced with <em><a href="#fields">maxlength</a></em> going forward.  Please adapt your code when using the latest release.</p>
-
-<a name="callback"></a>
-
-<h2>Callback Processing</h2>
-
-<p>When a callback function is defined a form object is returned.  This allows you to define a custom AJAX handler based on the requirements of your application.  The following function corresponds to the <a href="#example">example</a> provided above.</p>
-
-<pre>function customHandler(form) {
-  var xhr = new XMLHttpRequest();
-
-  xhr.addEventListener('load', function() {
-    if (this.status == 200) {
-      alert(response);
-    }
-  });
-
-  xhr.open('POST', form.getAttribute('action'));
-  xhr.send(new FormData(form));
-}</pre>
-
-<a name="methods"></a>
-
-<h2>Adding Fields on the fly</h2>
-
-<p>I have added a method to dynamically create form fields that can be added to an existing webform. An optional callback has also been provided to for post-processing FORM and field elements. This makes it easy to show/hide fields using conditions and expressions.</p>
-
-<pre>webform.WebformToolkit('create', {
-  "id":          "new_field_id",
-  "label":       "New Field",
-  "type":        "text",
-  "name":        "new_field",
-  "value":       "",
-  "maxlength":   "",
-  "filter":      "^[a-zA-Z0-9]{0,255}$",
-  "description": "",
-  "error":       "Supported characters: A-Z, 0-9",
-  "required":    "0"
-},
-function(form, elm) {
-  form.appendChild(elm);  // default: last in fieldset
-});
-</pre>
-
-<h2>Best Practices</h2>
-
-<p>Just because you are filtering form input on the client-side is NO EXCUSE to not do the same on the server-side.  Security is a two-way street, and BOTH ends should be protected.</p>
-
-<h2>Functional Testing</h2>
-
-<p>This package has been preconfigured to support <a href="http://qunitjs.com">QUnit</a> headless testing using <a href="http://www.travis-ci.org">Travis-CI</a>.  If you plan on using another integration tool you will have to create a custom project that combines the use of <em>QUnit</em> and <a href="http://www.phantomjs.org">PhantomJS</a> plugins.  If headless testing in not available you can manually run <code>test.html</code> in your web browser.</p>
-
-<h2>Releases</h2>
-
-<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (5.3 kB) and developers version (unpacked 14 kB)</p>
-
-<p>You can always find the latest updates within this projects repository.</p>
-
-<h2>Code Repository</h2>
-
-<p>This projects repository is currently hosted on <a href="https://github.com">Github</a></p>
-
-<pre>https://github.com/nuxy/Webform-Toolkit</pre>
-
-<h2>Maintainer</h2>
-
-<p>For feedback, bug reports, or other comments, feel free to contact me at: <strong>devel</strong> <em>at</em> <strong>mbrooks</strong> <em>dot</em> <strong>info</strong></p>
-
-<h2>License and Warranty</h2>
-
-<p>This package is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.</p>
-
-<p>Webform Toolkit is provided under the terms of the <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
-
-<p>Webform Toolkit &#169;2012-2016 <a href="https://mbrooks.info">Marc S. Brooks</a></p>
-
+  <div id="webform-toolkit"></div>
+  <div id="output"></div>
 </body>
 </html>

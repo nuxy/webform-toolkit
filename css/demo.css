@@ -1,0 +1,99 @@
+#webform-toolkit {
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 7% auto;
+  width: 680px;
+}
+
+#webform-toolkit fieldset {
+  float: left;
+  padding: 5px;
+  margin: 5px;
+  width: 320px;
+}
+
+#webform-toolkit fieldset label {
+  width: 100px;
+}
+
+#webform-toolkit fieldset label span {
+  margin-right: 4px;
+}
+
+#webform-toolkit fieldset input[type=text],
+#webform-toolkit fieldset input[type=password],
+#webform-toolkit fieldset textarea {
+  padding: 4px;
+  width: 200px;
+}
+
+#webform-toolkit fieldset input[type=radio] {
+  margin: 8px 4px;
+}
+
+#webform-toolkit fieldset input[type=submit] {
+  display: block;
+  margin: 10px auto;
+  width: 80px;
+}
+
+#webform-toolkit fieldset select {
+  margin: 5px;
+}
+
+#webform-toolkit fieldset p {
+  width: 100%;
+}
+
+#webform-toolkit fieldset .checkbox input {
+  margin-left: 20px;
+}
+
+#webform-toolkit fieldset .checkbox span {
+  padding-left: 5px;
+}
+
+#webform-toolkit fieldset .error-message {
+  margin: 5px 0px 10px 0px;
+  width: 298px;
+}
+
+/**
+ * Field alignment overrides.
+ */
+#webform-toolkit .field-group2 {
+  clear: both;
+  float: left;
+}
+
+#webform-toolkit .field-group3 label {
+  vertical-align: top;
+}
+
+#webform-toolkit .field-group4 {
+  min-height: 30px;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+#webform-toolkit .field-group4 div {
+  display: block;
+  margin: 0 auto;
+  width: 350px;
+}
+
+#webform-toolkit .form-submit {
+  clear: both;
+}
+
+#webform-toolkit .form-submit input {
+  display: block;
+  margin: 0 auto;
+  width: 60px;
+}
+
+#output {
+  margin: auto;
+  width: 300px;
+}
