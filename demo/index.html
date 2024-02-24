@@ -18,11 +18,6 @@
               legend: 'Account Info',
               fields: [
                 {
-                  type: 'hidden',
-                  name: 'token',
-                  value: '00112233-4455-6677-8899-aabbccddeeff'
-                },
-                {
                   id: 'username',
                   label: 'User Name',
                   type: 'text',
@@ -144,7 +139,17 @@
 
         var container = document.getElementById('webform-toolkit');
 
-        webformToolkit(container, settings, callback);
+        const webform = webformToolkit(container, settings, callback);
+
+        // Add hidden input element.
+        webform.create({
+          type: 'hidden',
+          name: 'token',
+          value: '00112233-4455-6677-8899-aabbccddeeff'
+        },
+        function(form, elm) {
+          form.appendChild(elm);
+        });
 
         output = document.getElementById('output');
     };
