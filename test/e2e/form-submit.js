@@ -46,6 +46,7 @@ describe('Form submit button', function() {
       data.upload.size         = 100000;
 
       expect(data).toMatchObject({
+        token: '00112233-4455-6677-8899-aabbccddeeff',
         username: 'john_doe',
         password: 'my$ecr3t',
         upload: {
