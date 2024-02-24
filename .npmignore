@@ -3,6 +3,8 @@
 .travis.yml
 .vscode
 demo
+ISSUE_TEMPLATE.md
 package.*
 node_modules
 test
+wdio.conf.js
