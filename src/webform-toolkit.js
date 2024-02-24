@@ -147,30 +147,10 @@ function WebformToolkit(container, settings, callback) {
    * @return {Element}
    */
   function createField(form, config) {
-    const div = document.createElement('div');
-
-    // .. Label, if exists.
-    if (config.label && config.type != 'checkbox') {
-      const label = document.createElement('label');
-      label.setAttribute('for', config.id);
-
-      if (config.required) {
-        const span = document.createElement('span');
-        span.classList.add('required');
-
-        label.appendChild(span);
-      }
-
-      label.textContent = config.label;
-
-      div.appendChild(label);
-    }
-
     let elm = null;
 
     // Supported elements
     switch (config.type) {
-      case 'hidden':
       case 'password':
       case 'text':
         elm = createInputElm(config);
@@ -196,16 +176,36 @@ function WebformToolkit(container, settings, callback) {
         elm = createCheckBoxElm(config);
       break;
 
+      case 'hidden':
+        return createInputElm(config);
+
       default:
         throw new Error('Invalid or missing field type');
     }
 
-    if (config?.id) {
-      elm.setAttribute('id', config.id);
+    config?.id && elm.setAttribute('id', config.id);
+
+    const div = document.createElement('div');
+
+    // .. Label, if exists.
+    if (config.type !== 'checkbox') {
+      const label = document.createElement('label');
+      label.setAttribute('for', config.id);
+
+      if (config.required) {
+        const span = document.createElement('span');
+        span.classList.add('required');
+
+        label.appendChild(span);
+      }
+
+      label.textContent = config.label;
+
+      div.appendChild(label);
     }
 
     // Filter with REGEX
-    if (config?.filter && config.type != 'hidden') {
+    if (config?.filter) {
       elm.regex   = config.filter;
       elm.message = config.error;
       elm.error   = false;
@@ -216,7 +216,7 @@ function WebformToolkit(container, settings, callback) {
         setButtonState(form);
       };
 
-      if (elm.tagName === 'SELECT') {
+      if (config.type === 'select') {
 
         // .. Select menu
         elm.addEventListener('change', handler);
