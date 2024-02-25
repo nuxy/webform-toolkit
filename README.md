@@ -198,6 +198,14 @@ Run [WebdriverIO](https://webdriver.io) E2E tests:
 
     $ npm run test
 
+## Contributions
+
+If you fix a bug, or have a code you want to contribute, please send a pull-request with your changes. (Note: Before committing your code please ensure that you are following the [Node.js style guide](https://github.com/felixge/node-style-guide))
+
+## Versioning
+
+This package is maintained under the [Semantic Versioning](https://semver.org) guidelines.
+
 ## License and Warranty
 
 This package is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.
