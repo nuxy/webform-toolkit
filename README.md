@@ -16,6 +16,8 @@ Create a HTML form with field validation and custom errors.
 - Supports FORM submit callback for custom AJAX handling.
 - Supports dynamic ([on the fly](#adding-fields)) field creation.
 
+Checkout the [demo](https://nuxy.github.io/webform-toolkit) for examples of use.
+
 ## Dependencies
 
 - [Node.js](https://nodejs.org)
