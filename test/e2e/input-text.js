@@ -92,12 +92,29 @@ describe('Input text elements', function() {
     it('should validate input', async function() {
       const containers = await fieldset.$$('div');
 
+      const label1 = await containers[0].$('label');
       const field1 = await containers[0].$('#username');
       const error1 = await containers[0].$('.error-message');
 
       await field1.setValue('john3$%&');
       await field1.click();
       await error1.waitForExist({timeout: 3000});
+
+      await expect(label1).toHaveAttribute('aria-invalid', 'true', {
+        message: 'Attribute aria-invalid="true" is defined'
+      });
+
+      await expect(field1).toHaveAttribute('aria-invalid', 'true', {
+        message: 'Attribute aria-invalid="true" is defined'
+      });
+
+      await expect(field1).toHaveAttribute('aria-describedBy', 'error-username', {
+        message: 'Attribute aria-describedBy="error-username" is defined'
+      });
+
+      await expect(error1).toHaveAttribute('aria-invalid', 'true', {
+        message: 'Attribute aria-invalid="true" is defined'
+      });
 
       await expect(error1).toHaveText('Supported characters: A-Z, 0-9 and underscore');
 
@@ -107,12 +124,29 @@ describe('Input text elements', function() {
 
       await expect(error1).not.toBePresent();
 
+      const label2 = await containers[1].$('label');
       const field2 = await containers[1].$('#password');
       const error2 = await containers[1].$('.error-message');
 
       await field2.setValue('password');
       await field2.click();
       await error2.waitForExist({timeout: 3000});
+
+      await expect(label2).toHaveAttribute('aria-invalid', 'true', {
+        message: 'Attribute aria-invalid="true" is defined'
+      });
+
+      await expect(field2).toHaveAttribute('aria-invalid', 'true', {
+        message: 'Attribute aria-invalid="true" is defined'
+      });
+
+      await expect(field2).toHaveAttribute('aria-describedBy', 'error-password', {
+        message: 'Attribute aria-describedBy="error-password" is defined'
+      });
+
+      await expect(error2).toHaveAttribute('aria-invalid', 'true', {
+        message: 'Attribute aria-invalid="true" is defined'
+      });
 
       await expect(error2).toHaveText('The password entered is not valid');
 

@@ -42,12 +42,25 @@ describe('Textarea element', function() {
 
 
     it('should validate input', async function() {
+      const label = await fieldset.$('label');
       const field = await fieldset.$('textarea');
       const error = await fieldset.$('.error-message');
 
       await field.setValue('Lorem ipsum $%&^');
       await field.click();
       await error.waitForExist({timeout: 3000});
+
+      await expect(label).toHaveAttribute('aria-invalid', 'true', {
+        message: 'Attribute aria-invalid="true" is defined'
+      });
+
+      await expect(field).toHaveAttribute('aria-invalid', 'true', {
+        message: 'Attribute aria-invalid="true" is defined'
+      });
+
+      await expect(field).toHaveAttribute('aria-describedBy', 'error-description', {
+        message: 'Attribute aria-describedBy="error-description" is defined'
+      });
 
       await expect(error).toHaveText('Supported characters: Alphanumeric and ,.? characters');
 

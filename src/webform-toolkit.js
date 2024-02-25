@@ -236,6 +236,7 @@ function WebformToolkit(container, settings, callback) {
     if (config?.description) {
       const block = document.createElement('p');
       block.classList.add('description');
+      block.setAttribute('role', 'info');
       block.textContent = config.description;
 
       div.appendChild(block);
@@ -477,18 +478,27 @@ function WebformToolkit(container, settings, callback) {
     }
 
     const field = elm.parentNode;
+    const label = field.querySelector('label');
 
     let block = null;
 
     // Toggle error message visibility.
     if (match === false && error === false) {
+      const errorId = `error-${elm.id}`;
+
+      label.setAttribute('aria-invalid', 'true');
+
       block = document.createElement('p');
       block.classList.add('error-message');
+      block.setAttribute('id', errorId);
+      block.setAttribute('aria-invalid', 'true');
       block.textContent = message;
 
       field.appendChild(block);
 
       elm.classList.add('error-on');
+      elm.setAttribute('aria-describedBy', errorId);
+      elm.setAttribute('aria-invalid', 'true');
       elm.error = true;
 
       block.style.display = 'block';
@@ -514,7 +524,11 @@ function WebformToolkit(container, settings, callback) {
       // Hide error message.
       (function fadeOut() {
         if ((block.style.opacity -= 0.1) < 0.1) {
+          label.removeAttribute('aria-invalid');
+
           elm.classList.remove('error-on');
+          elm.removeAttribute('aria-describedBy');
+          elm.removeAttribute('aria-invalid');
 
           block.style.display = 'none';
           block.remove();
