@@ -168,6 +168,20 @@ function(form, elm) {
 
 Just because you are filtering form input on the client-side is NO EXCUSE to not do the same on the server-side.  Security is a two-way street, and BOTH ends should be protected.
 
+## Unsupported releases
+
+To install deprecated versions use [Bower](http://bower.io) or download the package [by tag](https://github.com/nuxy/webform-toolkit/tags).
+
+### v2 (no dependencies)
+
+    $ bower install webform-toolkit#2
+
+### v1 (requires [jQuery 1.8.3](http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js))
+
+Compatible with Firefox 3.6, Chrome, Safari 5, Opera, and Internet Explorer 7+ web browsers.
+
+    $ bower install webform-toolkit#1
+
 ## Developers
 
 ### CLI options
@@ -183,20 +197,6 @@ Transpile ES6 sources (using [Babel](https://babeljs.io)) and minify to a distri
 Run [WebdriverIO](https://webdriver.io) E2E tests:
 
     $ npm run test
-
-## Unsupported releases
-
-To install deprecated versions use [Bower](http://bower.io) or download the package [by tag](https://github.com/nuxy/webform-toolkit/tags).
-
-### v3 (no dependencies)
-
-    $ bower install webform-toolkit#2
-
-### v2 (requires [jQuery 1.8.3](http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js))
-
-Compatible with Firefox 3.6, Chrome, Safari 5, Opera, and Internet Explorer 7+ web browsers.
-
-    $ bower install webform-toolkit#1
 
 ## License and Warranty
 
