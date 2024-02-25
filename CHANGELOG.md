@@ -14,3 +14,7 @@ The following items are **breaking changes** and not supported in prior releases
 - Refactored instance arguments `new WebformToolkit(container, settings, callback)`
 - Replaced [QUnit](https://qunitjs.com) testing with [WebdriverIO](https://webdriver.io) framework.
 - Integrated [Babel](https://babeljs.io) transpilation build process.
+
+## [3.0.1] - 2024-02-25
+
+- Support WCAG 2.1 aria roles
