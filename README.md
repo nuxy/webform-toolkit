@@ -10,7 +10,7 @@ Create a HTML form with field validation and custom errors.
 
 - Extensible HTML/CSS interface.
 - Compatible with all modern desktop and mobile web browsers.
-- Easy to set-up and customize.
+- Easy to set-up and customize. **No dependencies**.
 - Provides form input validation using REGEX ([regular expressions](http://www.regular-expressions.info/reference.html))
 - Supports synchronous form-data POST
 - Supports FORM submit callback for custom AJAX handling.
