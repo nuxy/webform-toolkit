@@ -1,6 +1,6 @@
 .babelrc
 .eslintrc
-.travis.yml
+.github
 .vscode
 demo
 ISSUE_TEMPLATE.md
