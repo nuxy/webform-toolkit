@@ -32,4 +32,6 @@ jobs:
       - name: Run ESLint
         run: npm run lint
       - name: Run WDIO
-        run: npm run test
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: npm run test
