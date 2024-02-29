@@ -10,7 +10,6 @@ jobs:
         node-version: ['20.x', '21.x']
     steps:
       - uses: actions/checkout@v4
-      - uses: browser-actions/setup-firefox@v1
 
       # libEGL
       - name: Install libEGL dependency
@@ -22,9 +21,6 @@ jobs:
         uses: browser-actions/setup-firefox@v1
         with:
           firefox-version: ${{ matrix.firefox-version }}
-      - run: |
-          echo Install Firefox browser: ${{ steps.setup-firefox.outputs.firefox-version }}
-          ${{ steps.setup-firefox.outputs.firefox-path }} --version
 
       # Node.js environment
       - name: Setup Node.js ${{ matrix.node-version }}
