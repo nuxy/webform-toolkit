@@ -18,3 +18,9 @@ The following items are **breaking changes** and not supported in prior releases
 ## [3.0.1] - 2024-02-25
 
 - Support WCAG 2.1 aria roles
+
+## [3.0.2] - 2024-02-29
+
+## Updated
+
+- Replaced Travis-CI with Github workflow
