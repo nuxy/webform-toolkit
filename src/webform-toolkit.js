@@ -34,8 +34,6 @@ function WebformToolkit(container, settings, callback) {
 
   /**
    * Create new instance of Webform-Toolkit
-   *
-   * @return {Element}
    */
   function renderWebform() {
     const form = createForm();
