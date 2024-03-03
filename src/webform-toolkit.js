@@ -151,8 +151,15 @@ function WebformToolkit(container, settings, callback) {
 
     // Supported elements
     switch (config.type) {
+      case 'color':
+      case 'date':
+      case 'email':
+      case 'number':
       case 'password':
+      case 'quantity':
+      case 'range':
       case 'text':
+      case 'time':
         elm = createInputElm(config);
       break;
 
@@ -269,11 +276,22 @@ function WebformToolkit(container, settings, callback) {
       input.setAttribute('value', config.value);
     }
 
-    if (config.maxlength) {
+    if (config?.maxlength
+      && (config.type === 'password' || config.type === 'text')) {
       input.setAttribute('maxlength', config.maxlength);
     }
 
-    if (config.placeholder) {
+    if (config?.max || config?.min || config?.step
+      && (config.type === 'number' || config.type === 'quantity')) {
+      input.setAttribute('max', config.max);
+      input.setAttribute('min', config.min);
+
+      if (config.type === 'step') {
+        input.setAttribute('step', config.step);
+      }
+    }
+
+    if (config?.placeholder) {
       input.setAttribute('placeholder', config.placeholder);
     }
 

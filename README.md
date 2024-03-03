@@ -108,21 +108,28 @@ const container = document.getElementById('webform-toolkit');
 const webformToolkit = new WebformToolkit(container, settings, callback);
 ```
 
+## Supported types
+
+[checkbox](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox), [color](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color), [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date), [email](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email), [file](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file), [hidden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden), [number](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number), [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password), [quantity](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/quantity), [radio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio), [range](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range), [select](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select), [text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text), [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea), [time](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time)
+
 ## Field definitions
 
-| Attribute   | Description                                                                                       | Required |
-|-------------|---------------------------------------------------------------------------------------------------|----------|
-| id          | Field ID value.                                                                                   | true     |
-| label       | Field label value.                                                                                | true     |
-| type        | Supported types (`text`, `hidden`, `password`, `checkbox`, `radio`, `file`, `select`, `textarea`) | true     |
-| name        | Form element name.                                                                                | true     |
-| value       | Default value.                                                                                    | false    |
-| maxlength   | Input type maximum length.                                                                        | false    |
-| filter      | Validate form input using REGEX                                                                   | false    |
-| description | Custom field description.                                                                         | false    |
-| placeholder | Input field type placeholder text.                                                                | false    |
-| error       | Custom error message (Required, if `filter` is defined)                                           | false    |
-| required    | Required field.                                                                                   | false    |
+| Attribute   | Description                                             | Required |
+|-------------|---------------------------------------------------------|----------|
+| id          | Field ID value.                                         | true     |
+| label       | Field label value.                                      | true     |
+| type        | [Supported types](#supported-types)                     | true     |
+| name        | Form element name.                                      | true     |
+| value       | Default value.                                          | false    |
+| maxlength   | Input maximum length ([password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password), [text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text)) | false |
+| max         | Input number max ([number](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number), [quantity](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/quantity)) | false |
+| min         | Input number min ([number](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number), [quantity](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/quantity)) | false |
+| step        | Input number step ([range](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range)) | false |
+| filter      | Validate form input using REGEX                         | false    |
+| description | Custom field description.                               | false    |
+| placeholder | Input field type placeholder text.                      | false    |
+| error       | Custom error message (Required, if `filter` is defined) | false    |
+| required    | Required field.                                         | false    |
 
 ## Callback processing
 
