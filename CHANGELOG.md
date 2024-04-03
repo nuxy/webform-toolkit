@@ -21,6 +21,12 @@ The following items are **breaking changes** and not supported in prior releases
 
 ## [3.0.2] - 2024-02-29
 
-## Updated
+### Updated
 
 - Replaced Travis-CI with Github workflow
+
+## [3.1.0] - 2024-04-02
+
+### Added
+
+- Support extended INPUT types
