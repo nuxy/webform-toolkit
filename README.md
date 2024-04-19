@@ -68,6 +68,7 @@ const webformToolkit = new WebformToolkit(container, settings, callback);
 const settings = {
   action: 'https://www.domain.com/handler',
   params: 'name1=value1&name2=value2',
+  submit: false, // Override submit button creation.
   groups: [
     {
       legend: 'Login Form',
@@ -110,7 +111,7 @@ const webformToolkit = new WebformToolkit(container, settings, callback);
 
 ## Supported types
 
-[checkbox](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox), [color](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color), [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date), [email](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email), [file](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file), [hidden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden), [number](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number), [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password), [quantity](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/quantity), [radio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio), [range](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range), [select](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select), [text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text), [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea), [time](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time)
+[checkbox](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox), [color](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color), [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date), [email](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email), [file](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file), [hidden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden), [number](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number), [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password), [quantity](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/quantity), [radio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio), [range](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range), [select](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select), [submit](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit), [text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text), [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea), [time](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time)
 
 ## Field definitions
 

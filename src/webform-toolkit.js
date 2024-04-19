@@ -99,37 +99,36 @@ function WebformToolkit(container, settings, callback) {
     }
 
     // Create submit button.
-    const div = document.createElement('div');
-    div.classList.add('form-submit');
+    if (settings?.submit !== false) {
+      const div = document.createElement('div');
+      div.classList.add('form-submit');
 
-    const button = document.createElement('input');
-    button.setAttribute('type',  'submit');
-    button.setAttribute('value', 'Submit');
+      const button = document.createElement('input');
+      button.setAttribute('type',  'submit');
+      button.setAttribute('value', 'Submit');
+
+      div.appendChild(button);
+
+      form.appendChild(div);
+    }
 
     // Bind form submit event.
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      if (!checkErrorsExist(form)) {
+      if (checkErrorsExist(form)) { return }
 
-        // Return callback with form object response.
-        if (typeof callback === 'function') {
-          var formData = new FormData(form);
+      // Return callback with form object response.
+      if (typeof callback === 'function') {
+        callback(Object.fromEntries(new FormData(form)));
+      }
 
-          // Output as object.
-          callback(Object.fromEntries(formData));
-        }
-
-        // POST form values.
-        else {
-          self.submit();
-        }
+      // POST form values.
+      else {
+        self.submit();
       }
     });
 
-    div.appendChild(button);
-
-    form.appendChild(div);
     return form;
   }
 
@@ -157,6 +156,7 @@ function WebformToolkit(container, settings, callback) {
       case 'password':
       case 'quantity':
       case 'range':
+      case 'submit':
       case 'text':
       case 'time':
         elm = createInputElm(config);
