@@ -30,3 +30,14 @@ The following items are **breaking changes** and not supported in prior releases
 ### Added
 
 - Support extended INPUT types
+
+## [3.1.1] - 2024-04-19
+
+## Added
+
+- Support submit button INPUT type
+- Ability to override submit button (`submit: false`)
+
+### Updated
+
+- Removed DIV wrapper on hidden/submit elements
