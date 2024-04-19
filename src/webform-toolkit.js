@@ -188,6 +188,10 @@ function WebformToolkit(container, settings, callback) {
 
     config?.id && elm.setAttribute('id', config.id);
 
+    if (config.type === 'hidden' || config.type === 'submit') {
+      return elm;
+    }
+
     const div = document.createElement('div');
 
     // .. Label, if exists.
