@@ -59,18 +59,18 @@ function WebformToolkit(container, settings, callback) {
 
     // Create hidden elements, if POST parameters exist.
     if (settings?.params) {
-      const pairs = settings.params.split('&');
+      const params = settings.params.split('&');
 
-      for (let i = 0; i < pairs.length; i++) {
-        const name = pairs[i].split('=');
+      for (let i = 0; i < params.length; i++) {
+        const param = params[i].split('=');
 
-        const hidden = document.createElement('input');
-        hidden.setAttribute('aria-hidden', 'true');
-        hidden.setAttribute('type', 'hidden');
-        hidden.setAttribute('name',  name[0]);
-        hidden.setAttribute('value', name[1]);
+        const elm = createInputElm({
+          type: 'hidden',
+          name: param[0],
+          value: param[1]
+        });
 
-        form.appendChild(hidden);
+        form.appendChild(elm);
       }
     }
 
@@ -152,6 +152,7 @@ function WebformToolkit(container, settings, callback) {
       case 'color':
       case 'date':
       case 'email':
+      case 'hidden':
       case 'number':
       case 'password':
       case 'quantity':
@@ -180,9 +181,6 @@ function WebformToolkit(container, settings, callback) {
       case 'checkbox':
         elm = createCheckBoxElm(config);
       break;
-
-      case 'hidden':
-        return createInputElm(config);
 
       default:
         throw new Error('Invalid or missing field type');
