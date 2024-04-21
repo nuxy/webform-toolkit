@@ -24,7 +24,7 @@
                   name: 'username',
                   value: null,
                   maxlength: 15,
-                  filter: '^\\w{0,15}$',
+                  filter: '^\\w+?$',
                   description: null,
                   placeholder: null,
                   error: 'Supported characters: A-Z, 0-9 and underscore',
@@ -100,7 +100,7 @@
                   filter: '^(?:\\w|\\s|\\.|,|\\?){0,55}$',
                   description: null,
                   placeholder: null,
-                  error: 'Supported characters: Alphanumeric and ,.? characters',
+                  error: 'Supported characters: Alphanumeric and ,.?',
                   required: false
                 }
               ]
@@ -138,8 +138,7 @@
         };
 
         var container = document.getElementById('webform-toolkit');
-
-        const webform = webformToolkit(container, settings, callback);
+        var webform = webformToolkit(container, settings, callback);
 
         // Add hidden input element.
         webform.create({
