@@ -183,7 +183,7 @@ function WebformToolkit(container, settings, callback) {
       break;
 
       default:
-        throw new Error('Invalid or missing field type');
+        throw new Error(`Invalid field type: ${config.type}`);
     }
 
     config?.id && elm.setAttribute('id', config.id);
@@ -566,7 +566,11 @@ function WebformToolkit(container, settings, callback) {
   function setButtonState(form) {
     const button = form.querySelector('input[type="submit"]');
 
-    button.disabled = checkErrorsExist(form);
+    if (button) {
+      button.disabled = checkErrorsExist(form);
+    } else {
+      throw new Error('Failed to change submit state (missing field)')
+    }
   }
 
   /**
@@ -607,7 +611,7 @@ function WebformToolkit(container, settings, callback) {
     if (form && elm && typeof callback === 'function') {
       callback(form, elm);
     } else {
-      throw new Error('Failed to create (malformed config)');
+      throw new Error(`Failed to create field: ${elm.name} (malformed config)`);
     }
   };
 
