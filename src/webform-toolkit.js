@@ -498,15 +498,14 @@ function WebformToolkit(container, settings, callback) {
     const field = elm.parentNode;
     const label = field.querySelector('label');
 
-    let block = null;
+    const errorId = `error-${elm.id}`;
+
+    const block = document.getElementById(errorId) || document.createElement('p');
 
     // Toggle error message visibility.
     if (match === false && error === false) {
-      const errorId = `error-${elm.id}`;
-
       label.setAttribute('aria-invalid', 'true');
 
-      block = document.createElement('p');
       block.classList.add('error-message');
       block.setAttribute('id', errorId);
       block.setAttribute('aria-invalid', 'true');
@@ -535,8 +534,6 @@ function WebformToolkit(container, settings, callback) {
     }
     else
     if (match === true && error === true) {
-      block = field.querySelector('p');
-
       elm.error = false;
 
       // Hide error message.
