@@ -62,7 +62,7 @@ describe('Textarea element', function() {
         message: 'Attribute aria-describedBy="error-description" is defined'
       });
 
-      await expect(error).toHaveText('Supported characters: Alphanumeric and ,.? characters');
+      await expect(error).toHaveText('Supported characters: Alphanumeric and ,.?');
 
       await field.setValue('Lorem ipsum dolor sit amet, consectetur adipiscing.');
       await field.click();
