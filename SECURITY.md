@@ -6,7 +6,7 @@
 | ------- | ------------------ |
 | 1.x.x   | :x:                |
 | 2.x.x   | :x:                |
-| 3.0.x   | :white_check_mark: |
+| 3.x.x   | :white_check_mark: |
 
 ## Reporting an issue
 
