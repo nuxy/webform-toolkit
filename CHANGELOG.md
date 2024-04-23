@@ -33,7 +33,7 @@ The following items are **breaking changes** and not supported in prior releases
 
 ## [3.1.1] - 2024-04-19
 
-## Added
+### Added
 
 - Support submit button INPUT type
 - Ability to override submit button (`submit: false`)
@@ -41,3 +41,9 @@ The following items are **breaking changes** and not supported in prior releases
 ### Updated
 
 - Removed DIV wrapper on hidden/submit elements
+
+## [3.1.2] - 2024-04-23
+
+- Fixed [message fadeOut](https://github.com/nuxy/webform-toolkit/commit/adc5b339d5451f443136b3a25027463cbf7ad38b), when multiple `<p>` exist.
+- Updated field filter/error message
+- Added descriptor to error responses
