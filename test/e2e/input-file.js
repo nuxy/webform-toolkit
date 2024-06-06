@@ -52,4 +52,12 @@ describe('Input file element', function() {
       });
     });
   });
+
+  describe('Description', function() {
+    it('should contain text', async function() {
+      const text = await fieldset.$('.description');
+
+      await expect(text).toHaveHTML('You can upload a <a href="https://en.wikipedia.org/wiki/JPEG">JPEG</a>, <a href="https://en.wikipedia.org/wiki/GIF">GIF</a> or <a href="https://en.wikipedia.org/wiki/PNG">PNG</a> <em>(2 MB max)</em>', {includeSelectorTag: false});
+    });
+  });
 });

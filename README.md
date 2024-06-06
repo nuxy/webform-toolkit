@@ -127,10 +127,20 @@ const webformToolkit = new WebformToolkit(container, settings, callback);
 | min         | Input number min ([number](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number), [quantity](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/quantity)) | false |
 | step        | Input number step ([range](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range)) | false |
 | filter      | Validate form input using REGEX                         | false    |
-| description | Custom field description.                               | false    |
+| description | Custom field description ([Supported text tokens](#supported-text-tokens)). | false |
 | placeholder | Input field type placeholder text.                      | false    |
 | error       | Custom error message (Required, if `filter` is defined) | false    |
 | required    | Required field.                                         | false    |
+
+## Supported text tokens
+
+The following Markdown elements are supported in the `description` attribute:
+
+| Token Type   | Example                  |
+|--------------|--------------------------|
+| Bold         | &ast;&ast;bold&ast;&ast; |
+| Italic       | &ast;italic&ast;         |
+| Link         | &lsqb;alt text&rsqb;&lpar;https://www.example.com&rpar; |
 
 ## Callback processing
 

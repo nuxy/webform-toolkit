@@ -244,7 +244,7 @@ function WebformToolkit(container, settings, callback) {
       const block = document.createElement('p');
       block.classList.add('description');
       block.setAttribute('role', 'info');
-      block.textContent = config.description;
+      block.innerHTML = parseTokens(stripMarkup(config.description));
 
       div.appendChild(block);
     }
@@ -598,6 +598,40 @@ function WebformToolkit(container, settings, callback) {
         return true;
       }
     }
+  }
+
+  /**
+   * Parse Markdown tokens, return HTML equivalent.
+   *
+   * @param {String} text
+   *   Text value.
+   *
+   * @return {String}
+   */
+  function parseTokens(text = '') {
+    return text
+
+    // Bold
+    .replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
+
+    // Italic
+    .replace(/\*(.*)\*/g, '<em>$1</em>')
+
+    // Link
+    .replace(/\[([^()]+)\]\(([^()]+)\)/g, '<a href="$2">$1</a>')
+  }
+
+  /**
+   * Remove HTML markup from a string.
+   *
+   * @param {String} text
+   *   Text value.
+   *
+   * @return {String}
+   */
+  function stripMarkup(text) {
+    return (new DOMParser().parseFromString(text, 'text/html'))
+      .body.textContent || '';
   }
 
   /**
