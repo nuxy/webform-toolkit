@@ -47,3 +47,13 @@ The following items are **breaking changes** and not supported in prior releases
 - Fixed [message fadeOut](https://github.com/nuxy/webform-toolkit/commit/adc5b339d5451f443136b3a25027463cbf7ad38b), when multiple `<p>` exist.
 - Updated field filter/error message
 - Added descriptor to error responses
+
+## [3.1.2] - 2024-06-07
+
+### Added
+
+- Support tokens in [description field](https://github.com/nuxy/webform-toolkit/tree/master?tab=readme-ov-file#supported-text-tokens)
+
+### Updated
+
+- Upgraded outdated NPM dependencies
