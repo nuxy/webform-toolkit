@@ -48,7 +48,7 @@ The following items are **breaking changes** and not supported in prior releases
 - Updated field filter/error message
 - Added descriptor to error responses
 
-## [3.1.2] - 2024-06-07
+## [3.1.3] - 2024-06-07
 
 ### Added
 
@@ -57,3 +57,7 @@ The following items are **breaking changes** and not supported in prior releases
 ### Updated
 
 - Upgraded outdated NPM dependencies
+
+## [3.1.4] - 2024-07-13
+
+- NPM security updates ([ws override](https://github.com/advisories/GHSA-3h5v-q93c-6h6q))
