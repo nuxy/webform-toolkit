@@ -2,7 +2,7 @@
  *  webform-toolkit
  *  Create a HTML form with field validation and custom errors.
  *
- *  Copyright 2012-2024, Marc S. Brooks (https://mbrooks.info)
+ *  Copyright 2012-2025, Marc S. Brooks (https://mbrooks.info)
  *  Licensed under the MIT license:
  *  http://www.opensource.org/licenses/mit-license.php
  */
