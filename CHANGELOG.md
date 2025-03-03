@@ -61,3 +61,8 @@ The following items are **breaking changes** and not supported in prior releases
 ## [3.1.4] - 2024-07-13
 
 - NPM security updates ([ws override](https://github.com/advisories/GHSA-3h5v-q93c-6h6q))
+
+## [3.1.5] - 2025-03-01
+
+- NPM security updates ([cross-spawn](https://github.com/advisories/GHSA-3xgq-45jj-v275)/[micromatch](https://github.com/advisories/GHSA-952p-6rrq-rcjv))
+- Updated demo - Added device only responsice overrides
