@@ -102,3 +102,16 @@ body {
   margin: auto;
   width: 300px;
 }
+
+/**
+ * Responsive overrides.
+ */
+@media only screen and (min-device-width: 0px) and (max-device-width: 400px) {
+  #webform-toolkit {
+    width: auto;
+  }
+
+  #webform-toolkit fieldset {
+    margin-top: 10px;
+  }
+}
