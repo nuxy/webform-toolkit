@@ -66,3 +66,10 @@ The following items are **breaking changes** and not supported in prior releases
 
 - NPM security updates ([cross-spawn](https://github.com/advisories/GHSA-3xgq-45jj-v275)/[micromatch](https://github.com/advisories/GHSA-952p-6rrq-rcjv))
 - Updated demo - Added device only responsice overrides
+
+## [3.1.6] - 2025-10-30
+
+- Upgraded Webdriver.IO to latest (9.20.0)
+- Upgraded outdated NPM dependencies
+- Replaced ESLint deprecated release
+- Renamed Babel config to recommended
