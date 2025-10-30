@@ -64,6 +64,8 @@ describe('Textarea element', function() {
 
       await expect(error).toHaveText('Supported characters: Alphanumeric and ,.?');
 
+      await browser.pause(300);
+
       await field.setValue('Lorem ipsum dolor sit amet, consectetur adipiscing.');
       await field.click();
       await error.waitForExist({timeout: 3000, reverse: true});

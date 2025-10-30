@@ -118,6 +118,8 @@ describe('Input text elements', function() {
 
       await expect(error1).toHaveText('Supported characters: A-Z, 0-9 and underscore');
 
+      await browser.pause(300);
+
       await field1.setValue('john_doe');
       await field1.click();
       await error1.waitForExist({timeout: 3000, reverse: true});
@@ -149,6 +151,8 @@ describe('Input text elements', function() {
       });
 
       await expect(error2).toHaveText('The password entered is not valid');
+
+      await browser.pause(300);
 
       await field2.setValue('my$ecr3t');
       await field2.click();

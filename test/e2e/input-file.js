@@ -57,7 +57,7 @@ describe('Input file element', function() {
     it('should contain text', async function() {
       const text = await fieldset.$('.description');
 
-      await expect(text).toHaveHTML('You can upload a <a href="https://en.wikipedia.org/wiki/JPEG">JPEG</a>, <a href="https://en.wikipedia.org/wiki/GIF">GIF</a> or <a href="https://en.wikipedia.org/wiki/PNG">PNG</a> <em>(2 MB max)</em>', {includeSelectorTag: false});
+      await expect(text).toHaveHTML('You can upload a\n<a href="https://en.wikipedia.org/wiki/JPEG">JPEG</a>,\n<a href="https://en.wikipedia.org/wiki/GIF">GIF</a>\nor\n<a href="https://en.wikipedia.org/wiki/PNG">PNG</a>\n<em>(2 MB max)</em>', {includeSelectorTag: false});
     });
   });
 });

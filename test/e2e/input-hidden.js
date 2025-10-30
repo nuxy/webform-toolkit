@@ -9,6 +9,8 @@ describe('Input hidden element', function() {
     await browser.url(`${process.cwd()}/demo/index.html`);
 
     form = await $('.webform');
+
+    await browser.pause(1000);
   });
 
   describe('Field', function() {

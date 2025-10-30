@@ -72,6 +72,8 @@ describe('Select menu element', function() {
 
       await expect(error).toHaveText('Must select a valid age group');
 
+      await browser.pause(300);
+
       await field.selectByVisibleText('18-24');
       await error.waitForExist({timeout: 3000, reverse: true});
 
