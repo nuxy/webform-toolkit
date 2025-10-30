@@ -32,11 +32,11 @@ describe('Textarea element', function() {
       const field = await fieldset.$('textarea');
 
       await expect(field).toHaveAttribute('id', 'description', {
-        message: `Attribute id="description" is defined`
+        message: 'Attribute id="description" is defined'
       });
 
       await expect(field).toHaveAttribute('name', 'description', {
-        message: `Attribute name="description" is defined`
+        message: 'Attribute name="description" is defined'
       });
     });
 

@@ -33,15 +33,15 @@ describe('Select menu element', function() {
       const field = await fieldset.$('select');
 
       await expect(field).toHaveAttribute('id', 'age', {
-        message: `Attribute id="age" is defined`
+        message: 'Attribute id="age" is defined'
       });
 
       await expect(field).toHaveAttribute('name', 'age', {
-        message: `Attribute name="age" is defined`
+        message: 'Attribute name="age" is defined'
       });
 
       await expect(field).toHaveAttribute('required', 'true', {
-        message: `Attribute required="true" is defined`
+        message: 'Attribute required="true" is defined'
       });
     });
 

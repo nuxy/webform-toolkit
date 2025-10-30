@@ -116,7 +116,9 @@ function WebformToolkit(container, settings, callback) {
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      if (checkErrorsExist(form)) { return }
+      if (checkErrorsExist(form)) {
+        return;
+      }
 
       // Return callback with form object response.
       if (typeof callback === 'function') {
@@ -353,12 +355,11 @@ function WebformToolkit(container, settings, callback) {
 
       if (!first) {
         option.setAttribute('value', val);
-      }
-      else {
+      } else {
         first = false;
       }
 
-      if (val == config.value) {
+      if (val === config.value) {
         option.selected = true;
       }
 
@@ -392,7 +393,7 @@ function WebformToolkit(container, settings, callback) {
       input.setAttribute('name', config.name);
       input.setAttribute('value', val);
 
-      if (val == config.value) {
+      if (val === config.value) {
         input.checked = true;
       }
 
@@ -481,7 +482,7 @@ function WebformToolkit(container, settings, callback) {
     let match = false;
 
     // .. REGEX by type
-    switch(elm.tagName) {
+    switch (elm.tagName) {
       case 'INPUT' :
         match = search.test(val);
       break;
@@ -569,7 +570,7 @@ function WebformToolkit(container, settings, callback) {
     if (button) {
       button.disabled = checkErrorsExist(form);
     } else {
-      throw new Error('Failed to change submit state (missing field)')
+      throw new Error('Failed to change submit state (missing field)');
     }
   }
 
@@ -588,7 +589,7 @@ function WebformToolkit(container, settings, callback) {
       const field = fields[i];
 
       // Supported elements.
-      if (field.tagName == 'INPUT' &&
+      if (field.tagName === 'INPUT' &&
         !/text|password|radio|checkbox/.test(field.type)) {
         continue;
       }
@@ -618,7 +619,7 @@ function WebformToolkit(container, settings, callback) {
     .replace(/\*(.*)\*/g, '<em>$1</em>')
 
     // Link
-    .replace(/\[([^()]+)\]\(([^()]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\[([^()]+)\]\(([^()]+)\)/g, '<a href="$2">$1</a>');
   }
 
   /**

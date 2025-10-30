@@ -40,15 +40,15 @@ describe('Input file element', function() {
       const field = await fieldset.$('input');
 
       await expect(field).toHaveAttribute('type', 'file', {
-        message: `Attribute type="file" is defined`
+        message: 'Attribute type="file" is defined'
       });
 
       await expect(field).toHaveAttribute('id', 'image', {
-        message: `Attribute id="image" is defined`
+        message: 'Attribute id="image" is defined'
       });
 
       await expect(field).toHaveAttribute('name', 'upload', {
-        message: `Attribute name="upload" is defined`
+        message: 'Attribute name="upload" is defined'
       });
     });
   });

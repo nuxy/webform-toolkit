@@ -1,7 +1,7 @@
 'use strict';
 
 import {browser, expect, $} from '@wdio/globals';
-import {join}  from 'path'
+import {join}  from 'path';
 
 describe('Form submit button', function() {
   let form;
