@@ -1,7 +1,7 @@
-.babelrc
 .eslintrc
 .github
 .vscode
+babel.config.json
 demo
 ISSUE_TEMPLATE.md
 package.*
