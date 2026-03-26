@@ -73,3 +73,8 @@ The following items are **breaking changes** and not supported in prior releases
 - Upgraded outdated NPM dependencies
 - Replaced ESLint deprecated release
 - Renamed Babel config to recommended
+
+## [3.1.7] - 2026-03-26
+
+- Override serialize-javascript (see mochajs/mocha#5781)
+- Upgraded outdated NPM dependencies
