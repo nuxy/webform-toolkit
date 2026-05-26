@@ -1,10 +1,9 @@
 .github
 .vscode
 babel.config.json
-eslint.config.js
 demo
+eslint.config.js
 ISSUE_TEMPLATE.md
 package.*
-node_modules
 test
 wdio.conf.js
